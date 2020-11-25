@@ -7,24 +7,72 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
-    - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
-    - output: web,pdf
-      title: Test functions
-      url: /test.html
-    - output: web,pdf
-      title: Core functions
-      url: /core.html
-    - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: About
+      url: /about
     output: web
-    title: Notebook
+    title: Welcome
+  - folderitems:
+    - output: web,pdf
+      title: Beginner
+      url: /beginner
+    - output: web,pdf
+      title: Intermediate
+      url: /intermediate
+    - output: web,pdf
+      title: Advanced
+      url: /advanced
+    output: web
+    title: Tutorials
+  - folderitems:
+    - output: web,pdf
+      title: Preparing Data
+      url: /data
+    - output: web,pdf
+      title: Behavioural Measures
+      url: /measures
+    - output: web,pdf
+      title: Summary Statistics
+      url: /statistics
+    - output: web,pdf
+      title: Labelling
+      url: /labelling
+    - output: web,pdf
+      title: Machine Learning
+      url: /machine_learning
+    output: web
+    title: Library Functions
+  - folderitems:
+    - output: web,pdf
+      title: Overview
+      url: /replications
+    - output: web,pdf
+      title: LaBrie 2007
+      url: /labrie2007
+    - output: web,pdf
+      title: LaBrie 2008
+      url: /labrie2008
+    - output: web,pdf
+      title: LaPlante 2009
+      url: /laplante2009
+    - output: web,pdf
+      title: Braverman 2010
+      url: /braverman2010
+    - output: web,pdf
+      title: Philander 2014
+      url: /philander2014
+    output: web
+    title: Research Replications
+  - folderitems:
+    - external_url: http://www.thetransparencyproject.org/index.html
+      output: web,pdf
+      title: The Transparency Project
+    - external_url: https://www.greo.ca/Modules/EvidenceCentre/Search.aspx
+      output: web,pdf
+      title: GREO Evidence Center
+    output: web
+    title: Public Data Repositories
   output: web
   title: Sidebar

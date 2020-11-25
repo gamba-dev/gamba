@@ -1,10 +1,30 @@
 {
-  "Notebook": {
-    "Export to modules": "/export",
-    "Convert to html": "/export2html",
-    "Show doc": "/showdoc",
-    "Test functions": "/test",
-    "Core functions": "/core",
-    "Command line functions": "/cli"
+  "Welcome": {
+  	"Overview": "/",
+  	"About": "/about"
+  },
+  "Tutorials": {
+  	"Beginner": "/beginner",
+  	"Intermediate": "/intermediate",
+  	"Advanced": "/advanced"
+  },
+  "Library Functions": {
+  	"Preparing Data": "/data",
+  	"Behavioural Measures": "/measures",
+  	"Summary Statistics": "/statistics",
+  	"Labelling": "/labelling",
+  	"Machine Learning": "/machine_learning"
+  },
+  "Research Replications": {
+  	"Overview": "/replications",
+  	"LaBrie 2007": "/labrie2007",
+  	"LaBrie 2008": "/labrie2008",
+  	"LaPlante 2009": "/laplante2009",
+  	"Braverman 2010": "/braverman2010",
+  	"Philander 2014": "/philander2014"
+  },
+  "Public Data Repositories": {
+  	"The Transparency Project": "http://www.thetransparencyproject.org/index.html",
+  	"GREO Evidence Center": "https://www.greo.ca/Modules/EvidenceCentre/Search.aspx"
   }
 }
