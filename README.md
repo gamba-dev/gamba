@@ -17,10 +17,3 @@ Getting started using gamba in your research is super easy - the first step is t
 `pip install gamba`
 
 `git clone https://github.com/gamba-dev/gamba.git`
-
-```
-!nbdev_diff_nbs
-```
-
-    
-
