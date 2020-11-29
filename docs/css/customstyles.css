@@ -1402,6 +1402,7 @@ ol.bibliography li{
 }
 h2{
     margin-top: 30px;
+    padding-top: 20px;
     border-top-color: var(--theme);
 }
 .nav > li > a:hover{
