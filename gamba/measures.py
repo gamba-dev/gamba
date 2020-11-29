@@ -5,6 +5,7 @@ __all__ = ['check_measure_data', 'duration']
 # Cell
 def check_measure_data(player_bets, required_columns):
     "Compares the columns found in a dataframe of player bets to a supplied list of column names. If any of the required_column names are not found, an exception is raised reporting the error."
+
     for column in required_columns:
         if column not in player_bets.columns:
             exception_string = (
