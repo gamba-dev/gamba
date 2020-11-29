@@ -43,7 +43,7 @@ entries:
       title: Machine Learning
       url: /machine_learning
     output: web
-    title: Library Functions
+    title: Modules
   - folderitems:
     - output: web,pdf
       title: Overview

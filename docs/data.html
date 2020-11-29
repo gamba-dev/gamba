@@ -31,7 +31,7 @@ nb_path: "20_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use.</p>
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use. This module contains a number of data loading functions for existing public data repositories so you can replicate or extend work right from the start.</p>
 
 </div>
 </div>
@@ -60,7 +60,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_csv" class="doc_header"><code>read_csv</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_csv</code>(<strong><code>file</code></strong>, <strong><code>parse_dates</code></strong>=<em><code>[]</code></em>, <strong><code>index_col</code></strong>=<em><code>None</code></em>, <strong><code>delimiter</code></strong>=<em><code>','</code></em>, <strong><code>dummy_data</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="read_csv" class="doc_header"><code>read_csv</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L7" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_csv</code>(<strong><code>file</code></strong>, <strong><code>parse_dates</code></strong>=<em><code>[]</code></em>, <strong><code>index_col</code></strong>=<em><code>None</code></em>, <strong><code>delimiter</code></strong>=<em><code>','</code></em>, <strong><code>dummy_data</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -95,7 +95,7 @@ nb_path: "20_data.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The gamba library's methods expect a dataframe with certain column names. The most important task after loading data as a <a href="">pandas dataframe</a> is to set these names according to the type of data the column contains. These names should match the following table;</p>
+<p>The gamba library's methods expect a dataframe with certain column names. The most important task after loading data as a <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas dataframe</a> is to set these column names according to the type of data the column contains. These names should match the following table for basic data;</p>
 
 </div>
 </div>
@@ -104,22 +104,26 @@ nb_path: "20_data.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <table>
 <thead><tr>
-<th>name</th>
-<th>description</th>
+<th>Column Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>player_id</td>
+<td><strong><em>player_id</em></strong></td>
 <td>a unique identifier for each player</td>
 </tr>
 <tr>
-<td>bet_size</td>
+<td><strong><em>bet_size</em></strong></td>
 <td>the size of the bet (in raw currency form, e.g. USD)</td>
 </tr>
 <tr>
-<td>bet_time</td>
-<td>the</td>
+<td><strong><em>bet_time</em></strong></td>
+<td>the datetime the bet was placed</td>
+</tr>
+<tr>
+<td><strong><em>payout_size</em></strong></td>
+<td>the size of the payout (also in raw currency)</td>
 </tr>
 </tbody>
 </table>
@@ -127,6 +131,151 @@ nb_path: "20_data.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Advanced data sets may contain more information about each bet. These additional columns can be included using names from the table below. Note that methods in other parts of the library will reject dataframes which contain column names not in one these two tables.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<table>
+<thead><tr>
+<th>Column Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><em>payout_time</em></strong></td>
+<td>the <a href="(https://www.unixtimestamp.com/">timestamp</a> that the payout was paid</td>
+</tr>
+<tr>
+<td><strong><em>decimal_odds</em></strong></td>
+<td>the <a href="https://en.wikipedia.org/wiki/Odds#Decimal_odds">decimal odds</a> for the given bet</td>
+</tr>
+<tr>
+<td><strong><em>house_edge</em></strong></td>
+<td>the percentage taken by the house (value of 3 for 3% house edge)</td>
+</tr>
+<tr>
+<td><strong><em>game_type</em></strong></td>
+<td>the game being played as a string e.g. 'coinflip', 'roulette' - doesn't have to be one of a fixed set but should be unique per game type</td>
+</tr>
+<tr>
+<td><strong><em>provider</em></strong></td>
+<td>the operator's name - this is useful for mixed operator datasets</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loading-Existing-Datasets">Loading Existing Datasets<a class="anchor-link" href="#Loading-Existing-Datasets"> </a></h2><p>Several public repositories provide transaction data that can be loaded by the gamba library (see Public Repositories in the menu). The data module contains methods for loading some of these sets into the correct format, which are used in the respective replications. If you're loading in a similar data set, feel free to explore the source code of these methods to see how it's done, and modify them for your own needs!</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="prepare_labrie_data" class="doc_header"><code>prepare_labrie_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_labrie_data</code>(<strong><code>filename</code></strong>, <strong><code>savedir</code></strong>=<em><code>'labrie_individuals/'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>year</code></strong>=<em><code>2008</code></em>)</p>
+</blockquote>
+<p>Splits the original labrie data into CSV files for each individual's transactions and renames the columns to be compatable with the rest of the gamba library.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="prepare_braverman_data" class="doc_header"><code>prepare_braverman_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_braverman_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Splits the original Braverman and Shaffer data into CSV files for each indivdiual's transactions, and renames the columns to be compatable with the rest of the gamba library.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="prepare_philander_data" class="doc_header"><code>prepare_philander_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_philander_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Loads in the analytic data set of high-risk internet gamblers and removes the UserID, Sereason, random, and clustering columns as described in Philander's 2014 study.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Final-Checks">Final Checks<a class="anchor-link" href="#Final-Checks"> </a></h2>
@@ -151,8 +300,111 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
+<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
 </blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2><p>The data module contains some basic visualisation methods which can be applied before any behavioural measures are calculated. This is useful for showing the distributions of player bet sizes, times, payouts, and so on.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="plot_player_career" class="doc_header"><code>plot_player_career</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career</code>(<strong><code>player_df</code></strong>, <strong><code>savename</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Creates a candlestick-style plot of a players betting activity over the course of their career. This works best on regularly-spaced sequential data but can also provide insight into intra-session win/loss patterns.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="plot_player_career_split" class="doc_header"><code>plot_player_career_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career_split</code>(<strong><code>player_df</code></strong>)</p>
+</blockquote>
+<p>Plot a player's betting and payout trajectory on a single plot, with green indicating payouts (top) and red indicating bets (bottom). A cumulative value line is also plotted between the two. Note that the player_df must include both</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="visualise_provider_dates" class="doc_header"><code>visualise_provider_dates</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualise_provider_dates</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Visualises the start and end dates of bets from one or more providers on a stacked gantt style plot.</p>
 
 </div>
 

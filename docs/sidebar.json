@@ -8,7 +8,7 @@
   	"Intermediate": "/intermediate",
   	"Advanced": "/advanced"
   },
-  "Library Functions": {
+  "Modules": {
   	"Preparing Data": "/data",
   	"Behavioural Measures": "/measures",
   	"Summary Statistics": "/statistics",

@@ -3,7 +3,13 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"read_csv": "20_data.ipynb",
+         "prepare_labrie_data": "20_data.ipynb",
+         "prepare_braverman_data": "20_data.ipynb",
+         "prepare_philander_data": "20_data.ipynb",
          "check_data": "20_data.ipynb",
+         "plot_player_career": "20_data.ipynb",
+         "plot_player_career_split": "20_data.ipynb",
+         "visualise_provider_dates": "20_data.ipynb",
          "check_measure_data": "21_measures.ipynb",
          "duration": "21_measures.ipynb"}
 

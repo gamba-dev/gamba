@@ -1,5 +1,5 @@
 # Welcome to the gamba library!
-> Gambling Transaction Analysis in Python
+> Analytical methods for player behaviour tracking research
 
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gamba-dev/gamba/CI?logo=github&style=for-the-badge&)](https://github.com/gamba-dev/gamba/actions)
