@@ -2,14 +2,11 @@
 > Gambling Transaction Analysis in Python
 
 
-
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gamba-dev/gamba/CI?logo=github&style=for-the-badge&)](https://github.com/gamba-dev/gamba/actions)
 [![PyPI](https://img.shields.io/pypi/v/gamba?style=for-the-badge&color=blue)](https://pypi.org/project/gamba/)
 [![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge)](https://github.com/gamba-dev/gamba/commit/master)
 
-The pysan library is a collection of methods for doing sequence analysis. It's free, open source, and each method is fully documented with examples. Using pysan you'll be able to run powerful sequence analysis and visualisation tasks with just a few lines of code, and integrate or extend them into your other Python workflows.
-
-Welcome to the gamba transaction analysis library. This library is a collection of methods used to analyse gambling transactions in peer-reviewed studies. The library is 100% free and open source, and aims to be useful to researchers and analysts with access to transaction data sets.
+The gamba transaction analysis library is a collection of methods for applying analytical methods as they appear peer-reviewed studies. The library is 100% free and open source, and aims to be useful to researchers and analysts with access to transaction data sets.
 
 ## Getting Started
 
