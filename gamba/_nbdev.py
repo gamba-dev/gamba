@@ -2,9 +2,13 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"read_csv": "20_data.ipynb",
+         "check_data": "20_data.ipynb",
+         "check_measure_data": "21_measures.ipynb",
+         "duration": "21_measures.ipynb"}
 
-modules = []
+modules = ["data.py",
+           "measures.py"]
 
 doc_url = "https://gamba-dev.github.io/gamba/"
 

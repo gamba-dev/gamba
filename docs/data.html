@@ -1,6 +1,6 @@
 ---
 
-title: data
+title: Data
 
 
 keywords: fastai
@@ -31,7 +31,71 @@ nb_path: "20_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The data module can be used to load in transaction data sets from multiple sources. The most important task after loading data as a <a href="">pandas datafram</a> is to set column names. These names should correspond to specific values depending on what the column contains.</p>
+<p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reading-CSV-Files">Reading CSV Files<a class="anchor-link" href="#Reading-CSV-Files"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This can be done using the <a href="/gamba/data.html#read_csv"><code>read_csv</code></a> method, which is a wrapper around the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">pandas library's method</a> of the same name.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="read_csv" class="doc_header"><code>read_csv</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_csv</code>(<strong><code>file</code></strong>, <strong><code>parse_dates</code></strong>=<em><code>[]</code></em>, <strong><code>index_col</code></strong>=<em><code>None</code></em>, <strong><code>delimiter</code></strong>=<em><code>','</code></em>, <strong><code>dummy_data</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This can be used to read a regular CSV file as you'd expect, but can also be used for tab-separated files - as some of <a href="http://www.thetransparencyproject.org/download_index.php">the transparency project</a>'s data sets are.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-Column-Names">Setting Column Names<a class="anchor-link" href="#Setting-Column-Names"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The gamba library's methods expect a dataframe with certain column names. The most important task after loading data as a <a href="">pandas dataframe</a> is to set these names according to the type of data the column contains. These names should match the following table;</p>
 
 </div>
 </div>
@@ -63,6 +127,50 @@ nb_path: "20_data.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Final-Checks">Final Checks<a class="anchor-link" href="#Final-Checks"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's good practice to check that your column names match those used by the gamba library, and make sure that no extra columns exist. The <a href="/gamba/data.html#check_data"><code>check_data</code></a> method below can be given the dataframe, and it will raise an error if anything isn't as it should be;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 </div>
  
 

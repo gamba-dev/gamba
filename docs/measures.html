@@ -31,7 +31,142 @@ nb_path: "21_measures.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A behavioural measure is a number derived from a...</p>
+<h2 id="Basics">Basics<a class="anchor-link" href="#Basics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A behavioural measure is a number derived from a player's transaction data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="check_measure_data" class="doc_header"><code>check_measure_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_measure_data</code>(<strong><code>player_bets</code></strong>, <strong><code>required_columns</code></strong>)</p>
+</blockquote>
+<p>Compares the columns found in a dataframe of player bets to a supplied list of column names. If any of the required_column names are not found, an exception is raised reporting the error.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This works.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Root-Domain">Root Domain<a class="anchor-link" href="#Root-Domain"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The root domain consists of behavioural measures that can be computed using only the knowledge of when the bets took place. This means using only values from the <strong><em>bet_time</em></strong> column in the player bet dataframe.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="duration" class="doc_header"><code>duration</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>duration</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+<p>The number of days between the first bet and the last.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bet-Domain">Bet Domain<a class="anchor-link" href="#Bet-Domain"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The bet domain contains all behavioural measures which can be computed using additional values from the <strong><em>bet_size</em></strong> column. As such, they describe <em>spending</em> behaviours as opposed to <em>engagement</em> behaviours as above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loss-Domain">Loss Domain<a class="anchor-link" href="#Loss-Domain"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The loss domain includes all behavioural measures which require the additional information of the size of the payout received as a result of each bet. This data should be held in the <strong><em>payout_size</em></strong> column if available.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Domain">Other Domain<a class="anchor-link" href="#Other-Domain"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% bibliography --cited %}</p>
 
 </div>
 </div>
