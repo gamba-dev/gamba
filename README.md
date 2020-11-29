@@ -4,7 +4,7 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gamba-dev/gamba/CI?logo=github&style=for-the-badge&)](https://github.com/gamba-dev/gamba/actions)
 [![PyPI](https://img.shields.io/pypi/v/gamba?style=for-the-badge&color=blue)](https://pypi.org/project/gamba/)
-[![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge)](https://github.com/gamba-dev/gamba/commit/master)
+[![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge&)](https://github.com/gamba-dev/gamba/commit/main)
 
 The gamba transaction analysis library is a collection of methods for applying analytical methods found in peer-reviewed studies. The library is 100% free and open source, and aims to be useful to researchers and analysts with access to transaction data sets.
 
