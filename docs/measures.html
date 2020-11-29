@@ -37,7 +37,7 @@ nb_path: "21_measures.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A behavioural measure is a number derived from a player's transaction data.</p>
+<p>A behavioural measure is a number derived from a player's transaction data. This data needs to have specific columns depending on the measure you want to calculate. For example, measures in the bet domain require the <strong>bet_size</strong> column. Before defining any measures, the first step is to create a checker method which makes sure that the data used has the right columns.</p>
 
 </div>
 </div>
@@ -74,13 +74,6 @@ nb_path: "21_measures.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This works.</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Root-Domain">Root Domain<a class="anchor-link" href="#Root-Domain"> </a></h2>
