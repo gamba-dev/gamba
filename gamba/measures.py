@@ -12,7 +12,6 @@ def check_measure_data(player_bets, required_columns):
             )
             raise Exception(exception_string)
 
-
 # Cell
 def duration(player_bets):
     "The number of days between the first bet and the last."

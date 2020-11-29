@@ -17,5 +17,3 @@ def check_data(dataframe):
     column_names = dataframe.columns
 
     print(column_names)
-
-
