@@ -1,13 +1,13 @@
 ---
 
-title: LaBrie 2007
+title: LaBrie et al 2007
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Full replication"
-description: "Full replication"
+summary: "Full study replication"
+description: "Full study replication"
 nb_path: "31_labrie2007.ipynb"
 ---
 <!--
@@ -25,6 +25,395 @@ nb_path: "31_labrie2007.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This notebook reproduces every table in LaBrie et al's 2007 paper on internet sports gambling activity. To get started, dowload the raw data from the transparency project's website. The data we need is <strong>Raw Dataset 2 (text version)</strong> under the title 'Actual Internet Sports Gambling Activity: February 2005 through September 2005' towards the bottom of the page.</p>
+<p>Once you've downloaded and extracted it, you should see a file called <strong>RawDataIIUserDailyAggregation.txt</strong> - copy this into the same directory as this notebook to begin.</p>
+<ul>
+<li><a href="http://www.thetransparencyproject.org/download_index.php">Data Download (thetransparencyproject.org)</a></li>
+<li><a href="http://www.thetransparencyproject.org/codebooks/Codebook_for_Actual_Internet_Sports_Gambling_Activity_from_February_2005_through_September_2005.pdf">Original data description</a></li>
+<li><a href="https://www.researchgate.net/profile/Howard_Shaffer/publication/6261653_Assessing_the_Playing_Field_A_Prospective_Longitudinal_Study_of_Internet_Sports_Gambling_Behavior/links/0fcfd50a6bc690d200000000/Assessing-the-Playing-Field-A-Prospective-Longitudinal-Study-of-Internet-Sports-Gambling-Behavior.pdf">Original paper link</a></li>
+</ul>
+<p>{% include image.html style="float:left; margin-right: 7px;" file="<a href="https://img.shields.io/badge/-FLAG-red?style=flat-square">https://img.shields.io/badge/-FLAG-red?style=flat-square</a>" %} Minor discrepency between number of players taken forward after data cleaning - this has minor effects on fixed-odds figures below.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first step is to split the raw data into CSV files for each player, this lets us calculate measures later on, on a per-player basis. For this particular study, the data must first be split by product ID (live action vs fixed odds betting)...</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">daily_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;RawDataIIUserDailyAggregation.txt&#39;</span><span class="p">)</span>
+<span class="n">daily_data</span><span class="p">[</span><span class="n">daily_data</span><span class="p">[</span><span class="s1">&#39;ProductID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;fixed_odds_daily.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">daily_data</span><span class="p">[</span><span class="n">daily_data</span><span class="p">[</span><span class="s1">&#39;ProductID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;live_action_daily.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fo_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">prepare_labrie_data</span><span class="p">(</span><span class="s1">&#39;fixed_odds_daily.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2007</span><span class="p">)</span>
+<span class="n">la_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">prepare_labrie_data</span><span class="p">(</span><span class="s1">&#39;live_action_daily.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2007</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now to calculate the behavioural measures used in the paper for each of the players, this includes the <strong>duration</strong>, <strong>frequency</strong>, <strong>number of bets</strong>, <strong>average bets per day</strong>, <strong>average bet size</strong>, <strong>total amount wagered</strong>, <strong>net loss</strong>, and <strong>percentage loss</strong>;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">fo_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;fo_labrie_measures.csv&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fixed odd labrie measures saved.&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 1/42157 [00:00&lt;1:59:00,  5.90it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>calculating LaBrie measures for42157players, this may take some time...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 154/42157 [00:15&lt;1:10:24,  9.94it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-5-6c6170e7b761&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>gb<span class="ansi-blue-fg">.</span>measures<span class="ansi-blue-fg">.</span>calculate_labrie_measures<span class="ansi-blue-fg">(</span>fo_data<span class="ansi-blue-fg">,</span> filename<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;fo_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">,</span> loud<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;fixed odd labrie measures saved.&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">calculate_labrie_measures</span><span class="ansi-blue-fg">(all_player_bets, savedir, filename, loud, daily)</span>
+<span class="ansi-green-intense-fg ansi-bold">    213</span>         <span class="ansi-green-fg">if</span> daily<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    214</span>             all_number_of_bets<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>number_of_bets<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 215</span><span class="ansi-red-fg">             </span>all_average_bets_per_day<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>mean_bets_per_day<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    216</span>             all_average_bet_size<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>mean_bet_size<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    217</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">mean_bets_per_day</span><span class="ansi-blue-fg">(player_bets, daily)</span>
+<span class="ansi-green-intense-fg ansi-bold">     67</span> 
+<span class="ansi-green-intense-fg ansi-bold">     68</span>         age_in_days <span class="ansi-blue-fg">=</span> duration<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg">         </span>frequency_percentage <span class="ansi-blue-fg">=</span> frequency<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     70</span> 
+<span class="ansi-green-intense-fg ansi-bold">     71</span>         betting_days <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>frequency_percentage <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">*</span> age_in_days
+
+<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">frequency</span><span class="ansi-blue-fg">(player_bets)</span>
+<span class="ansi-green-intense-fg ansi-bold">     43</span>     <span class="ansi-green-fg">for</span> day <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>age_in_days<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     44</span>         current_date <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>first_day <span class="ansi-blue-fg">+</span> datetime<span class="ansi-blue-fg">.</span>timedelta<span class="ansi-blue-fg">(</span>days<span class="ansi-blue-fg">=</span>day<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>date<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 45</span><span class="ansi-red-fg">         </span>bets_today <span class="ansi-blue-fg">=</span> player_bets<span class="ansi-blue-fg">.</span>iloc<span class="ansi-blue-fg">[</span>player_bets<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bet_date&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>values <span class="ansi-blue-fg">==</span> current_date<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">     46</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>bets_today<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">!=</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     47</span>             betting_days <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, key)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1766</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1767</span>             maybe_callable <span class="ansi-blue-fg">=</span> com<span class="ansi-blue-fg">.</span>apply_if_callable<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>obj<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 1768</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getitem_axis<span class="ansi-blue-fg">(</span>maybe_callable<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1769</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1770</span>     <span class="ansi-green-fg">def</span> _is_scalar_access<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">:</span> Tuple<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_getitem_axis</span><span class="ansi-blue-fg">(self, key, axis)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2123</span>         <span class="ansi-green-fg">if</span> com<span class="ansi-blue-fg">.</span>is_bool_indexer<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   2124</span>             self<span class="ansi-blue-fg">.</span>_validate_key<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 2125</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getbool_axis<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2126</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2127</span>         <span class="ansi-red-fg"># a list of integers</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_getbool_axis</span><span class="ansi-blue-fg">(self, key, axis)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1782</span>         key <span class="ansi-blue-fg">=</span> check_bool_indexer<span class="ansi-blue-fg">(</span>labels<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1783</span>         inds <span class="ansi-blue-fg">=</span> key<span class="ansi-blue-fg">.</span>nonzero<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">-&gt; 1784</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>obj<span class="ansi-blue-fg">.</span>_take_with_is_copy<span class="ansi-blue-fg">(</span>inds<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1785</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1786</span>     <span class="ansi-green-fg">def</span> _get_slice_axis<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> slice_obj<span class="ansi-blue-fg">:</span> slice<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">_take_with_is_copy</span><span class="ansi-blue-fg">(self, indices, axis, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3407</span>         See the docstring of<span class="ansi-red-fg"> </span><span class="ansi-red-fg">`</span>take<span class="ansi-red-fg">`</span> <span class="ansi-green-fg">for</span> full explanation of the parameters<span class="ansi-blue-fg">.</span>
+<span class="ansi-green-intense-fg ansi-bold">   3408</span>         &#34;&#34;&#34;
+<span class="ansi-green-fg">-&gt; 3409</span><span class="ansi-red-fg">         </span>result <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indices<span class="ansi-blue-fg">=</span>indices<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3410</span>         <span class="ansi-red-fg"># Maybe set copy if we didn&#39;t actually change the index.</span>
+<span class="ansi-green-intense-fg ansi-bold">   3411</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> result<span class="ansi-blue-fg">.</span>_get_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>equals<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_get_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indices, axis, is_copy, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3392</span>         self<span class="ansi-blue-fg">.</span>_consolidate_inplace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3393</span> 
+<span class="ansi-green-fg">-&gt; 3394</span><span class="ansi-red-fg">         new_data = self._data.take(
+</span><span class="ansi-green-intense-fg ansi-bold">   3395</span>             indices<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>_get_block_manager_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> verify<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+<span class="ansi-green-intense-fg ansi-bold">   3396</span>         )
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indexer, axis, verify, convert)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1390</span>                 <span class="ansi-green-fg">raise</span> Exception<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Indices must be nonzero and less than the axis length&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1391</span> 
+<span class="ansi-green-fg">-&gt; 1392</span><span class="ansi-red-fg">         </span>new_labels <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>axes<span class="ansi-blue-fg">[</span>axis<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indexer<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1393</span>         return self.reindex_indexer(
+<span class="ansi-green-intense-fg ansi-bold">   1394</span>             new_axis<span class="ansi-blue-fg">=</span>new_labels<span class="ansi-blue-fg">,</span> indexer<span class="ansi-blue-fg">=</span>indexer<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">,</span> allow_dups<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indices, axis, allow_fill, fill_value, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    762</span>                 )
+<span class="ansi-green-intense-fg ansi-bold">    763</span>             taken <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>values<span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indices<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 764</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>taken<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    765</span> 
+<span class="ansi-green-intense-fg ansi-bold">    766</span>     def _assert_take_fillable(
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py</span> in <span class="ansi-cyan-fg">_shallow_copy</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    392</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    393</span>             kwargs<span class="ansi-blue-fg">.</span>setdefault<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;name&#34;</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 394</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_int64index<span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    395</span> 
+<span class="ansi-green-intense-fg ansi-bold">    396</span>     <span class="ansi-blue-fg">@</span>Appender<span class="ansi-blue-fg">(</span>ibase<span class="ansi-blue-fg">.</span>_index_shared_docs<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;copy&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/numeric.py</span> in <span class="ansi-cyan-fg">_shallow_copy</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    109</span>         <span class="ansi-green-fg">if</span> values <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>_can_hold_na<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    110</span>             <span class="ansi-red-fg"># Ensure we are not returning an Int64Index with float data:</span>
+<span class="ansi-green-fg">--&gt; 111</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_shallow_copy_with_infer<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">=</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    112</span>         <span class="ansi-green-fg">return</span> super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">=</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    113</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">_shallow_copy_with_infer</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    565</span>             <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>TypeError<span class="ansi-blue-fg">,</span> ValueError<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    566</span>                 <span class="ansi-green-fg">pass</span>
+<span class="ansi-green-fg">--&gt; 567</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Index<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attributes<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    568</span> 
+<span class="ansi-green-intense-fg ansi-bold">    569</span>     <span class="ansi-green-fg">def</span> _update_inplace<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> result<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">__new__</span><span class="ansi-blue-fg">(cls, data, dtype, copy, name, tupleize_cols, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    388</span>             <span class="ansi-red-fg"># maybe coerce to a sub-class</span>
+<span class="ansi-green-intense-fg ansi-bold">    389</span>             <span class="ansi-green-fg">if</span> is_signed_integer_dtype<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">.</span>dtype<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 390</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> Int64Index<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span> copy<span class="ansi-blue-fg">=</span>copy<span class="ansi-blue-fg">,</span> dtype<span class="ansi-blue-fg">=</span>dtype<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">=</span>name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    391</span>             <span class="ansi-green-fg">elif</span> is_unsigned_integer_dtype<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">.</span>dtype<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    392</span>                 <span class="ansi-green-fg">return</span> UInt64Index<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span> copy<span class="ansi-blue-fg">=</span>copy<span class="ansi-blue-fg">,</span> dtype<span class="ansi-blue-fg">=</span>dtype<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">=</span>name<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">lo_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;la_labrie_measures.csv&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;live action labrie measures saved.&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, for this replication we can take the user id's from the original analytic data set and take those from the measures dataset calculated above;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fo_gamba_measures</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;fo_labrie_measures.csv&#39;</span><span class="p">)</span>
+<span class="n">la_gamba_measures</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;la_labrie_measures.csv&#39;</span><span class="p">)</span>
+<span class="n">original</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AnalyticDataInternetGambling.txt&#39;</span><span class="p">)</span>
+
+<span class="n">fo_bettors</span> <span class="o">=</span> <span class="n">original</span><span class="p">[</span><span class="n">original</span><span class="p">[</span><span class="s1">&#39;FOTotalBets&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">la_bettors</span> <span class="o">=</span> <span class="n">original</span><span class="p">[</span><span class="n">original</span><span class="p">[</span><span class="s1">&#39;LATotalBets&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">gamba_fo</span> <span class="o">=</span> <span class="n">fo_gamba_measures</span><span class="p">[</span><span class="n">fo_gamba_measures</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">fo_bettors</span><span class="p">[</span><span class="s1">&#39;USERID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
+<span class="n">gamba_la</span> <span class="o">=</span> <span class="n">la_gamba_measures</span><span class="p">[</span><span class="n">la_gamba_measures</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">la_bettors</span><span class="p">[</span><span class="s1">&#39;USERID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t1a</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">gamba_fo</span><span class="p">)</span>
+<span class="n">t1b</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">gamba_la</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">t1a</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">t1b</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+    
+<span class="n">fo_spearmans</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">spearmans_r</span><span class="p">(</span><span class="n">gamba_fo</span><span class="p">)</span>
+<span class="n">la_spearmans</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">spearmans_r</span><span class="p">(</span><span class="n">gamba_la</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fo_spearmans</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">la_spearmans</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With both the descriptive and inter-measure correlation tables complete, the sample of measures can be labelled according to the presence of a player in the top 1% of their cohort by a given measure. In this case the measures include the <strong>net loss</strong>, <strong>total amount wagered</strong>, and <strong>number of bets</strong>. This is done for both the fixed odds (fo) and live action (la) data...</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fo_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">gamba_fo</span><span class="p">,</span> <span class="s1">&#39;net_loss&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">fo_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">,</span> <span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">fo_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">,</span> <span class="s1">&#39;num_bets&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+
+<span class="n">t3a</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">[</span><span class="n">fo_labelled</span><span class="p">[</span><span class="s1">&#39;top_net_loss&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">t3b</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">[</span><span class="n">fo_labelled</span><span class="p">[</span><span class="s1">&#39;top_total_wagered&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">t3c</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">[</span><span class="n">fo_labelled</span><span class="p">[</span><span class="s1">&#39;top_num_bets&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">la_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">gamba_la</span><span class="p">,</span> <span class="s1">&#39;net_loss&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">la_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">,</span> <span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">la_labelled</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">labelling</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">,</span> <span class="s1">&#39;num_bets&#39;</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+
+<span class="n">t3d</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">[</span><span class="n">la_labelled</span><span class="p">[</span><span class="s1">&#39;top_net_loss&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">t3e</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">[</span><span class="n">la_labelled</span><span class="p">[</span><span class="s1">&#39;top_total_wagered&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">t3f</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">[</span><span class="n">la_labelled</span><span class="p">[</span><span class="s1">&#39;top_num_bets&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">t3_top</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">t3a</span><span class="p">,</span> <span class="n">t3b</span><span class="p">,</span> <span class="n">t3c</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">t3a</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">t3_bottom</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">t3d</span><span class="p">,</span> <span class="n">t3e</span><span class="p">,</span> <span class="n">t3f</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">t3d</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">t3_top</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">t3_top</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">t3_bottom</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">t3_bottom</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">t3_top</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">t3_bottom</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, explore the overlap between players labelled with different schemes as in the original paper;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fo_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">label_overlap_table</span><span class="p">(</span><span class="n">fo_labelled</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;top_net_loss&#39;</span><span class="p">,</span><span class="s1">&#39;top_total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;top_num_bets&#39;</span><span class="p">])</span>
+<span class="n">la_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">label_overlap_table</span><span class="p">(</span><span class="n">la_labelled</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;top_net_loss&#39;</span><span class="p">,</span><span class="s1">&#39;top_total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;top_num_bets&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fo_table</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">la_table</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     {% endraw %}

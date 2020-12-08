@@ -4,6 +4,7 @@ __all__ = ['read_csv', 'prepare_labrie_data', 'prepare_braverman_data', 'prepare
            'plot_player_career', 'plot_player_career_split', 'visualise_provider_dates']
 
 # Cell
+import pandas as pd
 def read_csv(file, parse_dates=[], index_col=None, delimiter=",", dummy_data=False):
 
     df = pd.read_csv(

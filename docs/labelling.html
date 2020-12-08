@@ -42,6 +42,115 @@ nb_path: "23_labelling.ipynb"
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="top_split" class="doc_header"><code>top_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/labelling.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>top_split</code>(<strong><code>measures_table</code></strong>, <strong><code>split_by</code></strong>, <strong><code>percentile</code></strong>=<em><code>95</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Labels player's behavioural measures according to their presence in the top percentile of a given measure (split_by). Label column will be 1 if in the top percentile, 0 if not. E.g. if split_by is 'total_wagered' and percentile is 95, players in the top 5% by total wagered will be labelled 1, and all others 0.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_labelled_groups" class="doc_header"><code>get_labelled_groups</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/labelling.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_labelled_groups</code>(<strong><code>labelled_measures_table</code></strong>, <strong><code>labelname</code></strong>)</p>
+</blockquote>
+<p>Provides a simple way of splitting a labelled measures table into multiple tables each corresponding to a given label.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Descriptive-Outputs">Descriptive Outputs<a class="anchor-link" href="#Descriptive-Outputs"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Labeled measures tables are a powerful tool in themselves, and can be used in the <a href="/gamba/machine_learning.html"><code>machine_learning</code></a> module or used to describe each labeled group.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="spending_portions" class="doc_header"><code>spending_portions</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/labelling.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>spending_portions</code>(<strong><code>measures_table</code></strong>)</p>
+</blockquote>
+<p>Computes the percentages of total amount wagered of groups of players by presence in the top percentages of the total amount wagered. E.g. how much does the top 5% of players by total amount wagered account for out of the total amount wagered by everyone. It currently computes this statement for the percentages {1,5,10,25,50}, and prints the statements to the console.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 </div>
  
 

@@ -1,6 +1,6 @@
 ---
 
-title: LaBrie 2007
+title: LaPlante et al 2009
 
 
 keywords: fastai
@@ -31,11 +31,782 @@ nb_path: "33_laplante2009.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>...</p>
+<p>This notebook reproduces every table in LaPlante et al's 2009 paper on poker player behaviour. To get started, download the raw data from the link below from the transparency project's website;</p>
+<ul>
+<li><a href="http://www.thetransparencyproject.org/download_index.php">Data Download (thetransparencyproject.org)</a></li>
+<li><a href="http://www.thetransparencyproject.org/codebooks/DS4_codebook.pdf">Original data description</a></li>
+<li><a href="https://s3.amazonaws.com/academia.edu.documents/54266852/j.chb.2008.12.02720170828-2864-sy3yen.pdf?response-content-disposition=inline%3B%20filename%3DSitting_at_the_virtual_poker_table_A_pro.pdf&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191230%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20191230T162733Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=51168a75ea282e15ba9b9f0b117a8f70ca5e4803f349088879688dad88b303de">Original paper link</a></li>
+</ul>
+<p>File names: <strong>DS4_Raw2_Aggregate_txt.txt</strong> and <strong>DS4_Analytic_txt.txt</strong></p>
+<p>With the data downloaded, the first step is to import <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a>, run the cell below to get started;</p>
+<p>{% include image.html style="float:left; margin-right: 7px;" file="<a href="https://img.shields.io/badge/-FLAG-red?style=flat-square">https://img.shields.io/badge/-FLAG-red?style=flat-square</a>" %} Data description above mentions '<em>Eligibility for poker analysis</em>' as a variable in the daily aggregate data which is not present. This is not a fatal discrepency, and can be retrospectively added using player's existence in the analytical data set.</p>
+<p>{% include image.html style="float:left; margin-right: 7px;" file="<a href="https://img.shields.io/badge/-FLAG-red?style=flat-square">https://img.shields.io/badge/-FLAG-red?style=flat-square</a>" %} Both the Cohen's d and K-S test results computed below differ from the original paper, this is likely due to differences in the ways these tests are computed or an undocumented data transformation (see third flag).</p>
+<p>{% include image.html style="float:left; margin-right: 7px;" file="<a href="https://img.shields.io/badge/-FLAG-red?style=flat-square">https://img.shields.io/badge/-FLAG-red?style=flat-square</a>" %} Paper contains undocumented results - <em>df</em>, <em>t</em>, <em>df</em> (again), <em>p</em>, and <em>p(2-tailed)</em>. These are only referenced in the sentence '<em>Tests for differences between group means included testing the assumption of equal variances and, if necessary, adjusting for unequal variances.</em>`</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>gamba loaded, see https://gamba.dev/citation
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> ready, we need to load in both the analytic and raw data sets from the link above - we need both to make sure that the analytic data set is indeed a subset of the raw data set;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;DS4_Raw2_Aggregate_txt.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">analytic_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;DS4_Analytic_txt.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;raw data loaded:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;analytic data loaded:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">analytic_data</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>raw data loaded: 48114
+analytic data loaded: 3445
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, taking only the analytic data forward (for now), we can prepare the three subsets described in the paper (full set, most involved, not most involved);</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">useful_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;UserID&#39;</span><span class="p">,</span><span class="s1">&#39;Duration&#39;</span><span class="p">,</span><span class="s1">&#39;Total_sessions&#39;</span><span class="p">,</span><span class="s1">&#39;Sessions_Per_Day&#39;</span><span class="p">,</span><span class="s1">&#39;Euros_Per_Session&#39;</span><span class="p">,</span><span class="s1">&#39;Total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;Net_Loss&#39;</span><span class="p">,</span><span class="s1">&#39;Percent_Lost&#39;</span><span class="p">]</span>
+<span class="n">all_study_data</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[</span><span class="n">useful_columns</span><span class="p">]</span> <span class="c1"># get only columns that are used in the analysis, then rename them to be compatable with gamba</span>
+<span class="n">all_study_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;total_sessions&#39;</span><span class="p">,</span><span class="s1">&#39;sessions_per_day&#39;</span><span class="p">,</span><span class="s1">&#39;euros_per_session&#39;</span><span class="p">,</span><span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;net_loss&#39;</span><span class="p">,</span><span class="s1">&#39;percent_loss&#39;</span><span class="p">]</span>
+
+<span class="c1"># now do the same for the 5-95 split of players performed in the study (using the &#39;Most_Involved_Group&#39; column)</span>
+<span class="n">most_involved</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[</span><span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;Most_Involved_Group&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">most_involved</span> <span class="o">=</span> <span class="n">most_involved</span><span class="p">[</span><span class="n">useful_columns</span><span class="p">]</span>
+<span class="n">most_involved</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;total_sessions&#39;</span><span class="p">,</span><span class="s1">&#39;sessions_per_day&#39;</span><span class="p">,</span><span class="s1">&#39;euros_per_session&#39;</span><span class="p">,</span><span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;net_loss&#39;</span><span class="p">,</span><span class="s1">&#39;percent_loss&#39;</span><span class="p">]</span>
+
+<span class="n">not_most_involved</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[</span><span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;Most_Involved_Group&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">not_most_involved</span> <span class="o">=</span> <span class="n">not_most_involved</span><span class="p">[</span><span class="n">useful_columns</span><span class="p">]</span>
+<span class="n">not_most_involved</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;total_sessions&#39;</span><span class="p">,</span><span class="s1">&#39;sessions_per_day&#39;</span><span class="p">,</span><span class="s1">&#39;euros_per_session&#39;</span><span class="p">,</span><span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span><span class="s1">&#39;net_loss&#39;</span><span class="p">,</span><span class="s1">&#39;percent_loss&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;all players:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_study_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;most involved:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">most_involved</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;others 95 percent:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">not_most_involved</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>all players: 3445
+most involved: 173
+others 95 percent: 3272
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These numbers are identical to those found in the paper, so at this stage we can be reasonably sure that the data extracted above is the same as that used in the original analysis. Using <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> we can then reproduce each of the tables with the <a href="/gamba/statistics.html#descriptive_table"><code>descriptive_table</code></a> function, plus the <a href="/gamba/statistics.html#cohens_d"><code>cohens_d</code></a> and <a href="/gamba/statistics.html#ks_test"><code>ks_test</code></a> functions...</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">descriptive_df</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">all_study_data</span><span class="p">)</span>
+<span class="n">ks_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">ks_test</span><span class="p">(</span><span class="n">all_study_data</span><span class="p">)</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">descriptive_df</span><span class="p">,</span> <span class="n">ks_table</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+
+<span class="n">majority_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">not_most_involved</span><span class="p">)</span>
+<span class="n">minority_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">most_involved</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">majority_table</span><span class="p">,</span> <span class="n">minority_table</span><span class="p">)</span>
+
+<span class="n">most_involved</span><span class="p">[</span><span class="s1">&#39;most_involved&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">not_most_involved</span><span class="p">[</span><span class="s1">&#39;most_involved&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">all_labelled_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">most_involved</span><span class="p">,</span> <span class="n">not_most_involved</span><span class="p">])</span>
+<span class="n">cohens</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">cohens_d</span><span class="p">(</span><span class="n">all_labelled_data</span><span class="p">,</span> <span class="s1">&#39;most_involved&#39;</span><span class="p">)</span>
+<span class="n">most_involved</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;most_involved&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">cohens</span><span class="p">)</span>
+
+<span class="n">spearmans</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">spearmans_r</span><span class="p">(</span><span class="n">all_study_data</span><span class="p">)</span>
+<span class="n">second_spearmans</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">spearmans_r</span><span class="p">(</span><span class="n">most_involved</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">spearmans</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">second_spearmans</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>σ</th>
+      <th>median</th>
+      <th>K-S Score</th>
+      <th>p</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>263.297242</td>
+      <td>231.765320</td>
+      <td>196.000000</td>
+      <td>0.962656</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>197.189550</td>
+      <td>376.112854</td>
+      <td>60.000000</td>
+      <td>0.999968</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>1.141501</td>
+      <td>1.639888</td>
+      <td>0.560976</td>
+      <td>0.502543</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>34.822931</td>
+      <td>186.660876</td>
+      <td>13.150878</td>
+      <td>0.965538</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>8684.051892</td>
+      <td>83583.345565</td>
+      <td>807.989800</td>
+      <td>0.999706</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>587.460887</td>
+      <td>3018.728832</td>
+      <td>110.659371</td>
+      <td>0.873454</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>0.239377</td>
+      <td>0.294077</td>
+      <td>0.204473</td>
+      <td>0.424153</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>σ</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>249.192848</td>
+      <td>225.160554</td>
+      <td>181.000000</td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>151.582213</td>
+      <td>256.414753</td>
+      <td>52.000000</td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>1.084689</td>
+      <td>1.607911</td>
+      <td>0.506123</td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>24.473024</td>
+      <td>45.616327</td>
+      <td>12.323661</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>2736.739945</td>
+      <td>4784.441999</td>
+      <td>703.815150</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>465.789054</td>
+      <td>1210.518983</td>
+      <td>105.846000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>0.248375</td>
+      <td>0.297668</td>
+      <td>0.214518</td>
+    </tr>
+    <tr>
+      <th>most_involved</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>σ</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>530.057803</td>
+      <td>189.896505</td>
+      <td>565.000000</td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>1059.774566</td>
+      <td>891.173874</td>
+      <td>818.000000</td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>2.216007</td>
+      <td>1.859378</td>
+      <td>1.616105</td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>230.573760</td>
+      <td>785.814580</td>
+      <td>88.660873</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>121167.315999</td>
+      <td>355037.671438</td>
+      <td>55012.673500</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>2888.676138</td>
+      <td>12206.189893</td>
+      <td>1941.010535</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>0.069203</td>
+      <td>0.126085</td>
+      <td>0.033964</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Cohen's d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-1.256492</td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>-2.841726</td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>-0.697742</td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>-1.137564</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>-1.489859</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>-0.815126</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>0.614648</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+      <th>total_sessions</th>
+      <th>sessions_per_day</th>
+      <th>euros_per_session</th>
+      <th>total_wagered</th>
+      <th>net_loss</th>
+      <th>percent_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>0.62**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>-0.38**</td>
+      <td>0.37**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>0.12**</td>
+      <td>0.09**</td>
+      <td>-0.03</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>0.56**</td>
+      <td>0.85**</td>
+      <td>0.29**</td>
+      <td>0.57**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>0.31**</td>
+      <td>0.44**</td>
+      <td>0.1**</td>
+      <td>0.42**</td>
+      <td>0.59**</td>
+      <td>-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>-0.23**</td>
+      <td>-0.41**</td>
+      <td>-0.18**</td>
+      <td>-0.07**</td>
+      <td>-0.36**</td>
+      <td>0.36**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+      <th>total_sessions</th>
+      <th>sessions_per_day</th>
+      <th>euros_per_session</th>
+      <th>total_wagered</th>
+      <th>net_loss</th>
+      <th>percent_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_sessions</th>
+      <td>0.34**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>sessions_per_day</th>
+      <td>-0.22**</td>
+      <td>0.76**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>euros_per_session</th>
+      <td>-0.21**</td>
+      <td>-0.74**</td>
+      <td>-0.58**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>0.09</td>
+      <td>0.07</td>
+      <td>-0.01</td>
+      <td>0.55**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>-0</td>
+      <td>-0</td>
+      <td>0.03</td>
+      <td>-0.13</td>
+      <td>-0.17*</td>
+      <td>-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>-0.03</td>
+      <td>0</td>
+      <td>0.08</td>
+      <td>-0.18*</td>
+      <td>-0.28**</td>
+      <td>0.95**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That's it! The tables found in the paper can be recreated from those above - minus a <em>df</em>, <em>t</em>, <em>p</em>, and <em>p(2-tailed)</em> column which are not described in the text.</p>
+<p>This short population-level descriptive analysis lays the foundation for work in other areas/with other providers. For more examples of reproducability using <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a>, visit <a href="https://github.com/gamba-dev/gamba">the github repo</a> or <a href="https://gamba.dev/docs">see the docs</a></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measure</span> <span class="o">=</span> <span class="s1">&#39;duration&#39;</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">not_most_involved</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">experimental</span> <span class="o">=</span> <span class="n">most_involved</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">experimental</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">measure</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEGCAYAAACevtWaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4xLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy8li6FKAAASdklEQVR4nO3dfYzlVX3H8fenrIhFywo73Wx30cUWNca2iBuEaJsWQgPUCk3QYExZDWaTFhsf2ijUpA9J02DblKppaYnYro1VKNWyIVbdLphWE9Dl+UlwtRB2C+yKgFaiEf32j3tGr9PZnTszd2bunH2/kpt7fud37r3fmTvzub8593fPpKqQJPXlJ1a6AEnS+BnuktQhw12SOmS4S1KHDHdJ6tCalS4AYN26dbV58+aVLkOSVpVbbrnl61U1Ndu+iQj3zZs3s3v37pUuQ5JWlSQPHWzfSNMySR5McleS25Psbn3HJtmZ5Cvt+vmtP0k+kGRPkjuTnDyeL0OSNKr5zLn/alWdVFVb2vYlwK6qOhHY1bYBzgZObJdtwBXjKlaSNJrFvKF6LrC9tbcD5w31f6QGbgLWJtmwiMeRJM3TqOFewGeT3JJkW+tbX1WPtPajwPrW3gg8PHTbva1PkrRMRn1D9TVVtS/JTwM7k3x5eGdVVZJ5LVLTXiS2AbzgBS+Yz00lSXMY6ci9qva16/3AJ4FTgMemp1va9f42fB9w/NDNN7W+mfd5ZVVtqaotU1OznskjSVqgOcM9ydFJnjfdBn4NuBvYAWxtw7YC17X2DuDCdtbMqcBTQ9M3kqRlMMq0zHrgk0mmx/9zVX06yZeAa5JcBDwEvKGN/xRwDrAHeBp4y9irliQd0pzhXlVfA35xlv7HgTNm6S/g4rFUJ0lakIn4hOpiXL7zgVn733nmi5e5EkmaHC4cJkkdMtwlqUOGuyR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR0y3CWpQ4a7JHXIcJekDhnuktQhw12SOmS4S1KHDHdJ6pDhLkkdMtwlqUOGuyR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHRo53JMckeS2JNe37ROS3JxkT5KrkxzZ+p/dtve0/ZuXpnRJ0sHM58j97cB9Q9vvAy6vqp8DngAuav0XAU+0/svbOEnSMhop3JNsAn4d+FDbDnA6cG0bsh04r7XPbdu0/We08ZKkZTLqkftfA+8GftC2jwOerKpn2vZeYGNrbwQeBmj7n2rjf0ySbUl2J9l94MCBBZYvSZrNnOGe5LXA/qq6ZZwPXFVXVtWWqtoyNTU1zruWpMPemhHGvBp4XZJzgKOAnwLeD6xNsqYdnW8C9rXx+4Djgb1J1gDHAI+PvXJJ0kHNeeReVZdW1aaq2gxcANxQVW8CbgTOb8O2Ate19o62Tdt/Q1XVWKuWJB3SYs5zfw/wriR7GMypX9X6rwKOa/3vAi5ZXImSpPkaZVrmh6rqc8DnWvtrwCmzjPkO8Pox1CZJWiA/oSpJHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR0y3CWpQ4a7JHXIcJekDhnuktQhw12SOmS4S1KHDHdJ6pDhLkkdMtwlqUOGuyR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR2aM9yTHJXki0nuSHJPkj9p/SckuTnJniRXJzmy9T+7be9p+zcv7ZcgSZpplCP37wKnV9UvAicBZyU5FXgfcHlV/RzwBHBRG38R8ETrv7yNkyQtoznDvQb+t20+q10KOB24tvVvB85r7XPbNm3/GUkytoolSXMaac49yRFJbgf2AzuBrwJPVtUzbcheYGNrbwQeBmj7nwKOm+U+tyXZnWT3gQMHFvdVSJJ+zEjhXlXfr6qTgE3AKcBLF/vAVXVlVW2pqi1TU1OLvTtJ0pB5nS1TVU8CNwKnAWuTrGm7NgH7WnsfcDxA238M8PhYqpUkjWSUs2Wmkqxt7ecAZwL3MQj589uwrcB1rb2jbdP231BVNc6iJUmHtmbuIWwAtic5gsGLwTVVdX2Se4GPJ/lT4Dbgqjb+KuCfkuwBvgFcsAR1S5IOYc5wr6o7gVfM0v81BvPvM/u/A7x+LNVJkhbET6hKUocMd0nqkOEuSR0y3CWpQ4a7JHXIcJekDhnuktQhw12SOmS4S1KHDHdJ6pDhLkkdMtwlqUOGuyR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR0y3CWpQ4a7JHXIcJekDhnuktQhw12SOmS4S1KHDHdJ6tCc4Z7k+CQ3Jrk3yT1J3t76j02yM8lX2vXzW3+SfCDJniR3Jjl5qb8ISdKPG+XI/Rng96rqZcCpwMVJXgZcAuyqqhOBXW0b4GzgxHbZBlwx9qolSYc0Z7hX1SNVdWtrfwu4D9gInAtsb8O2A+e19rnAR2rgJmBtkg1jr1ySdFDzmnNPshl4BXAzsL6qHmm7HgXWt/ZG4OGhm+1tfTPva1uS3Ul2HzhwYJ5lS5IOZeRwT/Jc4F+Bd1TVN4f3VVUBNZ8Hrqorq2pLVW2Zmpqaz00lSXMYKdyTPItBsH+0qj7Ruh+bnm5p1/tb/z7g+KGbb2p9kqRlMsrZMgGuAu6rqr8a2rUD2NraW4HrhvovbGfNnAo8NTR9I0laBmtGGPNq4LeAu5Lc3vr+ALgMuCbJRcBDwBvavk8B5wB7gKeBt4y1YknSnOYM96r6PJCD7D5jlvEFXLzIuiRJizDKkfuqdPnOB2btf+eZL17mSiRp+bn8gCR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR3qdj33gznYOu/gWu+S+uGRuyR1yHCXpA4Z7pLUIcNdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QOGe6S1CHDXZI6ZLhLUocMd0nqkOEuSR067NZzX4iDrQHv+u+SJtWc4Z7kw8Brgf1V9fLWdyxwNbAZeBB4Q1U9kSTA+4FzgKeBN1fVrUtT+soz9CVNqlGmZf4ROGtG3yXArqo6EdjVtgHOBk5sl23AFeMpU5I0H3MeuVfVfybZPKP7XOBXWns78DngPa3/I1VVwE1J1ibZUFWPjKvgpXSof8EnSavJQt9QXT8U2I8C61t7I/Dw0Li9re//SbItye4kuw8cOLDAMiRJs1n02TLtKL0WcLsrq2pLVW2ZmppabBmSpCELDffHkmwAaNf7W/8+4PihcZtanyRpGS30VMgdwFbgsnZ93VD/25J8HHgV8NRqmW9fSZ51I2ncRjkV8mMM3jxdl2Qv8EcMQv2aJBcBDwFvaMM/xeA0yD0MToV8yxLUPPEMa0krbZSzZd54kF1nzDK2gIsXW5QOzRcPSXNx+QFJ6pDhLkkdcm2ZZeSHpCQtF4/cJalDHrkfBnwDVjr8GO4TzGkcSQtluHfEFwNJ0wx3SRqTQx1gLfc0qOF+GJukH0RJ4+XZMpLUIY/cpcOUZ1H1zXDXYWW+gebUlVYrw11jsdRHgR5lSvPjnLskdcgjd2lC+deKFsNw16wMlrn5PdIkM9y1pFZqLl4L54tWH5xzl6QOeeQurTIeWWsUhrvmZVzTIJMWUCs5vePU0sqbtJ/HcTDcNVF6CLoeg0Krj+EuLZMeXri0ehjuUid88Ri/1fw99WwZSeqQR+6SRuIiaquL4S5p1VpNb14vd62Gu6QlM65Am+/c92oK/aViuEtadqv5jcrVwnCXtGirJaxXS53j4NkyktQhw12SOuS0jCSN0akf+eCs/Tdd+LvLWofhLknL4GChz5kH6V8kw12SDuGgoTzhliTck5wFvB84AvhQVV22FI8jaWHmM3Uw33Cb7/TDbPe/3FMY01ZrkM9m7OGe5Ajgb4Azgb3Al5LsqKp7x/1Y6tekzFseyrhqnE+4rUTQztek3AeM7/u4Gi3FkfspwJ6q+hpAko8D5wITFe7jeHIn6QdnkmqZr/kE0LjCbSm/L5MUbqvh+V9Kh/PXn6oa7x0m5wNnVdVb2/ZvAa+qqrfNGLcN2NY2XwLcv8CHXAd8fYG3XQ7Wt3iTXqP1LY71LdwLq2pqth0r9oZqVV0JXLnY+0myu6q2jKGkJWF9izfpNVrf4ljf0liKDzHtA44f2t7U+iRJy2Qpwv1LwIlJTkhyJHABsGMJHkeSdBBjn5apqmeSvA34DINTIT9cVfeM+3GGLHpqZ4lZ3+JNeo3WtzjWtwTG/oaqJGnluXCYJHXIcJekDq3acE9yVpL7k+xJcskK1vHhJPuT3D3Ud2ySnUm+0q6f3/qT5AOt5juTnLwM9R2f5MYk9ya5J8nbJ6nGJEcl+WKSO1p9f9L6T0hyc6vj6vbmPEme3bb3tP2bl7K+oTqPSHJbkusnrb4kDya5K8ntSXa3vol4fttjrk1ybZIvJ7kvyWkTVt9L2vdu+vLNJO+YpBoXpKpW3YXBG7VfBV4EHAncAbxshWr5ZeBk4O6hvj8HLmntS4D3tfY5wL8DAU4Fbl6G+jYAJ7f284AHgJdNSo3tcZ7b2s8Cbm6Pew1wQev/O+C3W/t3gL9r7QuAq5fpeX4X8M/A9W17YuoDHgTWzeibiOe3PeZ24K2tfSSwdpLqm1HrEcCjwAsntcaRv5aVLmCBT8BpwGeGti8FLl3BejbPCPf7gQ2tvQG4v7X/HnjjbOOWsdbrGKz7M3E1Aj8J3Aq8isEnAtfMfL4ZnIV1WmuvaeOyxHVtAnYBpwPXt1/qSapvtnCfiOcXOAb475nfg0mpb5Z6fw34wiTXOOpltU7LbAQeHtre2/omxfqqeqS1HwXWt/aK1t2mCF7B4Oh4YmpsUx63A/uBnQz+Knuyqp6ZpYYf1tf2PwUct5T1AX8NvBv4Qds+bsLqK+CzSW7JYFkPmJzn9wTgAPAPbVrrQ0mOnqD6ZroA+FhrT2qNI1mt4b5q1OClfcXPN03yXOBfgXdU1TeH9610jVX1/ao6icER8inAS1eqlpmSvBbYX1W3rHQth/CaqjoZOBu4OMkvD+9c4ed3DYNpyyuq6hXAtxlMcfzQSv/8TWvvm7wO+JeZ+yalxvlYreE+6UscPJZkA0C73t/6V6TuJM9iEOwfrapPTGKNAFX1JHAjg2mOtUmmP2Q3XMMP62v7jwEeX8KyXg28LsmDwMcZTM28f4Lqo6r2tev9wCcZvEBOyvO7F9hbVTe37WsZhP2k1DfsbODWqnqsbU9ijSNbreE+6Usc7AC2tvZWBvPc0/0XtnfbTwWeGvqzb0kkCXAVcF9V/dWk1ZhkKsna1n4Og/cD7mMQ8ucfpL7pus8HbmhHVUuiqi6tqk1VtZnBz9kNVfWmSakvydFJnjfdZjBnfDcT8vxW1aPAw0le0rrOYLD890TUN8Mb+dGUzHQtk1bj6FZ60n+hFwbvWD/AYH72vStYx8eAR4DvMThKuYjBHOsu4CvAfwDHtrFh8I9MvgrcBWxZhvpew+DPyTuB29vlnEmpEfgF4LZW393AH7b+FwFfBPYw+DP52a3/qLa9p+1/0TI+17/Cj86WmYj6Wh13tMs9078Lk/L8tsc8CdjdnuN/A54/SfW1xz2awV9Yxwz1TVSN8724/IAkdWi1TstIkg7BcJekDhnuktQhw12SOmS4S1KHDHd1LckfJ/n9MdzP2iS/M7T9M0muXez9SkvFcJeaoU+czmYtgxUfAaiq/6mq8w8xXlpRhru6k+S9SR5I8nngJa3vc0m2tPa6tpwASd6cZEeSG4BdSZ6bZFeSWzNYI/3cdreXAT/b1vv+iySb09bwz2BN+n9o429L8qtD9/2JJJ9ua4L/+TJ/K3QYG/s/yJZWUpJXMlgm4CQGP9+3AnMt+nUy8AtV9Y129P6bVfXNJOuAm5LsYLDY1ctrsMDZ9Aqb0y5msLbUzyd5KYMVGl/c9p3EYCXO7wL3J/lgVQ2vKCgtCcNdvfkl4JNV9TRAC+a57Kyqb7R2gD9rKyv+gMFSrusPesuB1wAfBKiqLyd5CJgO911V9VSr5V4G/wTCcNeSM9x1uHiGH01DHjVj37eH2m8CpoBXVtX32vTNzPHz8d2h9vfxd07LxDl39eY/gfOSPKetlvgbrf9B4JWtfag3Qo9hsH7799rc+Qtb/7cY/JvC2fwXgxcF2nTMCxj8dx5pxRju6kpV3QpczWCVxH9nsDw0wF8Cv53kNmDdIe7io8CWJHcBFwJfbvf7OPCFJHcn+YsZt/lb4Cfaba4G3lxV30VaQa4KKUkd8shdkjpkuEtShwx3SeqQ4S5JHTLcJalDhrskdchwl6QO/R/X9YndDaQn6AAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 

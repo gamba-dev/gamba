@@ -31,7 +31,13 @@ nb_path: "20_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use. This module contains a number of data loading functions for existing public data repositories so you can replicate or extend work right from the start.</p>
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use. This format is is in preparation to create a measures table, and is simply a dataframe with fixed column names. Read through this page to find out how it works, plus some simple plotting at the end. This module also contains a number of data loading functions for existing public data repositories so you can replicate or extend work right from the start.</p>
 
 </div>
 </div>
@@ -60,7 +66,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_csv" class="doc_header"><code>read_csv</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L7" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_csv</code>(<strong><code>file</code></strong>, <strong><code>parse_dates</code></strong>=<em><code>[]</code></em>, <strong><code>index_col</code></strong>=<em><code>None</code></em>, <strong><code>delimiter</code></strong>=<em><code>','</code></em>, <strong><code>dummy_data</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="read_csv" class="doc_header"><code>read_csv</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_csv</code>(<strong><code>file</code></strong>, <strong><code>parse_dates</code></strong>=<em><code>[]</code></em>, <strong><code>index_col</code></strong>=<em><code>None</code></em>, <strong><code>delimiter</code></strong>=<em><code>','</code></em>, <strong><code>dummy_data</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -175,7 +181,13 @@ nb_path: "20_data.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loading-Existing-Datasets">Loading Existing Datasets<a class="anchor-link" href="#Loading-Existing-Datasets"> </a></h2><p>Several public repositories provide transaction data that can be loaded by the gamba library (see Public Repositories in the menu). The data module contains methods for loading some of these sets into the correct format, which are used in the respective replications. If you're loading in a similar data set, feel free to explore the source code of these methods to see how it's done, and modify them for your own needs!</p>
+<h2 id="Loading-Existing-Datasets">Loading Existing Datasets<a class="anchor-link" href="#Loading-Existing-Datasets"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Several public repositories provide transaction data that can be loaded by the gamba library (see Public Repositories in the menu). The data module contains methods for loading some of these sets into the correct format, which are used in the respective replications. If you're loading in a similar data set, feel free to explore the source code of these methods to see how it's done, and modify them for your own needs!</p>
 
 </div>
 </div>
@@ -191,7 +203,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_labrie_data" class="doc_header"><code>prepare_labrie_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_labrie_data</code>(<strong><code>filename</code></strong>, <strong><code>savedir</code></strong>=<em><code>'labrie_individuals/'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>year</code></strong>=<em><code>2008</code></em>)</p>
+<h4 id="prepare_labrie_data" class="doc_header"><code>prepare_labrie_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_labrie_data</code>(<strong><code>filename</code></strong>, <strong><code>savedir</code></strong>=<em><code>'labrie_individuals/'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>year</code></strong>=<em><code>2008</code></em>)</p>
 </blockquote>
 <p>Splits the original labrie data into CSV files for each individual's transactions and renames the columns to be compatable with the rest of the gamba library.</p>
 
@@ -223,7 +235,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_braverman_data" class="doc_header"><code>prepare_braverman_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_braverman_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="prepare_braverman_data" class="doc_header"><code>prepare_braverman_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_braverman_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Splits the original Braverman and Shaffer data into CSV files for each indivdiual's transactions, and renames the columns to be compatable with the rest of the gamba library.</p>
 
@@ -255,7 +267,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_philander_data" class="doc_header"><code>prepare_philander_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_philander_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="prepare_philander_data" class="doc_header"><code>prepare_philander_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_philander_data</code>(<strong><code>filename</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Loads in the analytic data set of high-risk internet gamblers and removes the UserID, Sereason, random, and clustering columns as described in Philander's 2014 study.</p>
 
@@ -300,7 +312,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
+<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -322,7 +334,13 @@ nb_path: "20_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2><p>The data module contains some basic visualisation methods which can be applied before any behavioural measures are calculated. This is useful for showing the distributions of player bet sizes, times, payouts, and so on.</p>
+<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The data module contains some basic visualisation methods which can be applied before any behavioural measures are calculated. This is useful for showing the distributions of player bet sizes, times, payouts, and so on.</p>
 
 </div>
 </div>
@@ -338,7 +356,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_player_career" class="doc_header"><code>plot_player_career</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career</code>(<strong><code>player_df</code></strong>, <strong><code>savename</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="plot_player_career" class="doc_header"><code>plot_player_career</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career</code>(<strong><code>player_df</code></strong>, <strong><code>savename</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Creates a candlestick-style plot of a players betting activity over the course of their career. This works best on regularly-spaced sequential data but can also provide insight into intra-session win/loss patterns.</p>
 
@@ -370,7 +388,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_player_career_split" class="doc_header"><code>plot_player_career_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career_split</code>(<strong><code>player_df</code></strong>)</p>
+<h4 id="plot_player_career_split" class="doc_header"><code>plot_player_career_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L149" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career_split</code>(<strong><code>player_df</code></strong>)</p>
 </blockquote>
 <p>Plot a player's betting and payout trajectory on a single plot, with green indicating payouts (top) and red indicating bets (bottom). A cumulative value line is also plotted between the two. Note that the player_df must include both</p>
 
@@ -402,7 +420,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="visualise_provider_dates" class="doc_header"><code>visualise_provider_dates</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualise_provider_dates</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="visualise_provider_dates" class="doc_header"><code>visualise_provider_dates</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L198" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>visualise_provider_dates</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Visualises the start and end dates of bets from one or more providers on a stacked gantt style plot.</p>
 

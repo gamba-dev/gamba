@@ -31,7 +31,7 @@ nb_path: "22_statistics.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p>With a measures table created, the first obvious step is to compute summary statistics across it, which can be compared to the measures tables from other providers or games, etc. and inform further analyses.</p>
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h2><p>With a measures table created, the first obvious step is to compute summary statistics across it, which can be compared to the measures tables from other providers or games, etc. and inform further analyses. The gamba library's statistics module contains methods for running these tests, plus some general descriptive methods.</p>
 
 </div>
 </div>
@@ -39,6 +39,301 @@ nb_path: "22_statistics.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Methods">Methods<a class="anchor-link" href="#Methods"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="descriptive_table" class="doc_header"><code>descriptive_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>descriptive_table</code>(<strong><code>measures_table</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>extended</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Creates the first table found in LaBrie et al's 2008 paper, which presents descriptive statistics for each of the behavioural measures they calculated.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ks_test" class="doc_header"><code>ks_test</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ks_test</code>(<strong><code>measures_table</code></strong>)</p>
+</blockquote>
+<p>Performs a one sample Kolmogorov-Smirnov test. This approximately indicates whether or not a collection of calculated behavioural measures are normally distributed.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="cohens_d" class="doc_header"><code>cohens_d</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L69" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cohens_d</code>(<strong><code>measures_table</code></strong>, <strong><code>label</code></strong>)</p>
+</blockquote>
+<p>Calculates Cohen's d value between the behavioural measures of two groups of players. Groups are distinguished using a label column which is either 1 (in group) or 0 (not in group). For example, the column 'in_top5' may represent whether or not a player is in the top 5 % of players by total amount wagered, and would be 1 or 0 for the top 5 and remaining 95 percent respectively.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="spearmans_r" class="doc_header"><code>spearmans_r</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L117" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>spearmans_r</code>(<strong><code>measures_table</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Calculates the coefficients (nonparametric Spearman's r) between a collection of behavioural measures. The upper-right diagonal of the resulting matrix is discarded (symmetric).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="calculate_walker_matrix" class="doc_header"><code>calculate_walker_matrix</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_walker_matrix</code>(<strong><code>measures_tables</code></strong>, <strong><code>labels</code></strong>, <strong><code>measure</code></strong>=<em><code>'frequency'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Performs a two sample Kolmogorov-Smirnov test between collections of measure from different games.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Labeled-Measures-Table-Statistics">Labeled Measures Table Statistics<a class="anchor-link" href="#Labeled-Measures-Table-Statistics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The statistics module also contains methods for computing statistics between groups as indicated by a label column in the measures table. {% cite labrie2007assessing %}</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="label_overlap_table" class="doc_header"><code>label_overlap_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L239" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>label_overlap_table</code>(<strong><code>measures_table</code></strong>, <strong><code>labels</code></strong>)</p>
+</blockquote>
+<p>Calculates the number of players under a collection of labels (exclusively), and on each pair of labels (again exclusively) in the list provided. This method can be used to reproduce the final table in LaBrie et al's 2007 paper {% cite labrie2007assessing %}.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Utility-Methods">Utility Methods<a class="anchor-link" href="#Utility-Methods"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>statistics</code> module has some utility methods which may not be directly useful for an analysis but can be used to do simple tasks like join measures tables.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="add_tables" class="doc_header"><code>add_tables</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L371" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_tables</code>(<strong><code>t1</code></strong>, <strong><code>t2</code></strong>, <strong><code>same_columns</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Joins two tables (the second to the right hand side of the first), adding '_2' to column names if same_columns parameter is True.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="color_matrix" class="doc_header"><code>color_matrix</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L381" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>color_matrix</code>(<strong><code>matrix</code></strong>, <strong><code>cmap</code></strong>)</p>
+</blockquote>
+<p>Creates a shaded matrix based on a color map.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% bibliography --cited %}</p>
+
 </div>
 </div>
 </div>

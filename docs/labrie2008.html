@@ -1,6 +1,6 @@
 ---
 
-title: LaBrie 2007
+title: LaBrie et al 2008
 
 
 keywords: fastai
@@ -31,7 +31,690 @@ nb_path: "32_labrie2008.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>...</p>
+<p>This notebook reproduces every table in LaBrie et al's 2008 paper on casino gambling behaviour. To get started, download the raw data from the link below from the transparency project's website. The data we need is <strong>Raw Dataset 2</strong> (<strong>text version</strong>) under the title '<em>Virtual Casino Gambling: February 2005 through February 2007</em>' towards the bottom of the page.</p>
+<p>Once you've downloaded and extracted it, you should see a file called <strong>RawDataSet2_DailyAggregCasinoTXT.txt</strong> - copy this into the same directory as this notebook to begin.</p>
+<ul>
+<li><a href="http://www.thetransparencyproject.org/download_index.php">Data Download (thetransparencyproject.org)</a></li>
+<li><a href="http://www.thetransparencyproject.org/codebooks/Codebook_for_Virtual_Casino_Gambling.pdf">Original data description</a></li>
+<li><a href="https://academic.oup.com/eurpub/article/18/4/410/477060">Original paper link</a></li>
+</ul>
+<p>The first step is to import the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, run the cell below to do so. If this cell throws an error, <a href="">see the install documentation page</a> to make sure you have <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> installed.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>gamba loaded, see https://gamba.dev/citation
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> loaded, the next step is to get the data into a usable format. To do this, we call the <a href="/gamba/data.html#prepare_labrie_data"><code>prepare_labrie_data</code></a> method from the data module. This does two things, first it renames the columns to values compatable with the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, second it splits the collection of all player's data into individual files and saves them. You should see a folder called <code>labrie_individuals/</code> appear next to this notebook once this cell has executed. This will contain 4,222 CSV files - one for each player.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_player_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">prepare_labrie_data</span><span class="p">(</span><span class="s1">&#39;RawDataSet2_DailyAggregCasinoTXT.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In two lines of code we're ready to start the analysis, and have each player's transactions individually saved in-case anything goes wrong or we want to take a sample. The next step is to load in the data we just prepared, this uses some magic from the <a href="https://docs.python.org/3/library/glob.html#module-glob">glob</a> library to load every CSV file in the <code>labrie_individuals/</code> folder into the variable <code>all_player_bets</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we want to do any other analysis on all of the players this is where we would add new methods, but let's crack on with calculating each of the measures described in the paper - which includes things like <strong>frequency</strong>, <strong>duration</strong>, <strong>total amount wagered</strong>, etc. Heads up: this calculation can take up to 10 minutes on a normal computer, so now is a great time to share this page with a colleague, or <a href="https://twitter.com/gamba_dev">tweet us your feedback</a>!</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measures_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">all_player_bets</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 0/4222 [00:00&lt;?, ?it/s]/home/ojs/.local/lib/python3.8/site-packages/gamba/measures.py:31: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  player_bets.sort_values(&#39;bet_time&#39;, inplace=True)
+/home/ojs/.local/lib/python3.8/site-packages/gamba/measures.py:46: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  player_bets.sort_values(&#39;bet_time&#39;, inplace=True)
+/home/ojs/.local/lib/python3.8/site-packages/gamba/measures.py:50: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  player_bets[&#39;bet_date&#39;] = player_bets[&#39;bet_time&#39;].dt.date
+  0%|          | 1/4222 [00:00&lt;12:04,  5.83it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>calculating LaBrie measures for 4222 players, this may take some time...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 4222/4222 [16:18&lt;00:00,  4.32it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>LaBrie measures saved
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The cell above took a while to finish, to make sure we don't have to do that computation again the output has been saved as <code>gamba_labrie_measures.csv</code> next to this notebook. We'll come back to this file later to make sure this recreation matches the original, but lets keep going! Time for the first meaningful output, the first table in the original paper - which describes the measures we just calculated using basic statistics;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labrie_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">measures_table</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">labrie_table</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>299.206774</td>
+      <td>236.670214</td>
+      <td>261.000000</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>16.326440</td>
+      <td>21.017499</td>
+      <td>7.429744</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>3515.047845</td>
+      <td>12210.792339</td>
+      <td>532.000000</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>115.950530</td>
+      <td>191.986075</td>
+      <td>48.911275</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>34.760626</td>
+      <td>184.090509</td>
+      <td>4.158098</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>27171.583452</td>
+      <td>109603.915777</td>
+      <td>2603.340000</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>839.710129</td>
+      <td>3229.177371</td>
+      <td>117.250000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>7.726259</td>
+      <td>11.579289</td>
+      <td>5.494480</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nice! Looks like the original! Next up is the Spearman's R coefficient matrix, which tells us how the measures relate to one-another. Run the next cell;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spearman_coefficient_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">spearmans_r</span><span class="p">(</span><span class="n">measures_table</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">spearman_coefficient_table</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+      <th>frequency</th>
+      <th>num_bets</th>
+      <th>average_bets_per_day</th>
+      <th>average_bet_size</th>
+      <th>total_wagered</th>
+      <th>net_loss</th>
+      <th>percent_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>-0.63**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>0.26**</td>
+      <td>0.22**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>0.01</td>
+      <td>0.13**</td>
+      <td>0.87**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>0.05**</td>
+      <td>0.09**</td>
+      <td>-0.24**</td>
+      <td>-0.41**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>0.27**</td>
+      <td>0.27**</td>
+      <td>0.66**</td>
+      <td>0.41**</td>
+      <td>0.52**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>0.23**</td>
+      <td>0.16**</td>
+      <td>0.49**</td>
+      <td>0.33**</td>
+      <td>0.32**</td>
+      <td>0.7**</td>
+      <td>-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>-0.07**</td>
+      <td>-0.18**</td>
+      <td>-0.26**</td>
+      <td>-0.14**</td>
+      <td>-0.27**</td>
+      <td>-0.43**</td>
+      <td>0.2**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nice x2! Now that the first two tables from the paper have been reproduced, the measures need splitting into the top 5% and remaining 95% of players by their total amount wagered. The <code>split_labrie_measures</code> method from the <code>gamba.studies</code> module does this, returning the two splits as dataframes.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labelled_measures</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">top_split</span><span class="p">(</span><span class="n">measures_table</span><span class="p">,</span> <span class="s1">&#39;total_wagered&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>top count: 212
+other count: 4010
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the two cohorts seperated, the last part of the paper uses the same descriptive table to present their differences. To reproduce that using <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a>, we simply call the same method as the first table on each of the cohorts;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labelled_groups</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">get_labelled_groups</span><span class="p">(</span><span class="n">labelled_measures</span><span class="p">,</span> <span class="s1">&#39;top_total_wagered&#39;</span><span class="p">)</span>
+<span class="n">top5_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">labelled_groups</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">other95_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">descriptive_table</span><span class="p">(</span><span class="n">labelled_groups</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">top5_table</span><span class="p">,</span> <span class="n">other95_table</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>476.023585</td>
+      <td>232.523748</td>
+      <td>529.000000</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>24.299398</td>
+      <td>16.768756</td>
+      <td>20.148853</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>24558.452830</td>
+      <td>36778.787680</td>
+      <td>10464.500000</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>284.988926</td>
+      <td>343.720575</td>
+      <td>188.175380</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>213.216382</td>
+      <td>682.412984</td>
+      <td>24.965530</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>345579.044151</td>
+      <td>354890.079012</td>
+      <td>233915.905000</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>8746.290143</td>
+      <td>11212.842660</td>
+      <td>6698.250000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>2.574661</td>
+      <td>2.593843</td>
+      <td>2.521351</td>
+    </tr>
+    <tr>
+      <th>top_total_wagered</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>289.858853</td>
+      <td>233.213355</td>
+      <td>246.000000</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>15.904928</td>
+      <td>21.136601</td>
+      <td>6.861726</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>2402.528678</td>
+      <td>7819.175770</td>
+      <td>485.500000</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>107.013836</td>
+      <td>176.064687</td>
+      <td>45.897791</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>25.326057</td>
+      <td>96.945569</td>
+      <td>3.826164</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>10338.071814</td>
+      <td>19359.770871</td>
+      <td>2284.452150</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>421.706398</td>
+      <td>938.710858</td>
+      <td>107.000000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>7.998612</td>
+      <td>11.804173</td>
+      <td>5.849977</td>
+    </tr>
+    <tr>
+      <th>top_total_wagered</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That's it! In around 10 lines of code the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework can fully replicate the findings of LaBrie et al's 2008 paper. The most interesting question now is how to expand this analysis to uncover more details from the data, or to calculate new behavioural measures and see if they are useful in any way.</p>
 
 </div>
 </div>
