@@ -119,7 +119,6 @@ nb_path: "31_labrie2007.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">fo_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;fo_labrie_measures.csv&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fixed odd labrie measures saved.&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -132,135 +131,17 @@ nb_path: "31_labrie2007.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>  0%|          | 1/42157 [00:00&lt;1:59:00,  5.90it/s]</pre>
+<pre>100%|██████████| 42157/42157 [1:01:43&lt;00:00, 11.38it/s]
+</pre>
 </div>
 </div>
 
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>calculating LaBrie measures for42157players, this may take some time...
+<pre>LaBrie measures saved
+fixed odd labrie measures saved.
 </pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>  0%|          | 154/42157 [00:15&lt;1:10:24,  9.94it/s]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-5-6c6170e7b761&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>gb<span class="ansi-blue-fg">.</span>measures<span class="ansi-blue-fg">.</span>calculate_labrie_measures<span class="ansi-blue-fg">(</span>fo_data<span class="ansi-blue-fg">,</span> filename<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;fo_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">,</span> loud<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;fixed odd labrie measures saved.&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">calculate_labrie_measures</span><span class="ansi-blue-fg">(all_player_bets, savedir, filename, loud, daily)</span>
-<span class="ansi-green-intense-fg ansi-bold">    213</span>         <span class="ansi-green-fg">if</span> daily<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    214</span>             all_number_of_bets<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>number_of_bets<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 215</span><span class="ansi-red-fg">             </span>all_average_bets_per_day<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>mean_bets_per_day<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    216</span>             all_average_bet_size<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>mean_bet_size<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">,</span> daily<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    217</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">mean_bets_per_day</span><span class="ansi-blue-fg">(player_bets, daily)</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> 
-<span class="ansi-green-intense-fg ansi-bold">     68</span>         age_in_days <span class="ansi-blue-fg">=</span> duration<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 69</span><span class="ansi-red-fg">         </span>frequency_percentage <span class="ansi-blue-fg">=</span> frequency<span class="ansi-blue-fg">(</span>player_bets<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     70</span> 
-<span class="ansi-green-intense-fg ansi-bold">     71</span>         betting_days <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>frequency_percentage <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">*</span> age_in_days
-
-<span class="ansi-green-fg">~/Desktop/gamba/gamba/measures.py</span> in <span class="ansi-cyan-fg">frequency</span><span class="ansi-blue-fg">(player_bets)</span>
-<span class="ansi-green-intense-fg ansi-bold">     43</span>     <span class="ansi-green-fg">for</span> day <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>age_in_days<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     44</span>         current_date <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>first_day <span class="ansi-blue-fg">+</span> datetime<span class="ansi-blue-fg">.</span>timedelta<span class="ansi-blue-fg">(</span>days<span class="ansi-blue-fg">=</span>day<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>date<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 45</span><span class="ansi-red-fg">         </span>bets_today <span class="ansi-blue-fg">=</span> player_bets<span class="ansi-blue-fg">.</span>iloc<span class="ansi-blue-fg">[</span>player_bets<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;bet_date&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>values <span class="ansi-blue-fg">==</span> current_date<span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">     46</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>bets_today<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">!=</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     47</span>             betting_days <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1766</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1767</span>             maybe_callable <span class="ansi-blue-fg">=</span> com<span class="ansi-blue-fg">.</span>apply_if_callable<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>obj<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 1768</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getitem_axis<span class="ansi-blue-fg">(</span>maybe_callable<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1769</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1770</span>     <span class="ansi-green-fg">def</span> _is_scalar_access<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">:</span> Tuple<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_getitem_axis</span><span class="ansi-blue-fg">(self, key, axis)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2123</span>         <span class="ansi-green-fg">if</span> com<span class="ansi-blue-fg">.</span>is_bool_indexer<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   2124</span>             self<span class="ansi-blue-fg">.</span>_validate_key<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 2125</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_getbool_axis<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2126</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2127</span>         <span class="ansi-red-fg"># a list of integers</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_getbool_axis</span><span class="ansi-blue-fg">(self, key, axis)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1782</span>         key <span class="ansi-blue-fg">=</span> check_bool_indexer<span class="ansi-blue-fg">(</span>labels<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1783</span>         inds <span class="ansi-blue-fg">=</span> key<span class="ansi-blue-fg">.</span>nonzero<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-fg">-&gt; 1784</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>obj<span class="ansi-blue-fg">.</span>_take_with_is_copy<span class="ansi-blue-fg">(</span>inds<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1785</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1786</span>     <span class="ansi-green-fg">def</span> _get_slice_axis<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> slice_obj<span class="ansi-blue-fg">:</span> slice<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">_take_with_is_copy</span><span class="ansi-blue-fg">(self, indices, axis, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3407</span>         See the docstring of<span class="ansi-red-fg"> </span><span class="ansi-red-fg">`</span>take<span class="ansi-red-fg">`</span> <span class="ansi-green-fg">for</span> full explanation of the parameters<span class="ansi-blue-fg">.</span>
-<span class="ansi-green-intense-fg ansi-bold">   3408</span>         &#34;&#34;&#34;
-<span class="ansi-green-fg">-&gt; 3409</span><span class="ansi-red-fg">         </span>result <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indices<span class="ansi-blue-fg">=</span>indices<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3410</span>         <span class="ansi-red-fg"># Maybe set copy if we didn&#39;t actually change the index.</span>
-<span class="ansi-green-intense-fg ansi-bold">   3411</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> result<span class="ansi-blue-fg">.</span>_get_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>equals<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_get_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indices, axis, is_copy, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3392</span>         self<span class="ansi-blue-fg">.</span>_consolidate_inplace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3393</span> 
-<span class="ansi-green-fg">-&gt; 3394</span><span class="ansi-red-fg">         new_data = self._data.take(
-</span><span class="ansi-green-intense-fg ansi-bold">   3395</span>             indices<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>_get_block_manager_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> verify<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
-<span class="ansi-green-intense-fg ansi-bold">   3396</span>         )
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indexer, axis, verify, convert)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1390</span>                 <span class="ansi-green-fg">raise</span> Exception<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Indices must be nonzero and less than the axis length&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1391</span> 
-<span class="ansi-green-fg">-&gt; 1392</span><span class="ansi-red-fg">         </span>new_labels <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>axes<span class="ansi-blue-fg">[</span>axis<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indexer<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1393</span>         return self.reindex_indexer(
-<span class="ansi-green-intense-fg ansi-bold">   1394</span>             new_axis<span class="ansi-blue-fg">=</span>new_labels<span class="ansi-blue-fg">,</span> indexer<span class="ansi-blue-fg">=</span>indexer<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">=</span>axis<span class="ansi-blue-fg">,</span> allow_dups<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">take</span><span class="ansi-blue-fg">(self, indices, axis, allow_fill, fill_value, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    762</span>                 )
-<span class="ansi-green-intense-fg ansi-bold">    763</span>             taken <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>values<span class="ansi-blue-fg">.</span>take<span class="ansi-blue-fg">(</span>indices<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 764</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>taken<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    765</span> 
-<span class="ansi-green-intense-fg ansi-bold">    766</span>     def _assert_take_fillable(
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/range.py</span> in <span class="ansi-cyan-fg">_shallow_copy</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    392</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    393</span>             kwargs<span class="ansi-blue-fg">.</span>setdefault<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;name&#34;</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 394</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_int64index<span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    395</span> 
-<span class="ansi-green-intense-fg ansi-bold">    396</span>     <span class="ansi-blue-fg">@</span>Appender<span class="ansi-blue-fg">(</span>ibase<span class="ansi-blue-fg">.</span>_index_shared_docs<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;copy&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/numeric.py</span> in <span class="ansi-cyan-fg">_shallow_copy</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    109</span>         <span class="ansi-green-fg">if</span> values <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>_can_hold_na<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    110</span>             <span class="ansi-red-fg"># Ensure we are not returning an Int64Index with float data:</span>
-<span class="ansi-green-fg">--&gt; 111</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_shallow_copy_with_infer<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">=</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    112</span>         <span class="ansi-green-fg">return</span> super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>_shallow_copy<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">=</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    113</span> 
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">_shallow_copy_with_infer</span><span class="ansi-blue-fg">(self, values, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    565</span>             <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>TypeError<span class="ansi-blue-fg">,</span> ValueError<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    566</span>                 <span class="ansi-green-fg">pass</span>
-<span class="ansi-green-fg">--&gt; 567</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Index<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attributes<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    568</span> 
-<span class="ansi-green-intense-fg ansi-bold">    569</span>     <span class="ansi-green-fg">def</span> _update_inplace<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> result<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py</span> in <span class="ansi-cyan-fg">__new__</span><span class="ansi-blue-fg">(cls, data, dtype, copy, name, tupleize_cols, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    388</span>             <span class="ansi-red-fg"># maybe coerce to a sub-class</span>
-<span class="ansi-green-intense-fg ansi-bold">    389</span>             <span class="ansi-green-fg">if</span> is_signed_integer_dtype<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">.</span>dtype<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 390</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> Int64Index<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span> copy<span class="ansi-blue-fg">=</span>copy<span class="ansi-blue-fg">,</span> dtype<span class="ansi-blue-fg">=</span>dtype<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">=</span>name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    391</span>             <span class="ansi-green-fg">elif</span> is_unsigned_integer_dtype<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">.</span>dtype<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    392</span>                 <span class="ansi-green-fg">return</span> UInt64Index<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span> copy<span class="ansi-blue-fg">=</span>copy<span class="ansi-blue-fg">,</span> dtype<span class="ansi-blue-fg">=</span>dtype<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">=</span>name<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
 </div>
 
@@ -277,11 +158,33 @@ nb_path: "31_labrie2007.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">lo_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;la_labrie_measures.csv&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;live action labrie measures saved.&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">la_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;la_labrie_measures.csv&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 26198/26198 [25:31&lt;00:00, 17.10it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>LaBrie measures saved
+live action labrie measures saved.
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -314,6 +217,75 @@ nb_path: "31_labrie2007.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-9-b9895528ac3b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> fo_gamba_measures <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;fo_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> la_gamba_measures <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;la_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>original <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;AnalyticDataInternetGambling.txt&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span> fo_bettors <span class="ansi-blue-fg">=</span> original<span class="ansi-blue-fg">[</span>original<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;FOTotalBets&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/Desktop/gamba/gamba/data.py</span> in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(file, parse_dates, index_col, delimiter, dummy_data)</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">def</span> read_csv<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">,</span> parse_dates<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> index_col<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> delimiter<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;,&#34;</span><span class="ansi-blue-fg">,</span> dummy_data<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> 
+<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg">     df = pd.read_csv(
+</span><span class="ansi-green-intense-fg ansi-bold">     11</span>         file<span class="ansi-blue-fg">,</span> parse_dates<span class="ansi-blue-fg">=</span>parse_dates<span class="ansi-blue-fg">,</span> index_col<span class="ansi-blue-fg">=</span>index_col<span class="ansi-blue-fg">,</span> delimiter<span class="ansi-blue-fg">=</span>delimiter
+<span class="ansi-green-intense-fg ansi-bold">     12</span>     )
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">parser_f</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
+<span class="ansi-green-intense-fg ansi-bold">    674</span>         )
+<span class="ansi-green-intense-fg ansi-bold">    675</span> 
+<span class="ansi-green-fg">--&gt; 676</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    677</span> 
+<span class="ansi-green-intense-fg ansi-bold">    678</span>     parser_f<span class="ansi-blue-fg">.</span>__name__ <span class="ansi-blue-fg">=</span> name
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
+<span class="ansi-green-intense-fg ansi-bold">    446</span> 
+<span class="ansi-green-intense-fg ansi-bold">    447</span>     <span class="ansi-red-fg"># Create the parser.</span>
+<span class="ansi-green-fg">--&gt; 448</span><span class="ansi-red-fg">     </span>parser <span class="ansi-blue-fg">=</span> TextFileReader<span class="ansi-blue-fg">(</span>fp_or_buf<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    449</span> 
+<span class="ansi-green-intense-fg ansi-bold">    450</span>     <span class="ansi-green-fg">if</span> chunksize <span class="ansi-green-fg">or</span> iterator<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, f, engine, **kwds)</span>
+<span class="ansi-green-intense-fg ansi-bold">    878</span>             self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    879</span> 
+<span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>engine<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    881</span> 
+<span class="ansi-green-intense-fg ansi-bold">    882</span>     <span class="ansi-green-fg">def</span> close<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_make_engine</span><span class="ansi-blue-fg">(self, engine)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1112</span>     <span class="ansi-green-fg">def</span> _make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> engine<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1113</span>         <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1114</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_engine <span class="ansi-blue-fg">=</span> CParserWrapper<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1115</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1116</span>             <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;python&#34;</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, src, **kwds)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1889</span>         kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;usecols&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>usecols
+<span class="ansi-green-intense-fg ansi-bold">   1890</span> 
+<span class="ansi-green-fg">-&gt; 1891</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_reader <span class="ansi-blue-fg">=</span> parsers<span class="ansi-blue-fg">.</span>TextReader<span class="ansi-blue-fg">(</span>src<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1892</span>         self<span class="ansi-blue-fg">.</span>unnamed_cols <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>unnamed_cols
+<span class="ansi-green-intense-fg ansi-bold">   1893</span> 
+
+<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.__cinit__</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] File AnalyticDataInternetGambling.txt does not exist: &#39;AnalyticDataInternetGambling.txt&#39;</pre>
+</div>
+</div>
+
 </div>
 </div>
 

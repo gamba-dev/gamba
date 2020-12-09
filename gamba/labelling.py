@@ -3,6 +3,7 @@
 __all__ = ['top_split', 'get_labelled_groups', 'spending_portions']
 
 # Cell
+import numpy as np
 def top_split(measures_table, split_by, percentile=95, loud=False):
     "Labels player's behavioural measures according to their presence in the top percentile of a given measure (split_by). Label column will be 1 if in the top percentile, 0 if not. E.g. if split_by is 'total_wagered' and percentile is 95, players in the top 5% by total wagered will be labelled 1, and all others 0."
 

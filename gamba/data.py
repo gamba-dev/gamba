@@ -6,7 +6,7 @@ __all__ = ['read_csv', 'prepare_labrie_data', 'prepare_braverman_data', 'prepare
 # Cell
 import pandas as pd
 def read_csv(file, parse_dates=[], index_col=None, delimiter=",", dummy_data=False):
-
+    "Read csv files into a pandas dataframe."
     df = pd.read_csv(
         file, parse_dates=parse_dates, index_col=index_col, delimiter=delimiter
     )
