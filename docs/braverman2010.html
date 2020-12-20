@@ -1,6 +1,6 @@
 ---
 
-title: LaBrie 2007
+title: Braverman and Shaffer 2010
 
 
 keywords: fastai
@@ -31,7 +31,697 @@ nb_path: "34_braverman2010.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>...</p>
+<p>This notebook attempts to reproduce the two tables found in Braverman and Shaffer's 2010 paper on behavioural markers for high-risk internet gambling. To get started, download the data titled '<em>How Do Gamblers Start Gambling: Identifying Behavioural Markers for High-risk Internet Gambling</em>' through the link below - you'll need the text files under 'Raw Dataset 2' and 'Analytic Dataset';</p>
+<ul>
+<li><a href="http://www.thetransparencyproject.org/download_index.php">Data Download (thetransparencyproject.org)</a></li>
+<li><a href="http://www.thetransparencyproject.org/codebooks/Codebook_forHighRisk1.pdf">Original data description</a></li>
+<li><a href="https://academic.oup.com/eurpub/article/22/2/273/508362">Original paper link</a></li>
+</ul>
+<p>File names: <strong>RawDataSet2_DailyAggregation.txt</strong> and <strong>AnalyticDataSet_HighRisk.txt</strong></p>
+<p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a>  Data description above implies RawDataSet2 contains actual betting data for players for the duration of the study, when it appears to only include a maximum of 31 days of betting data. This means the AnalyticDataSet cannot be faithfully reproduced using the raw data alone as the analytic data incudes full-duration behavioural measures (see final cell).</p>
+<p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a>  The <a href="/gamba/measures.html#trajectory"><code>trajectory</code></a> measure calculated here disagrees with the analytic data set, it specifically shows more extreme values for the gradient of the stakes. The reason for this issue is described below.</p>
+<p>With the data downloaded, the first step is to import <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a>, run the cell below to get started;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> ready, we need to load in both the analytic and raw data sets from the link above - we need to recreate the analytical data set from the raw data;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;RawDataSet2_DailyAggregation.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TimeDATE&#39;</span><span class="p">])</span>
+<span class="n">analytic_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AnalyticDataSet_HighRisk.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;raw data loaded:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;analytic data loaded:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">analytic_data</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>raw data loaded: 5161
+analytic data loaded: 530
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>At this point, the data can be prepared for use in the gamba library. This can be done with the purpose-built <a href="/gamba/data.html#prepare_braverman_data"><code>prepare_braverman_data</code></a> method in the <code>gamba.data</code> module;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_player_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">prepare_braverman_data</span><span class="p">(</span><span class="s1">&#39;RawDataSet2_DailyAggregation.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now for the start of the study's replication - we begin by calculating the measures reported in the paper which include <strong>intensity</strong>, <strong>frequency</strong>, <strong>variability</strong>, <strong>trajectory</strong>, <strong>sum of stakes</strong>, <strong>total number of bets</strong>, <strong>average bet size</strong>, <strong>duration of account betting</strong>, and the <strong>net loss incurred</strong> for each player. These are all included in the <a href="/gamba/measures.html#calculate_braverman_measures"><code>calculate_braverman_measures</code></a> method in the <code>gamba.measures</code> module;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measures</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_braverman_measures</span><span class="p">(</span><span class="n">all_player_bets</span><span class="p">)</span> <span class="c1"># this method saves them to a file called &#39;gamba_braverman_measures.csv&#39;</span>
+<span class="n">measures</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># lets sort them by ID and display the first 3;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">measures</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 530/530 [00:07&lt;00:00, 74.01it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>player_id</th>
+      <th>intensity</th>
+      <th>frequency</th>
+      <th>variability</th>
+      <th>trajectory</th>
+      <th>sum_of_stakes</th>
+      <th>total_num_bets</th>
+      <th>average_bet_size</th>
+      <th>duration</th>
+      <th>net_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>364</th>
+      <td>1324368</td>
+      <td>6.160000</td>
+      <td>80.645161</td>
+      <td>104.616151</td>
+      <td>4.715685</td>
+      <td>2256.9700</td>
+      <td>154</td>
+      <td>14.655649</td>
+      <td>31</td>
+      <td>-354.4800</td>
+    </tr>
+    <tr>
+      <th>481</th>
+      <td>1324786</td>
+      <td>3.000000</td>
+      <td>43.333333</td>
+      <td>30.580785</td>
+      <td>3.617582</td>
+      <td>409.8700</td>
+      <td>39</td>
+      <td>10.509487</td>
+      <td>30</td>
+      <td>86.0700</td>
+    </tr>
+    <tr>
+      <th>484</th>
+      <td>1324808</td>
+      <td>4.285714</td>
+      <td>25.000000</td>
+      <td>5.516551</td>
+      <td>-0.917025</td>
+      <td>41.4455</td>
+      <td>30</td>
+      <td>1.381517</td>
+      <td>28</td>
+      <td>-4.9835</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a sanity check, we can display the original measures calculated for the three players above (after renaming the columns to more intuitive ones);</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">players</span> <span class="o">=</span> <span class="n">measures</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># get only the first 3 values (those above)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">analytic_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">analytic_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;average_bet_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;p2sumstake&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;p2sumbet&#39;</span><span class="p">]</span>
+<span class="n">original_analysis</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[[</span><span class="s1">&#39;UserID&#39;</span><span class="p">,</span><span class="s1">&#39;p2bpd1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2totalactivedays1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2stakeSD1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2stakeSlope1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2sumstake&#39;</span><span class="p">,</span><span class="s1">&#39;p2sumbet&#39;</span><span class="p">,</span><span class="s1">&#39;average_bet_size&#39;</span><span class="p">,</span><span class="s1">&#39;p2intvday&#39;</span><span class="p">,</span><span class="s1">&#39;p2net&#39;</span><span class="p">]]</span>
+<span class="n">original_analysis</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span><span class="s1">&#39;variability&#39;</span><span class="p">,</span><span class="s1">&#39;trajectory&#39;</span><span class="p">,</span><span class="s1">&#39;sum_of_stakes&#39;</span><span class="p">,</span><span class="s1">&#39;total_num_bets&#39;</span><span class="p">,</span><span class="s1">&#39;average_bet_size&#39;</span><span class="p">,</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;net_loss&#39;</span><span class="p">]</span>
+<span class="n">original_analysis</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;player_id&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># after changing the column names, sort them by player ID (as above)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">original_analysis</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>Index([&#39;UserID&#39;, &#39;CountryID&#39;, &#39;Gender&#39;, &#39;ageRDATE&#39;, &#39;Sereason&#39;, &#39;p2sumstake&#39;,
+       &#39;p2sumbet&#39;, &#39;p2sumday&#39;, &#39;p2intvday&#39;, &#39;p2bpd&#39;, &#39;p2net&#39;, &#39;p2bpd1m&#39;,
+       &#39;p2stakeSD1m&#39;, &#39;p2totalactivedays1m&#39;, &#39;p2stakeSlope1m&#39;, &#39;Zp2bpd1m&#39;,
+       &#39;Zp2stakeSD1m&#39;, &#39;Zp2totalactivedays1m&#39;, &#39;Zp2stakeslope1m&#39;, &#39;random&#39;,
+       &#39;p2clusteringactivity&#39;, &#39;p2clusterhalf1&#39;, &#39;p2clusterhalf2&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>UserID</th>
+      <th>CountryID</th>
+      <th>Gender</th>
+      <th>ageRDATE</th>
+      <th>Sereason</th>
+      <th>p2sumstake</th>
+      <th>p2sumbet</th>
+      <th>p2sumday</th>
+      <th>p2intvday</th>
+      <th>p2bpd</th>
+      <th>...</th>
+      <th>p2totalactivedays1m</th>
+      <th>p2stakeSlope1m</th>
+      <th>Zp2bpd1m</th>
+      <th>Zp2stakeSD1m</th>
+      <th>Zp2totalactivedays1m</th>
+      <th>Zp2stakeslope1m</th>
+      <th>random</th>
+      <th>p2clusteringactivity</th>
+      <th>p2clusterhalf1</th>
+      <th>p2clusterhalf2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1324368</td>
+      <td>620</td>
+      <td>1</td>
+      <td>21</td>
+      <td>3</td>
+      <td>6202.5700</td>
+      <td>347</td>
+      <td>68</td>
+      <td>308</td>
+      <td>5.102941</td>
+      <td>...</td>
+      <td>25</td>
+      <td>0.038441</td>
+      <td>0.367245</td>
+      <td>0.410294</td>
+      <td>3.456178</td>
+      <td>0.155683</td>
+      <td>0.512291</td>
+      <td>3</td>
+      <td></td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1324786</td>
+      <td>40</td>
+      <td>1</td>
+      <td>19</td>
+      <td>1</td>
+      <td>665.8765</td>
+      <td>57</td>
+      <td>26</td>
+      <td>540</td>
+      <td>2.192308</td>
+      <td>...</td>
+      <td>13</td>
+      <td>0.122799</td>
+      <td>-0.239092</td>
+      <td>-0.069475</td>
+      <td>1.344293</td>
+      <td>0.273148</td>
+      <td>0.410518</td>
+      <td>4</td>
+      <td>4</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1324808</td>
+      <td>616</td>
+      <td>1</td>
+      <td>20</td>
+      <td>2</td>
+      <td>843.2210</td>
+      <td>306</td>
+      <td>105</td>
+      <td>679</td>
+      <td>2.914286</td>
+      <td>...</td>
+      <td>7</td>
+      <td>-0.108439</td>
+      <td>0.007609</td>
+      <td>-0.231898</td>
+      <td>0.288350</td>
+      <td>-0.048842</td>
+      <td>0.384736</td>
+      <td>4</td>
+      <td>4</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 23 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>player_id</th>
+      <th>intensity</th>
+      <th>frequency</th>
+      <th>variability</th>
+      <th>trajectory</th>
+      <th>sum_of_stakes</th>
+      <th>total_num_bets</th>
+      <th>average_bet_size</th>
+      <th>duration</th>
+      <th>net_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1324368</td>
+      <td>6.160000</td>
+      <td>25</td>
+      <td>104.616151</td>
+      <td>0.038441</td>
+      <td>6202.5700</td>
+      <td>347</td>
+      <td>17.874841</td>
+      <td>308</td>
+      <td>57.9500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1324786</td>
+      <td>3.000000</td>
+      <td>13</td>
+      <td>30.580785</td>
+      <td>0.122799</td>
+      <td>665.8765</td>
+      <td>57</td>
+      <td>11.682044</td>
+      <td>540</td>
+      <td>116.0765</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1324808</td>
+      <td>4.285714</td>
+      <td>7</td>
+      <td>5.516551</td>
+      <td>-0.108439</td>
+      <td>843.2210</td>
+      <td>306</td>
+      <td>2.755624</td>
+      <td>679</td>
+      <td>-27.4005</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a little puzzling as some of the measures align, yet others such as <code>total_num_bets</code> and <a href="/gamba/measures.html#duration"><code>duration</code></a> appear to be underestimates compared to the original analysis, the <a href="/gamba/measures.html#trajectory"><code>trajectory</code></a> measure also appears more extreme. To find out what's causing this difference, we can explore the duration of the data in the raw data set;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;RawDataSet2_DailyAggregation.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TimeDATE&#39;</span><span class="p">])</span>
+
+<span class="n">all_player_ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;UserID&#39;</span><span class="p">]))</span>
+<span class="n">max_duration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">player_id</span> <span class="ow">in</span> <span class="n">all_player_ids</span><span class="p">:</span>
+    
+    <span class="n">player_bets</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;UserID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">player_id</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">player_bets</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;TimeDATE&#39;</span><span class="p">:</span><span class="s1">&#39;bet_time&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">duration</span><span class="p">(</span><span class="n">player_bets</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">duration</span> <span class="o">&gt;</span> <span class="n">max_duration</span><span class="p">:</span>
+        <span class="n">max_duration</span> <span class="o">=</span> <span class="n">duration</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unique players found:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_player_ids</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;maximum duration found:&#39;</span><span class="p">,</span> <span class="n">max_duration</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>unique players found: 530
+maximum duration found: 31
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The raw data contains a maximum of 31 days of betting data per player, therefore the analytic data set cannot be <em>completely</em> reproduced using the raw data alone, hence the original analytic data will be taken forward as opposed to an exactly replicated data set.</p>
+<p>This means that as we cannot compute the measures exactly, the next best thing is to verify the accuracy of the clustering described in the paper, we can do this using the <a href="/gamba/machine_learning.html#k_means"><code>k_means</code></a> functions from gamba's clustering module;</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This next cell aims to recreate the k-means method described on page 3 of the paper, under the heading <em>Statistical analysis</em>;</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">standardised_measures_table</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">standardise_measures_table</span><span class="p">(</span><span class="n">original_analysis</span><span class="p">)</span>
+
+<span class="n">clustered_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">k_means</span><span class="p">(</span><span class="n">standardised_measures_table</span><span class="p">,</span> <span class="n">clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">describe_clusters</span><span class="p">(</span><span class="n">clustered_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n=374</th>
+      <th>n=36</th>
+      <th>n=8</th>
+      <th>n=112</th>
+    </tr>
+    <tr>
+      <th>cluster_centroid</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>intensity</th>
+      <td>-0.388466</td>
+      <td>0.829799</td>
+      <td>-0.184170</td>
+      <td>1.043632</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>-0.402049</td>
+      <td>1.139525</td>
+      <td>1.084161</td>
+      <td>0.898839</td>
+    </tr>
+    <tr>
+      <th>variability</th>
+      <td>-0.290654</td>
+      <td>0.269144</td>
+      <td>2.915477</td>
+      <td>0.675816</td>
+    </tr>
+    <tr>
+      <th>trajectory</th>
+      <td>-0.052216</td>
+      <td>0.116352</td>
+      <td>-1.481324</td>
+      <td>0.242775</td>
+    </tr>
+    <tr>
+      <th>sum_of_stakes</th>
+      <td>-0.303392</td>
+      <td>1.981813</td>
+      <td>4.008502</td>
+      <td>0.089778</td>
+    </tr>
+    <tr>
+      <th>total_num_bets</th>
+      <td>-0.313098</td>
+      <td>2.557085</td>
+      <td>0.323450</td>
+      <td>0.200500</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>-0.174562</td>
+      <td>0.282823</td>
+      <td>5.647233</td>
+      <td>0.088630</td>
+    </tr>
+    <tr>
+      <th>duration</th>
+      <td>-0.189037</td>
+      <td>1.055021</td>
+      <td>-0.237592</td>
+      <td>0.309104</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>-0.272929</td>
+      <td>1.818758</td>
+      <td>4.456281</td>
+      <td>0.008482</td>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The random initialisation of the k-means algorithm means that it is unlikely to exactly reproduce any previous k-means clusters on the data. This is a problem for <em>exact</em> replication, but, we can be sure that the algorithm is being applied and that clusters are being identified based on the descriptions above.</p>
+<p>Note: this can be fixed by seeding probabilistic studies in the future!</p>
+<p>What to do with this information is the next question, and as the raw data to analytic data attempt above showed some discrepancies, it's impossible to exactly replicate this particular study (as with other types of probabilistic analyses).</p>
 
 </div>
 </div>

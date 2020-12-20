@@ -38,7 +38,7 @@ nb_path: "31_labrie2007.ipynb"
 <li><a href="http://www.thetransparencyproject.org/codebooks/Codebook_for_Actual_Internet_Sports_Gambling_Activity_from_February_2005_through_September_2005.pdf">Original data description</a></li>
 <li><a href="https://www.researchgate.net/profile/Howard_Shaffer/publication/6261653_Assessing_the_Playing_Field_A_Prospective_Longitudinal_Study_of_Internet_Sports_Gambling_Behavior/links/0fcfd50a6bc690d200000000/Assessing-the-Playing-Field-A-Prospective-Longitudinal-Study-of-Internet-Sports-Gambling-Behavior.pdf">Original paper link</a></li>
 </ul>
-<p>{% include image.html style="float:left; margin-right: 7px;" file="<a href="https://img.shields.io/badge/-FLAG-red?style=flat-square">https://img.shields.io/badge/-FLAG-red?style=flat-square</a>" %} Minor discrepency between number of players taken forward after data cleaning - this has minor effects on fixed-odds figures below.</p>
+<p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a> Minor discrepency between number of players taken forward after data cleaning - this has minor effects on fixed-odds figures below.</p>
 
 </div>
 </div>
@@ -220,75 +220,6 @@ live action labrie measures saved.
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-9-b9895528ac3b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> fo_gamba_measures <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;fo_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> la_gamba_measures <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;la_labrie_measures.csv&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>original <span class="ansi-blue-fg">=</span> gb<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;AnalyticDataInternetGambling.txt&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> 
-<span class="ansi-green-intense-fg ansi-bold">      5</span> fo_bettors <span class="ansi-blue-fg">=</span> original<span class="ansi-blue-fg">[</span>original<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;FOTotalBets&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">~/Desktop/gamba/gamba/data.py</span> in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(file, parse_dates, index_col, delimiter, dummy_data)</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">def</span> read_csv<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">,</span> parse_dates<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> index_col<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> delimiter<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;,&#34;</span><span class="ansi-blue-fg">,</span> dummy_data<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">      9</span> 
-<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg">     df = pd.read_csv(
-</span><span class="ansi-green-intense-fg ansi-bold">     11</span>         file<span class="ansi-blue-fg">,</span> parse_dates<span class="ansi-blue-fg">=</span>parse_dates<span class="ansi-blue-fg">,</span> index_col<span class="ansi-blue-fg">=</span>index_col<span class="ansi-blue-fg">,</span> delimiter<span class="ansi-blue-fg">=</span>delimiter
-<span class="ansi-green-intense-fg ansi-bold">     12</span>     )
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">parser_f</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="ansi-green-intense-fg ansi-bold">    674</span>         )
-<span class="ansi-green-intense-fg ansi-bold">    675</span> 
-<span class="ansi-green-fg">--&gt; 676</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    677</span> 
-<span class="ansi-green-intense-fg ansi-bold">    678</span>     parser_f<span class="ansi-blue-fg">.</span>__name__ <span class="ansi-blue-fg">=</span> name
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    446</span> 
-<span class="ansi-green-intense-fg ansi-bold">    447</span>     <span class="ansi-red-fg"># Create the parser.</span>
-<span class="ansi-green-fg">--&gt; 448</span><span class="ansi-red-fg">     </span>parser <span class="ansi-blue-fg">=</span> TextFileReader<span class="ansi-blue-fg">(</span>fp_or_buf<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    449</span> 
-<span class="ansi-green-intense-fg ansi-bold">    450</span>     <span class="ansi-green-fg">if</span> chunksize <span class="ansi-green-fg">or</span> iterator<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, f, engine, **kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    878</span>             self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    879</span> 
-<span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>engine<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    881</span> 
-<span class="ansi-green-intense-fg ansi-bold">    882</span>     <span class="ansi-green-fg">def</span> close<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_make_engine</span><span class="ansi-blue-fg">(self, engine)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1112</span>     <span class="ansi-green-fg">def</span> _make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> engine<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1113</span>         <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1114</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_engine <span class="ansi-blue-fg">=</span> CParserWrapper<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1115</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1116</span>             <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;python&#34;</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, src, **kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1889</span>         kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;usecols&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>usecols
-<span class="ansi-green-intense-fg ansi-bold">   1890</span> 
-<span class="ansi-green-fg">-&gt; 1891</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_reader <span class="ansi-blue-fg">=</span> parsers<span class="ansi-blue-fg">.</span>TextReader<span class="ansi-blue-fg">(</span>src<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1892</span>         self<span class="ansi-blue-fg">.</span>unnamed_cols <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>unnamed_cols
-<span class="ansi-green-intense-fg ansi-bold">   1893</span> 
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.__cinit__</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] File AnalyticDataInternetGambling.txt does not exist: &#39;AnalyticDataInternetGambling.txt&#39;</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -311,6 +242,434 @@ live action labrie measures saved.
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>118.0</td>
+      <td>89.0</td>
+      <td>117.0</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>40.0</td>
+      <td>30.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>135.0</td>
+      <td>496.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>3.0</td>
+      <td>6.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>12.0</td>
+      <td>32.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>730.0</td>
+      <td>3439.0</td>
+      <td>148.0</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>97.0</td>
+      <td>579.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>32.0</td>
+      <td>62.0</td>
+      <td>29.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>79.0</td>
+      <td>83.0</td>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>43.0</td>
+      <td>37.0</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>99.0</td>
+      <td>407.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>11.0</td>
+      <td>25.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>1319.0</td>
+      <td>8593.0</td>
+      <td>61.0</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>85.0</td>
+      <td>571.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>23.0</td>
+      <td>61.0</td>
+      <td>18.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+      <th>frequency</th>
+      <th>num_bets</th>
+      <th>average_bets_per_day</th>
+      <th>average_bet_size</th>
+      <th>total_wagered</th>
+      <th>net_loss</th>
+      <th>percent_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>-0.57**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>0.64**</td>
+      <td>0.01*</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>0.2**</td>
+      <td>0.14**</td>
+      <td>0.71**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>-0.16**</td>
+      <td>-0</td>
+      <td>-0.37**</td>
+      <td>-0.38**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>0.54**</td>
+      <td>-0.01</td>
+      <td>0.75**</td>
+      <td>0.46**</td>
+      <td>0.27**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>0.2**</td>
+      <td>0.01</td>
+      <td>0.33**</td>
+      <td>0.29**</td>
+      <td>0.16**</td>
+      <td>0.46**</td>
+      <td>-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>-0.35**</td>
+      <td>0.06**</td>
+      <td>-0.43**</td>
+      <td>-0.19**</td>
+      <td>-0</td>
+      <td>-0.46**</td>
+      <td>0.42**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>duration</th>
+      <th>frequency</th>
+      <th>num_bets</th>
+      <th>average_bets_per_day</th>
+      <th>average_bet_size</th>
+      <th>total_wagered</th>
+      <th>net_loss</th>
+      <th>percent_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>-0.78**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>0.7**</td>
+      <td>-0.29**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>0.33**</td>
+      <td>-0.05**</td>
+      <td>0.8**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>0.03**</td>
+      <td>0.04**</td>
+      <td>0.03**</td>
+      <td>-0.02*</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>0.58**</td>
+      <td>-0.21**</td>
+      <td>0.83**</td>
+      <td>0.65**</td>
+      <td>0.54**</td>
+      <td>-</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>0.27**</td>
+      <td>-0.07**</td>
+      <td>0.41**</td>
+      <td>0.37**</td>
+      <td>0.27**</td>
+      <td>0.5**</td>
+      <td>-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>-0.25**</td>
+      <td>0.11**</td>
+      <td>-0.32**</td>
+      <td>-0.21**</td>
+      <td>-0.1**</td>
+      <td>-0.31**</td>
+      <td>0.47**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -360,6 +719,286 @@ live action labrie measures saved.
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>189.653266</td>
+      <td>56.839253</td>
+      <td>215.000000</td>
+      <td>194.108040</td>
+      <td>52.510965</td>
+      <td>217.000000</td>
+      <td>204.321608</td>
+      <td>43.109924</td>
+      <td>220.000000</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>51.980067</td>
+      <td>23.270583</td>
+      <td>50.721289</td>
+      <td>57.717627</td>
+      <td>21.051259</td>
+      <td>55.939801</td>
+      <td>65.552105</td>
+      <td>20.646955</td>
+      <td>66.860598</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>1541.447236</td>
+      <td>3237.726930</td>
+      <td>420.500000</td>
+      <td>1434.698492</td>
+      <td>3147.428568</td>
+      <td>421.500000</td>
+      <td>3493.422111</td>
+      <td>3149.957179</td>
+      <td>2369.500000</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>15.208532</td>
+      <td>43.117456</td>
+      <td>4.674917</td>
+      <td>11.165698</td>
+      <td>21.832324</td>
+      <td>4.093319</td>
+      <td>31.309630</td>
+      <td>43.178783</td>
+      <td>21.691200</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>55.451052</td>
+      <td>94.212106</td>
+      <td>22.879698</td>
+      <td>76.909173</td>
+      <td>95.948150</td>
+      <td>44.709555</td>
+      <td>2.876123</td>
+      <td>5.009361</td>
+      <td>1.355332</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>15003.748844</td>
+      <td>15703.525546</td>
+      <td>10195.054200</td>
+      <td>22866.646728</td>
+      <td>23854.204742</td>
+      <td>16735.253500</td>
+      <td>8421.379570</td>
+      <td>12884.908372</td>
+      <td>4153.159900</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>3486.437569</td>
+      <td>2615.810563</td>
+      <td>2642.910000</td>
+      <td>1833.757579</td>
+      <td>4542.107773</td>
+      <td>1533.167300</td>
+      <td>1260.820220</td>
+      <td>2228.848492</td>
+      <td>742.825000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>35.255165</td>
+      <td>22.175326</td>
+      <td>29.275363</td>
+      <td>9.610159</td>
+      <td>15.765185</td>
+      <td>8.818498</td>
+      <td>19.356744</td>
+      <td>17.400062</td>
+      <td>17.577639</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>duration</th>
+      <td>188.875000</td>
+      <td>52.833599</td>
+      <td>213.000000</td>
+      <td>187.963710</td>
+      <td>50.231153</td>
+      <td>209.000000</td>
+      <td>206.362903</td>
+      <td>33.896087</td>
+      <td>217.000000</td>
+    </tr>
+    <tr>
+      <th>frequency</th>
+      <td>50.189225</td>
+      <td>23.585788</td>
+      <td>50.110132</td>
+      <td>57.298534</td>
+      <td>21.238467</td>
+      <td>55.690835</td>
+      <td>65.129066</td>
+      <td>17.533174</td>
+      <td>65.594503</td>
+    </tr>
+    <tr>
+      <th>num_bets</th>
+      <td>1760.600806</td>
+      <td>2675.437088</td>
+      <td>971.500000</td>
+      <td>1700.479839</td>
+      <td>2311.852698</td>
+      <td>1034.500000</td>
+      <td>2932.298387</td>
+      <td>2449.241309</td>
+      <td>2147.500000</td>
+    </tr>
+    <tr>
+      <th>average_bets_per_day</th>
+      <td>15.710240</td>
+      <td>15.841488</td>
+      <td>11.201104</td>
+      <td>14.371118</td>
+      <td>13.344901</td>
+      <td>10.637707</td>
+      <td>22.559753</td>
+      <td>15.086767</td>
+      <td>17.986928</td>
+    </tr>
+    <tr>
+      <th>average_bet_size</th>
+      <td>58.915359</td>
+      <td>63.382781</td>
+      <td>34.233412</td>
+      <td>80.316555</td>
+      <td>78.755138</td>
+      <td>52.998731</td>
+      <td>15.138555</td>
+      <td>25.973484</td>
+      <td>6.244990</td>
+    </tr>
+    <tr>
+      <th>total_wagered</th>
+      <td>47792.303745</td>
+      <td>56630.099339</td>
+      <td>29102.187250</td>
+      <td>64588.914254</td>
+      <td>52992.361609</td>
+      <td>44042.135000</td>
+      <td>35987.606031</td>
+      <td>54142.890433</td>
+      <td>15707.764100</td>
+    </tr>
+    <tr>
+      <th>net_loss</th>
+      <td>4179.576040</td>
+      <td>3059.423521</td>
+      <td>3051.990000</td>
+      <td>2637.989352</td>
+      <td>4262.404915</td>
+      <td>1971.470000</td>
+      <td>2151.269950</td>
+      <td>3110.824224</td>
+      <td>1110.375000</td>
+    </tr>
+    <tr>
+      <th>percent_loss</th>
+      <td>14.954674</td>
+      <td>11.762545</td>
+      <td>11.778838</td>
+      <td>4.350920</td>
+      <td>6.797097</td>
+      <td>4.312687</td>
+      <td>8.832085</td>
+      <td>7.074857</td>
+      <td>7.471395</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -384,6 +1023,150 @@ live action labrie measures saved.
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>top_net_loss_only</th>
+      <th>top_total_wagered_only</th>
+      <th>top_num_bets_only</th>
+      <th>top_net_loss and top_total_wagered only</th>
+      <th>top_net_loss and top_num_bets only</th>
+      <th>top_total_wagered and top_num_bets only</th>
+      <th>all labels</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>top_net_loss</th>
+      <td>171 (43)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>143 (36)</td>
+      <td>32 (8)</td>
+      <td>-</td>
+      <td>52 (13)</td>
+    </tr>
+    <tr>
+      <th>top_total_wagered</th>
+      <td>-</td>
+      <td>178 (45)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>25 (6)</td>
+      <td>52 (13)</td>
+    </tr>
+    <tr>
+      <th>top_num_bets</th>
+      <td>-</td>
+      <td>-</td>
+      <td>289 (73)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>52 (13)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>top_net_loss_only</th>
+      <th>top_total_wagered_only</th>
+      <th>top_num_bets_only</th>
+      <th>top_net_loss and top_total_wagered only</th>
+      <th>top_net_loss and top_num_bets only</th>
+      <th>top_total_wagered and top_num_bets only</th>
+      <th>all labels</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>top_net_loss</th>
+      <td>92 (37)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>65 (26)</td>
+      <td>24 (10)</td>
+      <td>-</td>
+      <td>67 (27)</td>
+    </tr>
+    <tr>
+      <th>top_total_wagered</th>
+      <td>-</td>
+      <td>89 (36)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>27 (11)</td>
+      <td>67 (27)</td>
+    </tr>
+    <tr>
+      <th>top_num_bets</th>
+      <td>-</td>
+      <td>-</td>
+      <td>130 (52)</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>67 (27)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 

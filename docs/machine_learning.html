@@ -66,7 +66,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="k_means" class="doc_header"><code>k_means</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means</code>(<strong><code>measures_table</code></strong>, <strong><code>clusters</code></strong>=<em><code>4</code></em>, <strong><code>data_only</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="k_means" class="doc_header"><code>k_means</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means</code>(<strong><code>measures_table</code></strong>, <strong><code>clusters</code></strong>=<em><code>4</code></em>, <strong><code>data_only</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Applies the k-means clustering algorithm to a measures table. The resulting clustering is then reported in terms of its inertia (sum of squared distances of samples to their closest cluster center) and its silhouette score (how distinct clusters are within the sample [see the skikit learn docs for details]). The measures passed as the first parameter can be returned with an added column reporting the cluster each player belongs to using the data_only parameter.</p>
 
@@ -98,7 +98,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="k_means_range" class="doc_header"><code>k_means_range</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means_range</code>(<strong><code>measures_table</code></strong>, <strong><code>min_clusters</code></strong>=<em><code>2</code></em>, <strong><code>max_clusters</code></strong>=<em><code>13</code></em>)</p>
+<h4 id="k_means_range" class="doc_header"><code>k_means_range</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L66" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means_range</code>(<strong><code>measures_table</code></strong>, <strong><code>min_clusters</code></strong>=<em><code>2</code></em>, <strong><code>max_clusters</code></strong>=<em><code>13</code></em>)</p>
 </blockquote>
 <p>Computes the k_means calculation above across a range of cluster counts, returning their goodness of fit measures (inertia and silhouette).</p>
 
@@ -130,7 +130,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="k_means_ensemble" class="doc_header"><code>k_means_ensemble</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means_ensemble</code>(<strong><code>measures_table</code></strong>, <strong><code>ensemble_size</code></strong>=<em><code>100</code></em>, <strong><code>min_clusters</code></strong>=<em><code>2</code></em>, <strong><code>max_clusters</code></strong>=<em><code>13</code></em>)</p>
+<h4 id="k_means_ensemble" class="doc_header"><code>k_means_ensemble</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>k_means_ensemble</code>(<strong><code>measures_table</code></strong>, <strong><code>ensemble_size</code></strong>=<em><code>100</code></em>, <strong><code>min_clusters</code></strong>=<em><code>2</code></em>, <strong><code>max_clusters</code></strong>=<em><code>13</code></em>)</p>
 </blockquote>
 <p>Computes the k_means clustering algorithm across a range of cluster counts, a number of times. This is useful for determining clusters in a more robust way but can be slow on large data sets.</p>
 
@@ -162,7 +162,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="agglomerative_cluster" class="doc_header"><code>agglomerative_cluster</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>agglomerative_cluster</code>(<strong><code>measures_table</code></strong>, <strong><code>distance_threshold</code></strong>=<em><code>0</code></em>, <strong><code>n_clusters</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="agglomerative_cluster" class="doc_header"><code>agglomerative_cluster</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>agglomerative_cluster</code>(<strong><code>measures_table</code></strong>, <strong><code>distance_threshold</code></strong>=<em><code>0</code></em>, <strong><code>n_clusters</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Performs sklearn's agglomerative clustering algorithm on a dataframe of behavioural measures. See their documentation for details. Note: Either the distance threshold or the n_cluster parameter must be None.</p>
 
@@ -194,7 +194,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="describe_clusters" class="doc_header"><code>describe_clusters</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>describe_clusters</code>(<strong><code>clustered_measures_table</code></strong>, <strong><code>cluster_col</code></strong>=<em><code>'cluster'</code></em>)</p>
+<h4 id="describe_clusters" class="doc_header"><code>describe_clusters</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L127" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>describe_clusters</code>(<strong><code>clustered_measures_table</code></strong>, <strong><code>cluster_col</code></strong>=<em><code>'cluster'</code></em>)</p>
 </blockquote>
 <p>Describes cluster centroids (mean values of each measure) for each cluster in a clustered measures table.</p>
 
@@ -233,7 +233,82 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="logistic_regression" class="doc_header"><code>logistic_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logistic_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="nn_regression" class="doc_header"><code>nn_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L146" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>nn_regression</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="nn_classification" class="doc_header"><code>nn_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>nn_classification</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Logistic regression techniques can map simple relationships between variables, but typically become untenable in more complex applications. As with the clustering techniques, the gamba library contains wrappers around the sklearn library's logistic regression functions, offering simple methods to run analyses without having to interact with the sklearn library directly.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="logistic_regression" class="doc_header"><code>logistic_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L158" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logistic_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Performs a logistic regression using the <a href="https://www.statsmodels.org/stable/index.html">statsmodels library</a>, returning the predicted labels rounded to the nearest integer. Note: this method is currently hard-coded to only function on Philander 2014's data set. Abstracted logistic regression function coming soon.</p>
 
@@ -265,7 +340,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="lasso_logistic_regression" class="doc_header"><code>lasso_logistic_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L166" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lasso_logistic_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="lasso_logistic_regression" class="doc_header"><code>lasso_logistic_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L176" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lasso_logistic_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Performs a 'lasso' (optimizes a least-square problem with L1 penalty) logistic regression using <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.linear_model">sklearn's linear_model</a>. This <a href="https://stackoverflow.com/questions/41639557/how-to-perform-logistic-lasso-in-python&gt;">stackoverflow post</a> contains a useful discussion on this type of function-estimation regression pair.</p>
 
@@ -286,6 +361,19 @@ nb_path: "24_machine_learning.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Support-Vector-Machines">Support Vector Machines<a class="anchor-link" href="#Support-Vector-Machines"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>SVM's are another type of machine learning algorithm but have seen limited use in existing work.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -297,7 +385,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="svm_eps_regression" class="doc_header"><code>svm_eps_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L182" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_eps_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="svm_eps_regression" class="doc_header"><code>svm_eps_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L192" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_eps_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Creates and trains a support vector machine for epsilon-support vector regression using the sklearn library's implementation.</p>
 
@@ -329,7 +417,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="svm_c_classification" class="doc_header"><code>svm_c_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L202" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_c_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="svm_c_classification" class="doc_header"><code>svm_c_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L212" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_c_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Creates and trains a support vector machine for classification using the sklearn library's implementation.</p>
 
@@ -361,7 +449,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="svm_one_classification" class="doc_header"><code>svm_one_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L218" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_one_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="svm_one_classification" class="doc_header"><code>svm_one_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L228" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>svm_one_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Creates and trains a support vector machine for one-class classification using the sklearn library's implementation.</p>
 
@@ -399,7 +487,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="rf_regression" class="doc_header"><code>rf_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L240" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rf_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="rf_regression" class="doc_header"><code>rf_regression</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L250" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rf_regression</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Creates and fits a random forest regressor using <a href="https://scikit-learn.org/stable/modules/ensemble.html#forest">sklearn's ensemble module</a>, returning the predicted labels rounded to the nearest integer.</p>
 
@@ -431,7 +519,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="rf_classification" class="doc_header"><code>rf_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L260" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rf_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="rf_classification" class="doc_header"><code>rf_classification</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L270" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rf_classification</code>(<strong><code>train_measures</code></strong>, <strong><code>test_measures</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
 <p>Creates a random forest for classification also using the sklearn library's</p>
 
@@ -469,7 +557,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="compute_performance" class="doc_header"><code>compute_performance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L278" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compute_performance</code>(<strong><code>method_name</code></strong>, <strong><code>actual</code></strong>, <strong><code>predicted</code></strong>)</p>
+<h4 id="compute_performance" class="doc_header"><code>compute_performance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L288" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compute_performance</code>(<strong><code>method_name</code></strong>, <strong><code>actual</code></strong>, <strong><code>predicted</code></strong>)</p>
 </blockquote>
 <p>Computes performance metrics including sensitivity, specificity, accuracy, confusion matrix values, odds ratio, and area under curve, for a given classification/regression using its actual and predicted values.</p>
 
@@ -527,7 +615,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_cluster_sizes" class="doc_header"><code>plot_cluster_sizes</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L315" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_cluster_sizes</code>(<strong><code>model</code></strong>)</p>
+<h4 id="plot_cluster_sizes" class="doc_header"><code>plot_cluster_sizes</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L325" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_cluster_sizes</code>(<strong><code>model</code></strong>)</p>
 </blockquote>
 <p>Create a bar chart using a previously computed clustering model. Each bar represents a single cluster, with the height of the bars representing the number of members (players) in each cluster.</p>
 
@@ -559,7 +647,7 @@ nb_path: "24_machine_learning.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_agglomeration_dendrogram" class="doc_header"><code>plot_agglomeration_dendrogram</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L334" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_agglomeration_dendrogram</code>(<strong><code>model</code></strong>, <strong><code>dt_cutoff</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="plot_agglomeration_dendrogram" class="doc_header"><code>plot_agglomeration_dendrogram</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/machine_learning.py#L344" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_agglomeration_dendrogram</code>(<strong><code>model</code></strong>, <strong><code>dt_cutoff</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Create a dendrogram visualising a heirarchical clustering method (agglomerative clustering). A horisontal line can be added using the dt_cutoff parameter to visualise the number of clusters at a given distance threshold.</p>
 

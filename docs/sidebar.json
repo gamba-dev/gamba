@@ -25,6 +25,7 @@
   },
   "Public Data Repositories": {
   	"The Transparency Project": "http://www.thetransparencyproject.org/index.html",
-  	"GREO Evidence Center": "https://www.greo.ca/Modules/EvidenceCentre/Search.aspx"
+  	"GREO Evidence Center": "https://www.greo.ca/Modules/EvidenceCentre/Search.aspx",
+    "DGApp Crypto Transactions": "https://osf.io/8bfyj/"
   }
 }

@@ -1,5 +1,5 @@
 # Welcome to the gamba library!
-> Analytical methods for player behaviour tracking research
+> A Python library for player behaviour tracking research
 
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gamba-dev/gamba/CI?logo=github&style=for-the-badge&)](https://github.com/gamba-dev/gamba/actions)
@@ -14,6 +14,10 @@ Getting started using gamba in your research is super easy - the first step is t
 
 ## Install
 
+To install gamba use the following pip command;
+
 `pip install gamba`
+
+Or if you'd like to use the development release, clone the github repository to your machine;
 
 `git clone https://github.com/gamba-dev/gamba.git`

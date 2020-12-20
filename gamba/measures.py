@@ -2,7 +2,8 @@
 
 __all__ = ['check_measure_data', 'duration', 'frequency', 'number_of_bets', 'mean_bets_per_day', 'total_wagered',
            'net_loss', 'intensity', 'frequency_raw', 'mean_bet_size', 'variability', 'trajectory', 'percent_loss',
-           'calculate_labrie_measures', 'calculate_braverman_measures']
+           'calculate_labrie_measures', 'calculate_braverman_measures', 'standardise_measures_table',
+           'split_measures_table']
 
 # Cell
 def check_measure_data(player_bets, required_columns):
@@ -142,6 +143,7 @@ def variability(player_bets, daily=False):
 
 # Cell
 from sklearn.linear_model import LinearRegression
+import numpy as np
 def trajectory(player_bets, daily=False, plot=False):
     "Gradient of a linear regression fitted to the sequence of daily aggredated bet sizes."
 
@@ -240,18 +242,20 @@ def calculate_labrie_measures(all_player_bets, savedir="", filename="gamba_labri
 def calculate_braverman_measures(all_player_bets, savedir="", loud=False):
     "Calculates the set of measures described in Braverman and Shaffer's work in 2010 on high risk internet gamblers. These measures include the frequency, intensity, variability, and trajectories of each player. As this method sits in the studies module, it accepts a list of dataframes representing each player's bets as input. By default, this method saves the resulting dataframe of each player's measures to 'gamba_braverman_measures.csv'."
 
+    pd.options.mode.chained_assignment = None # supress setwithcopy warnings
+
     player_id = []
 
-    intensity = []
-    variability = []
-    frequency = []
-    trajectory = []
+    intensities = []
+    variabilities = []
+    frequencies = []
+    trajectories = []
 
     sum_of_stakes = []
     total_num_bets = []
-    average_bet_size = []
-    duration = []
-    net_loss = []
+    average_bet_sizes = []
+    durations = []
+    net_losses = []
 
     unique_players = list(set(all_player_bets["player_id"]))
 
@@ -259,33 +263,60 @@ def calculate_braverman_measures(all_player_bets, savedir="", loud=False):
         player_bets = all_player_bets[all_player_bets["player_id"] == unique_players[i]]
 
         player_id.append(player_bets.iloc[0]["player_id"])
-        intensity.append(intensity_daily(player_bets))
-        frequency.append(frequency_daily(player_bets))
-        variability.append(variability_daily(player_bets))
-        trajectory.append(trajectory_daily(player_bets))
+        intensities.append(intensity(player_bets))
+        frequencies.append(frequency(player_bets))
+        variabilities.append(variability(player_bets, daily=True))
+        trajectories.append(trajectory(player_bets, daily=True))
 
         sum_of_stakes.append(player_bets["bet_size"].sum())
         total_num_bets.append(player_bets["bet_count"].sum())
-        average_bet_size.append(
+        average_bet_sizes.append(
             player_bets["bet_size"].sum() / player_bets["bet_count"].sum()
         )
-        duration.append(duration(player_bets))
-        net_loss.append(net_loss(player_bets))
+        durations.append(duration(player_bets))
+        net_losses.append(net_loss(player_bets))
 
     braverman_dict = {
         "player_id": player_id,
-        "intensity": intensity,
-        "frequency": frequency,
-        "variability": variability,
-        "trajectory": trajectory,
+        "intensity": intensities,
+        "frequency": frequencies,
+        "variability": variabilities,
+        "trajectory": trajectories,
         "sum_of_stakes": sum_of_stakes,
         "total_num_bets": total_num_bets,
-        "average_bet_size": average_bet_size,
-        "duration": duration,
-        "net_loss": net_loss,
+        "average_bet_size": average_bet_sizes,
+        "duration": durations,
+        "net_loss": net_losses,
     }
 
     braverman_measures = pd.DataFrame.from_dict(braverman_dict)
     braverman_measures.to_csv(savedir + "gamba_braverman_measures.csv", index=False)
 
     return braverman_measures
+
+# Cell
+import scipy.stats
+def standardise_measures_table(measures_table):
+    "Standardises all measures columns in a measures table by applying the scipy.stats.zscore function to each column. This is useful for column-wise comparisons and some clustering methods, but use with caution!"
+
+    colnames = list(measures_table.columns)[1:]
+
+    standardised_table = pd.DataFrame()
+    standardised_table["player_id"] = measures_table["player_id"].values
+    for col in colnames:
+        standardised_table[col] = scipy.stats.zscore(measures_table[col].values)
+
+    return standardised_table
+
+# Cell
+def split_measures_table(measures_table, frac=0.7, loud=False):
+	"Splits a measures table into two randomly selected groups. This is useful for machine learning methods where a train-test split is needed, and uses the Pandas library's sample method."
+
+	measures_table.drop(['player_id'], axis=1)
+	train_table = measures_table.sample(frac=frac)
+	test_table = measures_table.drop(train_table.index)
+
+	if loud:
+		print('train:test\n', len(train_table),':',len(test_table), 'ready')
+	
+	return train_table, test_table

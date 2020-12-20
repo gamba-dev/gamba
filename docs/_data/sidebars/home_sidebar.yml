@@ -72,6 +72,9 @@ entries:
     - external_url: https://www.greo.ca/Modules/EvidenceCentre/Search.aspx
       output: web,pdf
       title: GREO Evidence Center
+    - external_url: https://osf.io/8bfyj/
+      output: web,pdf
+      title: DGApp Crypto Transactions
     output: web
     title: Public Data Repositories
   output: web
