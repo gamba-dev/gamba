@@ -292,7 +292,7 @@ nb_path: "24_machine_learning.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Logistic regression techniques can map simple relationships between variables, but typically become untenable in more complex applications. As with the clustering techniques, the gamba library contains wrappers around the sklearn library's logistic regression functions, offering simple methods to run analyses without having to interact with the sklearn library directly.</p>
+<p>Logistic regression techniques can map simple relationships between variables, but typically become untenable in more complex applications. As with the clustering techniques, the gamba library contains wrappers around the sklearn library's logistic regression functions, offering simple methods to run analyses without having to interact with the sklearn library directly (although you should for advanced techniques!).</p>
 
 </div>
 </div>
@@ -369,7 +369,7 @@ nb_path: "24_machine_learning.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>SVM's are another type of machine learning algorithm but have seen limited use in existing work.</p>
+<p>SVM's are another type of machine learning algorithm but have seen limited use in existing work, but are included as templates to see how they could be used as part of an analysis using the gamba library. The three SVM methods implemented include those used in Philander's 2014 study.</p>
 
 </div>
 </div>
@@ -476,6 +476,13 @@ nb_path: "24_machine_learning.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Random forests are collections of decision trees which are applied en-mass to classification and regression problems. The gamba library implements both techniques in a very basic form, which follow a similar structure to other machine learning methods in the library. As with many other methods on this page, the gamba library simply contains wrappers for the scikit-learn library, which should be used directly for more advanced analyses!</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -546,6 +553,13 @@ nb_path: "24_machine_learning.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Performance measures of many machine learning methods can be derived from the values they predict and the actual values of a test dataset. The <a href="/gamba/machine_learning.html#compute_performance"><code>compute_performance</code></a> function below is useful for quick estimates of performance, but you should refer to the measures appropriate to the specific method you're implementing for advanced analyses.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -580,7 +594,7 @@ nb_path: "24_machine_learning.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2><p>Some machine learning outputs favour plotting over raw tabular presentation. An example of this is a hierarchical clustering dendrogram, which is much more intuitive than a cluster membership report.</p>
+<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2><p>Some machine learning outputs favour plotting over raw tabular presentation. An example of this is a hierarchical clustering dendrogram, which is much more intuitive than a cluster membership report. The gamba library contains several methods for plotting the outputs of machine learning models;</p>
 
 </div>
 </div>

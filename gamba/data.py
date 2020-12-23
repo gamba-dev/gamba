@@ -281,7 +281,6 @@ def plot_provider_dates(player_bets, providers, provider_labels=None):
     fig = plt.figure(figsize=[8,1.5])
 
     for i, provider in enumerate(providers):
-        print(provider)
         provider_bets = player_bets[(player_bets['provider'] == provider)]
         start = provider_bets["bet_time"].min()
         end = provider_bets["bet_time"].max()

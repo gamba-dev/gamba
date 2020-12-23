@@ -1362,7 +1362,7 @@ h4.clickable-header{
 }
 
 div.output_subarea{
-    border-top: 4px solid #ddd;
+    border-top: 2px solid #ddd;
     margin-bottom: 20px;
 }
 
@@ -1415,4 +1415,16 @@ span.projectTitle{
 
 div#toc ul li ul{
     padding-left: 20px;
+}
+
+.text_cell_render blockquote{
+    font-family: inherit;
+    font-size: inherit;
+    border-radius: 5px;
+    border-left: 5px solid #a6e9d5;
+    background-color: #d2f4ea;
+}
+
+th, td{
+    padding: 4px !important;
 }

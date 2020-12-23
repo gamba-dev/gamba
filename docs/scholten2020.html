@@ -98,10 +98,6 @@ end: 2020-03-09 19:32:55 9639151
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">providers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;etheroll&#39;</span><span class="p">,</span><span class="s1">&#39;fck&#39;</span><span class="p">,</span><span class="s1">&#39;dice2win&#39;</span><span class="p">]</span>
 <span class="n">summary</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">summarise_providers</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">providers</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
-
-<span class="n">provider_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Etheroll.com&#39;</span><span class="p">,</span><span class="s1">&#39;FCK.com&#39;</span><span class="p">,</span><span class="s1">&#39;Dice2.Win&#39;</span><span class="p">]</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">plot_provider_dates</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">providers</span><span class="p">,</span> <span class="n">provider_labels</span> <span class="o">=</span> <span class="n">provider_labels</span><span class="p">)</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;provider_timeline.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -200,6 +196,31 @@ end: 2020-03-09 19:32:55 9639151
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">provider_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Etheroll.com&#39;</span><span class="p">,</span><span class="s1">&#39;FCK.com&#39;</span><span class="p">,</span><span class="s1">&#39;Dice2.Win&#39;</span><span class="p">]</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">plot_provider_dates</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">providers</span><span class="p">,</span> <span class="n">provider_labels</span> <span class="o">=</span> <span class="n">provider_labels</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;provider_timeline.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -270,7 +291,7 @@ dice2win
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;measures_table.csv&#39;</span><span class="p">,</span> <span class="n">daily</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">measures</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">calculate_labrie_measures</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;measures_table.csv&#39;</span><span class="p">,</span> <span class="n">daily</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>

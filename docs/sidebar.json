@@ -9,9 +9,9 @@
   	"Advanced": "/advanced"
   },
   "Modules": {
-  	"Preparing Data": "/data",
-  	"Behavioural Measures": "/measures",
-  	"Summary Statistics": "/statistics",
+  	"Data": "/data",
+  	"Measures": "/measures",
+  	"Statistics": "/statistics",
   	"Labelling": "/labelling",
   	"Machine Learning": "/machine_learning"
   },
