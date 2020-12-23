@@ -71,10 +71,10 @@ def mean_bets_per_day(player_bets, daily=False):
 
         betting_days = (frequency_percentage / 100) * age_in_days
 
-        average_bets_per_day = (
+        mean_bets_per_day = (
             number_of_bets(player_bets, daily=True) / betting_days  # taken from LaBrie 2008
         )
-        return average_bets_per_day
+        return mean_bets_per_day
 
     # otherwise compute regular mean bets per day measure
     age_in_days = duration(player_bets)
@@ -82,8 +82,8 @@ def mean_bets_per_day(player_bets, daily=False):
 
     betting_days = (frequency_percentage / 100) * age_in_days
 
-    average_bets_per_day = len(player_bets) / betting_days  # taken from LaBrie 2008
-    return average_bets_per_day
+    mean_bets_per_day = len(player_bets) / betting_days  # taken from LaBrie 2008
+    return mean_bets_per_day
 
 # Cell
 def total_wagered(player_bets):
@@ -123,12 +123,12 @@ def mean_bet_size(player_bets, daily=False):
     "The average (mean) size of bets."
     if daily:
         check_measure_data(player_bets, ["bet_size"])
-        average_bet_size = player_bets["bet_size"].sum() / number_of_bets(player_bets, daily=True)
-        return average_bet_size
+        mean_bet_size = player_bets["bet_size"].sum() / number_of_bets(player_bets, daily=True)
+        return mean_bet_size
 
     check_measure_data(player_bets, ["bet_size"])
-    average_bet_size = player_bets["bet_size"].sum() / len(player_bets)
-    return average_bet_size
+    mean_bet_size = player_bets["bet_size"].sum() / len(player_bets)
+    return mean_bet_size
 
 # Cell
 def variability(player_bets, daily=False):
@@ -193,8 +193,8 @@ def calculate_labrie_measures(all_player_bets, savedir="", filename="gamba_labri
     all_duration = []
     all_frequency = []
     all_number_of_bets = []
-    all_average_bets_per_day = []
-    all_average_bet_size = []
+    all_mean_bets_per_day = []
+    all_mean_bet_size = []
     all_total_wagered = []
     all_net_loss = []
     all_percent_loss = []
@@ -208,12 +208,12 @@ def calculate_labrie_measures(all_player_bets, savedir="", filename="gamba_labri
         all_frequency.append(frequency(player_bets))
         if daily:
             all_number_of_bets.append(number_of_bets(player_bets, daily=True))
-            all_average_bets_per_day.append(mean_bets_per_day(player_bets, daily=True))
-            all_average_bet_size.append(mean_bet_size(player_bets, daily=True))
+            all_mean_bets_per_day.append(mean_bets_per_day(player_bets, daily=True))
+            all_mean_bet_size.append(mean_bet_size(player_bets, daily=True))
         else:
             all_number_of_bets.append(number_of_bets(player_bets))
-            all_average_bets_per_day.append(average_bets_per_day(player_bets))
-            all_average_bet_size.append(average_bet_size(player_bets))
+            all_mean_bets_per_day.append(mean_bets_per_day(player_bets))
+            all_mean_bet_size.append(mean_bet_size(player_bets))
         all_total_wagered.append(total_wagered(player_bets))
         all_net_loss.append(net_loss(player_bets))
         all_percent_loss.append(percent_loss(player_bets))
@@ -223,8 +223,8 @@ def calculate_labrie_measures(all_player_bets, savedir="", filename="gamba_labri
         "duration": all_duration,
         "frequency": all_frequency,
         "num_bets": all_number_of_bets,
-        "average_bets_per_day": all_average_bets_per_day,
-        "average_bet_size": all_average_bet_size,
+        "mean_bets_per_day": all_mean_bets_per_day,
+        "mean_bet_size": all_mean_bet_size,
         "total_wagered": all_total_wagered,
         "net_loss": all_net_loss,
         "percent_loss": all_percent_loss,
@@ -253,7 +253,7 @@ def calculate_braverman_measures(all_player_bets, savedir="", loud=False):
 
     sum_of_stakes = []
     total_num_bets = []
-    average_bet_sizes = []
+    mean_bet_sizes = []
     durations = []
     net_losses = []
 
@@ -270,7 +270,7 @@ def calculate_braverman_measures(all_player_bets, savedir="", loud=False):
 
         sum_of_stakes.append(player_bets["bet_size"].sum())
         total_num_bets.append(player_bets["bet_count"].sum())
-        average_bet_sizes.append(
+        mean_bet_sizes.append(
             player_bets["bet_size"].sum() / player_bets["bet_count"].sum()
         )
         durations.append(duration(player_bets))
@@ -284,7 +284,7 @@ def calculate_braverman_measures(all_player_bets, savedir="", loud=False):
         "trajectory": trajectories,
         "sum_of_stakes": sum_of_stakes,
         "total_num_bets": total_num_bets,
-        "average_bet_size": average_bet_sizes,
+        "mean_bet_size": mean_bet_sizes,
         "duration": durations,
         "net_loss": net_losses,
     }
