@@ -60,14 +60,16 @@ sidebars:
 - home_sidebar
 
 theme: jekyll-theme-cayman
-baseurl: /gamba/
-
 
 
 plugins:
   - jekyll-scholar
+  - relativizer
+
 
 scholar:
   style: custom_citation_style
   sort_by: none
   source: ../
+
+baseurl: /gamba/

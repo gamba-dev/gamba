@@ -6,7 +6,7 @@
 [![PyPI](https://img.shields.io/pypi/v/gamba?style=for-the-badge&color=blue)](https://pypi.org/project/gamba/)
 [![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge&)](https://github.com/gamba-dev/gamba/commit/main)
 
-The gamba transaction analysis library is a collection of methods for applying analytical methods found in peer-reviewed studies. The library is 100% free and open source, and aims to be useful to researchers and analysts with access to transaction data sets.
+The gamba transaction analysis library is a collection of methods for applying analytical methods found in peer-reviewed studies. The library is 100% free and open source, and aims to be used by researchers and analysts with access to transaction data sets.
 
 ## Getting Started
 
@@ -21,3 +21,12 @@ To install gamba use the following pip command;
 Or if you'd like to use the development release, clone the github repository to your machine;
 
 `git clone https://github.com/gamba-dev/gamba.git`
+
+## Features
+
+- standardise your data across game types and activities
+- compute behavioural measures
+- apply descriptive and comparative statistics
+- run machine learning methods
+- replicate entire paper's analyses on your data
+- 

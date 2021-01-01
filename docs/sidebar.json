@@ -1,28 +1,29 @@
 {
   "Welcome": {
   	"Overview": "/",
-  	"About": "/about"
+    "About": "about.html",
+    "Upcoming Features": "upcoming.html"
   },
   "Tutorials": {
-  	"Beginner": "/beginner",
-  	"Intermediate": "/intermediate",
-  	"Advanced": "/advanced"
+  	"Beginner": "beginner.html",
+  	"Intermediate": "intermediate.html",
+  	"Advanced": "advanced.html"
   },
   "Modules": {
-  	"Data": "/data",
-  	"Measures": "/measures",
-  	"Statistics": "/statistics",
-  	"Labelling": "/labelling",
-  	"Machine Learning": "/machine_learning"
+  	"Data": "data.html",
+  	"Measures": "measures.html",
+  	"Statistics": "statistics.html",
+  	"Labelling": "labelling.html",
+  	"Machine Learning": "machine_learning.html"
   },
   "Research Replications": {
-  	"Overview": "/replications",
-  	"LaBrie 2007": "/labrie2007",
-  	"LaBrie 2008": "/labrie2008",
-  	"LaPlante 2009": "/laplante2009",
-  	"Braverman 2010": "/braverman2010",
-  	"Philander 2014": "/philander2014",
-    "Scholten 2020": "/scholten2020"
+  	"Overview": "replications.html",
+  	"LaBrie 2007": "labrie2007.html",
+  	"LaBrie 2008": "labrie2008.html",
+  	"LaPlante 2009": "laplante2009.html",
+  	"Braverman 2010": "braverman2010.html",
+  	"Philander 2014": "philander2014.html",
+    "Scholten 2020": "scholten2020.html"
   },
   "Public Data Repositories": {
   	"The Transparency Project": "http://www.thetransparencyproject.org/index.html",

@@ -11,61 +11,64 @@ entries:
       url: /
     - output: web,pdf
       title: About
-      url: /about
+      url: about.html
+    - output: web,pdf
+      title: Upcoming Features
+      url: upcoming.html
     output: web
     title: Welcome
   - folderitems:
     - output: web,pdf
       title: Beginner
-      url: /beginner
+      url: beginner.html
     - output: web,pdf
       title: Intermediate
-      url: /intermediate
+      url: intermediate.html
     - output: web,pdf
       title: Advanced
-      url: /advanced
+      url: advanced.html
     output: web
     title: Tutorials
   - folderitems:
     - output: web,pdf
       title: Data
-      url: /data
+      url: data.html
     - output: web,pdf
       title: Measures
-      url: /measures
+      url: measures.html
     - output: web,pdf
       title: Statistics
-      url: /statistics
+      url: statistics.html
     - output: web,pdf
       title: Labelling
-      url: /labelling
+      url: labelling.html
     - output: web,pdf
       title: Machine Learning
-      url: /machine_learning
+      url: machine_learning.html
     output: web
     title: Modules
   - folderitems:
     - output: web,pdf
       title: Overview
-      url: /replications
+      url: replications.html
     - output: web,pdf
       title: LaBrie 2007
-      url: /labrie2007
+      url: labrie2007.html
     - output: web,pdf
       title: LaBrie 2008
-      url: /labrie2008
+      url: labrie2008.html
     - output: web,pdf
       title: LaPlante 2009
-      url: /laplante2009
+      url: laplante2009.html
     - output: web,pdf
       title: Braverman 2010
-      url: /braverman2010
+      url: braverman2010.html
     - output: web,pdf
       title: Philander 2014
-      url: /philander2014
+      url: philander2014.html
     - output: web,pdf
       title: Scholten 2020
-      url: /scholten2020
+      url: scholten2020.html
     output: web
     title: Research Replications
   - folderitems:

@@ -39,7 +39,7 @@ nb_path: "34_braverman2010.ipynb"
 </ul>
 <p>File names: <strong>RawDataSet2_DailyAggregation.txt</strong> and <strong>AnalyticDataSet_HighRisk.txt</strong></p>
 <p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a>  Data description above implies RawDataSet2 contains actual betting data for players for the duration of the study, when it appears to only include a maximum of 31 days of betting data. This means the AnalyticDataSet cannot be faithfully reproduced using the raw data alone as the analytic data incudes full-duration behavioural measures (see final cell).</p>
-<p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a>  The <a href="/gamba/measures.html#trajectory"><code>trajectory</code></a> measure calculated here disagrees with the analytic data set, it specifically shows more extreme values for the gradient of the stakes. The reason for this issue is described below.</p>
+<p><a href="https://img.shields.io/badge/-FLAG-red?style=flat-square"><img src="https://img.shields.io/badge/-FLAG-red?style=flat-square" alt="Flag"></a>  The <a href="measures.html#trajectory"><code>trajectory</code></a> measure calculated here disagrees with the analytic data set, it specifically shows more extreme values for the gradient of the stakes. The reason for this issue is described below.</p>
 <p>With the data downloaded, the first step is to import <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a>, run the cell below to get started;</p>
 
 </div>
@@ -106,7 +106,7 @@ analytic data loaded: 530
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>At this point, the data can be prepared for use in the gamba library. This can be done with the purpose-built <a href="/gamba/data.html#prepare_braverman_data"><code>prepare_braverman_data</code></a> method in the <code>gamba.data</code> module;</p>
+<p>At this point, the data can be prepared for use in the gamba library. This can be done with the purpose-built <a href="data.html#prepare_braverman_data"><code>prepare_braverman_data</code></a> method in the <code>gamba.data</code> module;</p>
 
 </div>
 </div>
@@ -130,7 +130,7 @@ analytic data loaded: 530
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now for the start of the study's replication - we begin by calculating the measures reported in the paper which include <strong>intensity</strong>, <strong>frequency</strong>, <strong>variability</strong>, <strong>trajectory</strong>, <strong>sum of stakes</strong>, <strong>total number of bets</strong>, <strong>average bet size</strong>, <strong>duration of account betting</strong>, and the <strong>net loss incurred</strong> for each player. These are all included in the <a href="/gamba/measures.html#calculate_braverman_measures"><code>calculate_braverman_measures</code></a> method in the <code>gamba.measures</code> module;</p>
+<p>Now for the start of the study's replication - we begin by calculating the measures reported in the paper which include <strong>intensity</strong>, <strong>frequency</strong>, <strong>variability</strong>, <strong>trajectory</strong>, <strong>sum of stakes</strong>, <strong>total number of bets</strong>, <strong>average bet size</strong>, <strong>duration of account betting</strong>, and the <strong>net loss incurred</strong> for each player. These are all included in the <a href="measures.html#calculate_braverman_measures"><code>calculate_braverman_measures</code></a> method in the <code>gamba.measures</code> module;</p>
 
 </div>
 </div>
@@ -510,7 +510,7 @@ analytic data loaded: 530
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is a little puzzling as some of the measures align, yet others such as <code>total_num_bets</code> and <a href="/gamba/measures.html#duration"><code>duration</code></a> appear to be underestimates compared to the original analysis, the <a href="/gamba/measures.html#trajectory"><code>trajectory</code></a> measure also appears more extreme. To find out what's causing this difference, we can explore the duration of the data in the raw data set;</p>
+<p>This is a little puzzling as some of the measures align, yet others such as <code>total_num_bets</code> and <a href="measures.html#duration"><code>duration</code></a> appear to be underestimates compared to the original analysis, the <a href="measures.html#trajectory"><code>trajectory</code></a> measure also appears more extreme. To find out what's causing this difference, we can explore the duration of the data in the raw data set;</p>
 
 </div>
 </div>
@@ -565,7 +565,7 @@ maximum duration found: 31
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The raw data contains a maximum of 31 days of betting data per player, therefore the analytic data set cannot be <em>completely</em> reproduced using the raw data alone, hence the original analytic data will be taken forward as opposed to an exactly replicated data set.</p>
-<p>This means that as we cannot compute the measures exactly, the next best thing is to verify the accuracy of the clustering described in the paper, we can do this using the <a href="/gamba/machine_learning.html#k_means"><code>k_means</code></a> functions from gamba's clustering module;</p>
+<p>This means that as we cannot compute the measures exactly, the next best thing is to verify the accuracy of the clustering described in the paper, we can do this using the <a href="machine_learning.html#k_means"><code>k_means</code></a> functions from gamba's clustering module;</p>
 
 </div>
 </div>
