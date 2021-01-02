@@ -157,7 +157,7 @@ analytic data loaded: 530
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 530/530 [00:07&lt;00:00, 74.01it/s]
+<pre>100%|██████████| 530/530 [00:07&lt;00:00, 68.71it/s]
 </pre>
 </div>
 </div>
@@ -191,7 +191,7 @@ analytic data loaded: 530
       <th>trajectory</th>
       <th>sum_of_stakes</th>
       <th>total_num_bets</th>
-      <th>average_bet_size</th>
+      <th>mean_bet_size</th>
       <th>duration</th>
       <th>net_loss</th>
     </tr>
@@ -264,7 +264,6 @@ analytic data loaded: 530
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">players</span> <span class="o">=</span> <span class="n">measures</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># get only the first 3 values (those above)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">analytic_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">analytic_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;average_bet_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;p2sumstake&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">analytic_data</span><span class="p">[</span><span class="s1">&#39;p2sumbet&#39;</span><span class="p">]</span>
 <span class="n">original_analysis</span> <span class="o">=</span> <span class="n">analytic_data</span><span class="p">[[</span><span class="s1">&#39;UserID&#39;</span><span class="p">,</span><span class="s1">&#39;p2bpd1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2totalactivedays1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2stakeSD1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2stakeSlope1m&#39;</span><span class="p">,</span><span class="s1">&#39;p2sumstake&#39;</span><span class="p">,</span><span class="s1">&#39;p2sumbet&#39;</span><span class="p">,</span><span class="s1">&#39;average_bet_size&#39;</span><span class="p">,</span><span class="s1">&#39;p2intvday&#39;</span><span class="p">,</span><span class="s1">&#39;p2net&#39;</span><span class="p">]]</span>
@@ -279,21 +278,6 @@ analytic data loaded: 530
 
 <div class="output_wrapper">
 <div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea ">
-<pre>Index([&#39;UserID&#39;, &#39;CountryID&#39;, &#39;Gender&#39;, &#39;ageRDATE&#39;, &#39;Sereason&#39;, &#39;p2sumstake&#39;,
-       &#39;p2sumbet&#39;, &#39;p2sumday&#39;, &#39;p2intvday&#39;, &#39;p2bpd&#39;, &#39;p2net&#39;, &#39;p2bpd1m&#39;,
-       &#39;p2stakeSD1m&#39;, &#39;p2totalactivedays1m&#39;, &#39;p2stakeSlope1m&#39;, &#39;Zp2bpd1m&#39;,
-       &#39;Zp2stakeSD1m&#39;, &#39;Zp2totalactivedays1m&#39;, &#39;Zp2stakeslope1m&#39;, &#39;random&#39;,
-       &#39;p2clusteringactivity&#39;, &#39;p2clusterhalf1&#39;, &#39;p2clusterhalf2&#39;],
-      dtype=&#39;object&#39;)</pre>
-</div>
-
-</div>
 
 <div class="output_area">
 
@@ -328,7 +312,6 @@ analytic data loaded: 530
       <th>p2intvday</th>
       <th>p2bpd</th>
       <th>...</th>
-      <th>p2totalactivedays1m</th>
       <th>p2stakeSlope1m</th>
       <th>Zp2bpd1m</th>
       <th>Zp2stakeSD1m</th>
@@ -338,6 +321,7 @@ analytic data loaded: 530
       <th>p2clusteringactivity</th>
       <th>p2clusterhalf1</th>
       <th>p2clusterhalf2</th>
+      <th>average_bet_size</th>
     </tr>
   </thead>
   <tbody>
@@ -354,7 +338,6 @@ analytic data loaded: 530
       <td>308</td>
       <td>5.102941</td>
       <td>...</td>
-      <td>25</td>
       <td>0.038441</td>
       <td>0.367245</td>
       <td>0.410294</td>
@@ -364,6 +347,7 @@ analytic data loaded: 530
       <td>3</td>
       <td></td>
       <td>3</td>
+      <td>17.874841</td>
     </tr>
     <tr>
       <th>1</th>
@@ -378,7 +362,6 @@ analytic data loaded: 530
       <td>540</td>
       <td>2.192308</td>
       <td>...</td>
-      <td>13</td>
       <td>0.122799</td>
       <td>-0.239092</td>
       <td>-0.069475</td>
@@ -388,6 +371,7 @@ analytic data loaded: 530
       <td>4</td>
       <td>4</td>
       <td></td>
+      <td>11.682044</td>
     </tr>
     <tr>
       <th>2</th>
@@ -402,7 +386,6 @@ analytic data loaded: 530
       <td>679</td>
       <td>2.914286</td>
       <td>...</td>
-      <td>7</td>
       <td>-0.108439</td>
       <td>0.007609</td>
       <td>-0.231898</td>
@@ -412,10 +395,11 @@ analytic data loaded: 530
       <td>4</td>
       <td>4</td>
       <td></td>
+      <td>2.755624</td>
     </tr>
   </tbody>
 </table>
-<p>3 rows × 23 columns</p>
+<p>3 rows × 24 columns</p>
 </div>
 </div>
 
@@ -620,10 +604,10 @@ maximum duration found: 31
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>n=374</th>
-      <th>n=36</th>
-      <th>n=8</th>
-      <th>n=112</th>
+      <th>n=378</th>
+      <th>n=110</th>
+      <th>n=13</th>
+      <th>n=29</th>
     </tr>
     <tr>
       <th>cluster_centroid</th>
@@ -636,66 +620,66 @@ maximum duration found: 31
   <tbody>
     <tr>
       <th>intensity</th>
-      <td>-0.388466</td>
-      <td>0.829799</td>
-      <td>-0.184170</td>
-      <td>1.043632</td>
+      <td>-0.369099</td>
+      <td>0.993864</td>
+      <td>0.979338</td>
+      <td>0.602167</td>
     </tr>
     <tr>
       <th>frequency</th>
-      <td>-0.402049</td>
-      <td>1.139525</td>
-      <td>1.084161</td>
-      <td>0.898839</td>
+      <td>-0.406867</td>
+      <td>0.978256</td>
+      <td>0.850219</td>
+      <td>1.211546</td>
     </tr>
     <tr>
       <th>variability</th>
-      <td>-0.290654</td>
-      <td>0.269144</td>
-      <td>2.915477</td>
-      <td>0.675816</td>
+      <td>-0.255534</td>
+      <td>0.142271</td>
+      <td>4.409441</td>
+      <td>0.814460</td>
     </tr>
     <tr>
       <th>trajectory</th>
-      <td>-0.052216</td>
-      <td>0.116352</td>
-      <td>-1.481324</td>
-      <td>0.242775</td>
+      <td>-0.022931</td>
+      <td>0.133540</td>
+      <td>-0.076290</td>
+      <td>-0.173440</td>
     </tr>
     <tr>
       <th>sum_of_stakes</th>
-      <td>-0.303392</td>
-      <td>1.981813</td>
-      <td>4.008502</td>
-      <td>0.089778</td>
+      <td>-0.305971</td>
+      <td>0.143319</td>
+      <td>0.914156</td>
+      <td>3.034755</td>
     </tr>
     <tr>
       <th>total_num_bets</th>
-      <td>-0.313098</td>
-      <td>2.557085</td>
-      <td>0.323450</td>
-      <td>0.200500</td>
+      <td>-0.320316</td>
+      <td>0.487507</td>
+      <td>0.046568</td>
+      <td>2.305120</td>
     </tr>
     <tr>
       <th>average_bet_size</th>
-      <td>-0.174562</td>
-      <td>0.282823</td>
-      <td>5.647233</td>
-      <td>0.088630</td>
+      <td>-0.159732</td>
+      <td>-0.068494</td>
+      <td>3.206291</td>
+      <td>0.904531</td>
     </tr>
     <tr>
       <th>duration</th>
-      <td>-0.189037</td>
-      <td>1.055021</td>
-      <td>-0.237592</td>
-      <td>0.309104</td>
+      <td>-0.219289</td>
+      <td>0.532655</td>
+      <td>-0.159865</td>
+      <td>0.909564</td>
     </tr>
     <tr>
       <th>net_loss</th>
-      <td>-0.272929</td>
-      <td>1.818758</td>
-      <td>4.456281</td>
-      <td>0.008482</td>
+      <td>-0.275880</td>
+      <td>0.066042</td>
+      <td>0.406459</td>
+      <td>3.163248</td>
     </tr>
     <tr>
       <th>cluster</th>

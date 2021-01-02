@@ -37,7 +37,14 @@ nb_path: "21_measures.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A behavioural measure is a number derived from a player's transaction data. This data needs to have specific columns depending on the measure you want to calculate. For example, measures in the bet domain require the <strong>bet_size</strong> column. Before defining any measures, the first step is to create a checker method which makes sure that the data used has the right columns.</p>
+<p>A behavioural measure is a number derived from a player's transaction data. This data needs to have specific columns depending on the measure you want to calculate. For example, measures in the bet domain require the <strong>bet_size</strong> column. For each of the measures you plan to use, make sure that the data you have in the gamba standard format (see <a href="data.html#check_data"><code>check_data</code></a>) has the correct values.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once your data has all of the right columns, the simplest way to get started is to call the <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method below, giving it one or more players bets in the gamba standard format.</p>
 
 </div>
 </div>
@@ -53,9 +60,9 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_measure_data" class="doc_header"><code>check_measure_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_measure_data</code>(<strong><code>player_bets</code></strong>, <strong><code>required_columns</code></strong>)</p>
+<h4 id="create_measures_table" class="doc_header"><code>create_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_measures_table</code>(<strong><code>all_player_bets</code></strong>, <strong><code>measures</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Compares the columns found in a dataframe of player bets to a supplied list of column names. If any of the required_column names are not found, an exception is raised reporting the error.</p>
+<p>Creates a measures table from a collection of bets in the gamba standard format. The second parameter 'measures' should be a list of names from the measures module. See <a href="measures.html#available_measures"><code>available_measures</code></a> for currently available options.</p>
 
 </div>
 
@@ -74,6 +81,13 @@ nb_path: "21_measures.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='The <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method is perhaps the most useful thing in the entire library.' %}</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Measure-Domains">Measure Domains<a class="anchor-link" href="#Measure-Domains"> </a></h2>
@@ -111,7 +125,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="duration" class="doc_header"><code>duration</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>duration</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="duration" class="doc_header"><code>duration</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>duration</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The number of days between the first bet and the last.</p>
 
@@ -143,7 +157,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="frequency" class="doc_header"><code>frequency</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>frequency</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="frequency" class="doc_header"><code>frequency</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>frequency</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The percentage of days within the <a href="measures.html#duration"><code>duration</code></a> that included at least one bet. Note that this method returns the actual percentage value e.g. 75, <strong>not</strong> the raw number of days or values in the interval [0,1].</p>
 
@@ -175,7 +189,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="number_of_bets" class="doc_header"><code>number_of_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>number_of_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="number_of_bets" class="doc_header"><code>number_of_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>number_of_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>The total number of bets made.</p>
 
@@ -207,7 +221,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_bets_per_day" class="doc_header"><code>mean_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_day</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="mean_bets_per_day" class="doc_header"><code>mean_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_day</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>The average (mean) number of bets made on days where betting took place.</p>
 
@@ -239,7 +253,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="intensity" class="doc_header"><code>intensity</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>intensity</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="intensity" class="doc_header"><code>intensity</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>intensity</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Mean number of bets per active betting day in first month, if data set contains daily aggregate data.</p>
 
@@ -271,7 +285,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="frequency_raw" class="doc_header"><code>frequency_raw</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>frequency_raw</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="frequency_raw" class="doc_header"><code>frequency_raw</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>frequency_raw</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Number of active betting days in first month, if data set contains daily aggregate data.</p>
 
@@ -316,7 +330,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="total_wagered" class="doc_header"><code>total_wagered</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_wagered</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="total_wagered" class="doc_header"><code>total_wagered</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L134" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_wagered</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The total amount wagered (sum of bet sizes).</p>
 
@@ -348,7 +362,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_bet_size" class="doc_header"><code>mean_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L115" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bet_size</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="mean_bet_size" class="doc_header"><code>mean_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L140" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bet_size</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>The average (mean) size of bets.</p>
 
@@ -380,7 +394,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="variability" class="doc_header"><code>variability</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L127" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>variability</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="variability" class="doc_header"><code>variability</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>variability</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Standard deviation of stake size in first month, if data set contains daily aggregate data.</p>
 
@@ -412,9 +426,41 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trajectory" class="doc_header"><code>trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L140" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="trajectory" class="doc_header"><code>trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L165" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Gradient of a linear regression fitted to the sequence of daily aggredated bet sizes.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="std_bet_sizes" class="doc_header"><code>std_bet_sizes</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L194" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_bet_sizes</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+<p>Standard deviation of bet sizes (generalised version of <a href="measures.html#variability"><code>variability</code></a>).</p>
 
 </div>
 
@@ -457,7 +503,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="net_loss" class="doc_header"><code>net_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="net_loss" class="doc_header"><code>net_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L201" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The net amount lost (sum of bet sizes minus sum of payout sizes).</p>
 
@@ -489,7 +535,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="percent_loss" class="doc_header"><code>percent_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L176" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>percent_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="percent_loss" class="doc_header"><code>percent_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L208" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>percent_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The <a href="measures.html#net_loss"><code>net_loss</code></a> as a percentage of <a href="measures.html#total_wagered"><code>total_wagered</code></a>.</p>
 
@@ -534,7 +580,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="theoretical_loss" class="doc_header"><code>theoretical_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L185" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>theoretical_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="theoretical_loss" class="doc_header"><code>theoretical_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L217" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>theoretical_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -578,7 +624,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="calculate_labrie_measures" class="doc_header"><code>calculate_labrie_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_labrie_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>filename</code></strong>=<em><code>'gamba_labrie_measures.csv'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>daily</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="calculate_labrie_measures" class="doc_header"><code>calculate_labrie_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_labrie_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>filename</code></strong>=<em><code>'gamba_labrie_measures.csv'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>daily</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Calculates the set of measures described in LaBrie et al's work in 2008 on casino gamblers. These measures include the durations, frequencies, number of bets, bets per day, value per bet (eth), total amount wagered, net loss, and percent loss for each player. As this method sits in the studies module, it accepts a list of dataframes representing each player's bets as input. By default, this method saves the resulting dataframe of each player's measures to 'gamba_labrie_measures.csv'. Be advised: this method can take some time for large numbers of players, the 'loud' parameter can be set to True to print out updates every 200 players.</p>
 
@@ -610,7 +656,7 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="calculate_braverman_measures" class="doc_header"><code>calculate_braverman_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L246" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_braverman_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="calculate_braverman_measures" class="doc_header"><code>calculate_braverman_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L278" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_braverman_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Calculates the set of measures described in Braverman and Shaffer's work in 2010 on high risk internet gamblers. These measures include the frequency, intensity, variability, and trajectories of each player. As this method sits in the studies module, it accepts a list of dataframes representing each player's bets as input. By default, this method saves the resulting dataframe of each player's measures to 'gamba_braverman_measures.csv'.</p>
 
@@ -655,7 +701,39 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="standardise_measures_table" class="doc_header"><code>standardise_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L303" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>standardise_measures_table</code>(<strong><code>measures_table</code></strong>)</p>
+<h4 id="available_measures" class="doc_header"><code>available_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L334" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>available_measures</code>()</p>
+</blockquote>
+<p>Returns a list of valid measures that the gamba library can compute. This list can be used in whole or in part by the <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method to compute these measures across one or more players bets.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="standardise_measures_table" class="doc_header"><code>standardise_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L340" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>standardise_measures_table</code>(<strong><code>measures_table</code></strong>)</p>
 </blockquote>
 <p>Standardises all measures columns in a measures table by applying the scipy.stats.zscore function to each column. This is useful for column-wise comparisons and some clustering methods, but use with caution!</p>
 
@@ -687,9 +765,41 @@ nb_path: "21_measures.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="split_measures_table" class="doc_header"><code>split_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L316" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_measures_table</code>(<strong><code>measures_table</code></strong>, <strong><code>frac</code></strong>=<em><code>0.7</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="split_measures_table" class="doc_header"><code>split_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L353" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_measures_table</code>(<strong><code>measures_table</code></strong>, <strong><code>frac</code></strong>=<em><code>0.7</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Splits a measures table into two randomly selected groups. This is useful for machine learning methods where a train-test split is needed, and uses the Pandas library's sample method.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="check_measure_data" class="doc_header"><code>check_measure_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L366" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_measure_data</code>(<strong><code>player_bets</code></strong>, <strong><code>required_columns</code></strong>)</p>
+</blockquote>
+<p>Compares the columns found in a dataframe of player bets to a supplied list of column names. If any of the required_column names are not found, an exception is raised reporting the error.</p>
 
 </div>
 

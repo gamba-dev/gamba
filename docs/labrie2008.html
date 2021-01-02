@@ -38,7 +38,7 @@ nb_path: "32_labrie2008.ipynb"
 <li><a href="http://www.thetransparencyproject.org/codebooks/Codebook_for_Virtual_Casino_Gambling.pdf">Original data description</a></li>
 <li><a href="https://academic.oup.com/eurpub/article/18/4/410/477060">Original paper link</a></li>
 </ul>
-<p>The first step is to import the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, run the cell below to do so. If this cell throws an error, <a href="">see the install documentation page</a> to make sure you have <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> installed.</p>
+<p>The first step is to import the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, run the cell below to do so. If this cell throws an error, <a href="https://gamba.dev">see the install documentation page</a> to make sure you have <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> installed.</p>
 
 </div>
 </div>
@@ -62,7 +62,7 @@ nb_path: "32_labrie2008.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>With <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> loaded, the next step is to get the data into a usable format. To do this, we call the <a href="data.html#prepare_labrie_data"><code>prepare_labrie_data</code></a> method from the data module. This does two things, first it renames the columns to values compatable with the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, second it splits the collection of all player's data into individual files and saves them. You should see a folder called <code>labrie_individuals/</code> appear next to this notebook once this cell has executed. This will contain 4,222 CSV files - one for each player.</p>
+<p>With <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> loaded, the next step is to get the data into a usable format. To do this, we call the <a href="data.html#prepare_labrie_data"><code>prepare_labrie_data</code></a> method from the data module. This does two things, first it renames the columns to values compatable with the <a href="https://github.com/gamba-dev/gamba"><em>gamba</em></a> framework, then it saves this newly compatable dataframe as a new csv file (in case it's needed elsewhere).</p>
 
 </div>
 </div>
@@ -118,7 +118,7 @@ nb_path: "32_labrie2008.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 4222/4222 [15:43&lt;00:00,  4.47it/s]</pre>
+<pre>100%|██████████| 4222/4222 [15:26&lt;00:00,  4.56it/s]</pre>
 </div>
 </div>
 
@@ -217,13 +217,13 @@ nb_path: "32_labrie2008.ipynb"
       <td>532.000000</td>
     </tr>
     <tr>
-      <th>average_bets_per_day</th>
+      <th>mean_bets_per_day</th>
       <td>115.950530</td>
       <td>191.986075</td>
       <td>48.911275</td>
     </tr>
     <tr>
-      <th>average_bet_size</th>
+      <th>mean_bet_size</th>
       <td>34.760626</td>
       <td>184.090509</td>
       <td>4.158098</td>
@@ -309,8 +309,8 @@ nb_path: "32_labrie2008.ipynb"
       <th>duration</th>
       <th>frequency</th>
       <th>num_bets</th>
-      <th>average_bets_per_day</th>
-      <th>average_bet_size</th>
+      <th>mean_bets_per_day</th>
+      <th>mean_bet_size</th>
       <th>total_wagered</th>
       <th>net_loss</th>
       <th>percent_loss</th>
@@ -351,7 +351,7 @@ nb_path: "32_labrie2008.ipynb"
       <td></td>
     </tr>
     <tr>
-      <th>average_bets_per_day</th>
+      <th>mean_bets_per_day</th>
       <td>0.01</td>
       <td>0.13**</td>
       <td>0.87**</td>
@@ -362,7 +362,7 @@ nb_path: "32_labrie2008.ipynb"
       <td></td>
     </tr>
     <tr>
-      <th>average_bet_size</th>
+      <th>mean_bet_size</th>
       <td>0.05**</td>
       <td>0.09**</td>
       <td>-0.24**</td>
@@ -531,13 +531,13 @@ other count: 4010
       <td>10464.500000</td>
     </tr>
     <tr>
-      <th>average_bets_per_day</th>
+      <th>mean_bets_per_day</th>
       <td>284.988926</td>
       <td>343.720575</td>
       <td>188.175380</td>
     </tr>
     <tr>
-      <th>average_bet_size</th>
+      <th>mean_bet_size</th>
       <td>213.216382</td>
       <td>682.412984</td>
       <td>24.965530</td>
@@ -620,13 +620,13 @@ other count: 4010
       <td>485.500000</td>
     </tr>
     <tr>
-      <th>average_bets_per_day</th>
+      <th>mean_bets_per_day</th>
       <td>107.013836</td>
       <td>176.064687</td>
       <td>45.897791</td>
     </tr>
     <tr>
-      <th>average_bet_size</th>
+      <th>mean_bet_size</th>
       <td>25.326057</td>
       <td>96.945569</td>
       <td>3.826164</td>

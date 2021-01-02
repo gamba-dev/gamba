@@ -37,7 +37,14 @@ nb_path: "20_data.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use. This format is is in preparation to create a measures table, and is simply a dataframe with fixed column names. Read through this page to find out how it works, plus some simple plotting at the end. This module also contains a number of data loading functions for existing public data repositories so you can replicate or extend work right from the start.</p>
+<p>The data module can be used to load in transaction data sets from multiple sources into a format that the gamba library can use. This format is needed to create a measures table, and is simply a dataframe with fixed column names. Read through this page to find out how it works, plus some simple plotting at the end. This module also contains a number of data loading functions for existing public data repositories so you can replicate or extend work right from the start.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='The CSV file format described on this page is referred to throughout the documentation as the <strong><em>gamba standard format</em></strong>.' %}</p>
 
 </div>
 </div>
@@ -220,7 +227,7 @@ nb_path: "20_data.ipynb"
 <tbody>
 <tr>
 <td><strong><em>payout_time</em></strong></td>
-<td>the <a href="(https://www.unixtimestamp.com/">timestamp</a> that the payout was paid</td>
+<td>the <a href="https://www.unixtimestamp.com/">timestamp</a> that the payout was paid</td>
 </tr>
 <tr>
 <td><strong><em>decimal_odds</em></strong></td>
@@ -240,6 +247,13 @@ nb_path: "20_data.ipynb"
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='CSV files with the following columns and data types are said to be in the <strong><em>gamba standard format</em></strong>, and are compatible with methods across the gamba library.' %}</p>
 
 </div>
 </div>
@@ -355,6 +369,44 @@ nb_path: "20_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>There's also an <a href="data.html#example_bets"><code>example_bets</code></a> method which returns a set of example transactions (entirely synthetic) to use as an example throughout the docs or to compare against your own data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="example_bets" class="doc_header"><code>example_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>example_bets</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Final-Checks">Final Checks<a class="anchor-link" href="#Final-Checks"> </a></h2>
 </div>
 </div>
@@ -377,8 +429,9 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
+<h4 id="check_data" class="doc_header"><code>check_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_data</code>(<strong><code>dataframe</code></strong>)</p>
 </blockquote>
+<p>Make sure that your data is in the gamba standard format (has the right column names). This method will raise an exception if the format is incorrect, and will do nothing if it is correct.</p>
 
 </div>
 
@@ -408,7 +461,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="summarise_app" class="doc_header"><code>summarise_app</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L130" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarise_app</code>(<strong><code>player_bets</code></strong>, <strong><code>dapp</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="summarise_app" class="doc_header"><code>summarise_app</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarise_app</code>(<strong><code>player_bets</code></strong>, <strong><code>dapp</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Prints out some basic information about a gambling or gambling-like application given a collection of bets made through that application. Data displayed includes the number of users, the number of game types provided, the number of bets placed, the total value of the bets and the payouts, the time of the first bet, and the time of the last.</p>
 
@@ -440,9 +493,9 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="summarise_providers" class="doc_header"><code>summarise_providers</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarise_providers</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>game_types</code></strong>=<em><code>['coinflip', 'onedice', 'twodice', 'roll']</code></em>)</p>
+<h4 id="summarise_providers" class="doc_header"><code>summarise_providers</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L163" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarise_providers</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>game_types</code></strong>=<em><code>['coinflip', 'onedice', 'twodice', 'roll']</code></em>)</p>
 </blockquote>
-<p>Create a table containing summary data for providers using a collection of player bets. Summary includes the number of unique users and games, the total value of bets and payouts, the starting and ending block numbers, and the time the starting and ending blocks ocurred.</p>
+<p>Create a table containing summary data for providers using a collection of player bets. Summary includes the number of unique users and games, the total value of bets and payouts, the starting and ending block numbers, and the time the starting and ending blocks occurred.</p>
 
 </div>
 
@@ -485,7 +538,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_player_career" class="doc_header"><code>plot_player_career</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L190" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career</code>(<strong><code>player_df</code></strong>, <strong><code>savename</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="plot_player_career" class="doc_header"><code>plot_player_career</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L192" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career</code>(<strong><code>player_df</code></strong>, <strong><code>savename</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Creates a candlestick-style plot of a players betting activity over the course of their career. This works best on regularly-spaced sequential data but can also provide insight into intra-session win/loss patterns.</p>
 
@@ -517,9 +570,9 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_player_career_split" class="doc_header"><code>plot_player_career_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L227" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career_split</code>(<strong><code>player_df</code></strong>)</p>
+<h4 id="plot_player_career_split" class="doc_header"><code>plot_player_career_split</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L229" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_player_career_split</code>(<strong><code>player_df</code></strong>)</p>
 </blockquote>
-<p>Plot a player's betting and payout trajectory on a single plot, with green indicating payouts (top) and red indicating bets (bottom). A cumulative value line is also plotted between the two. Note that the player_df must include both</p>
+<p>Plot a player's betting and payout trajectory on a single plot, with green indicating payouts (top) and red indicating bets (bottom). A cumulative value line is also plotted between the two. Note that the player_df must include both bet_size and payout_size columns.</p>
 
 </div>
 
@@ -549,7 +602,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_provider_dates" class="doc_header"><code>plot_provider_dates</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L276" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_provider_dates</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="plot_provider_dates" class="doc_header"><code>plot_provider_dates</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L278" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_provider_dates</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Visualises the start and end dates of bets from one or more providers on a stacked gantt style plot.</p>
 
@@ -581,7 +634,7 @@ nb_path: "20_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_provider_bets" class="doc_header"><code>plot_provider_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L306" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_provider_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="plot_provider_bets" class="doc_header"><code>plot_provider_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/data.py#L308" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_provider_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>providers</code></strong>, <strong><code>provider_labels</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Visualises the cumulative number of bets from one or more providers.</p>
 

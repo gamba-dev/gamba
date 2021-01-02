@@ -29,4 +29,3 @@ Or if you'd like to use the development release, clone the github repository to 
 - apply descriptive and comparative statistics
 - run machine learning methods
 - replicate entire paper's analyses on your data
-- 
