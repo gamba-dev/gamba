@@ -2,7 +2,6 @@
 > A Python library for player behaviour tracking research
 
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gamba-dev/gamba/CI?logo=github&style=for-the-badge&)](https://github.com/gamba-dev/gamba/actions)
 [![PyPI](https://img.shields.io/pypi/v/gamba?style=for-the-badge&color=blue)](https://pypi.org/project/gamba/)
 [![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge&)](https://github.com/gamba-dev/gamba/commit/main)
 

@@ -177,6 +177,12 @@ nb_path: "01_upcoming.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="New-Behavioural-Measures">New Behavioural Measures<a class="anchor-link" href="#New-Behavioural-Measures"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -297,65 +303,109 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">theoretical_loss</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_sessions</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">get_sessions</span>
+</pre></div>
 
-<span class="k">def</span> <span class="nf">num_sessions</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+    </div>
+</div>
+</div>
 
-<span class="k">def</span> <span class="nf">total_play_time</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+</div>
+    {% endraw %}
 
-<span class="k">def</span> <span class="nf">total_paid</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># game-agnostic, cross-data implementation may be tricky</span>
-    <span class="k">pass</span>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
-<span class="k">def</span> <span class="nf">mean_sessions_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class="output_wrapper">
+<div class="output">
 
-<span class="k">def</span> <span class="nf">mean_play_time_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class="output_area">
 
-<span class="k">def</span> <span class="nf">total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
 
+
+<div class="output_text output_subarea output_execute_result">
+<pre>6.11999999999999</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">total_paid</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># this is a poker-specific measure that is functionally identical to net_loss</span>
+    <span class="k">pass</span>
 <span class="k">def</span> <span class="nf">mean_rake_per_hour</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># mercantile game specific</span>
     <span class="k">pass</span>
-
 <span class="k">def</span> <span class="nf">mean_simultaneous_tables</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># poker specific</span>
     <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">mean_session_length</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">mean_rake_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">median_odds</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># this is functionally identical to -net_loss</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">positive_total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># conditional duplicate of &#39;total_amount_won&#39;</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">positive_amount_wagered</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># potentially function-identical variant</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">median_bet_size</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">mean_wager_session_length</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># dragicevic variant, not identical to &#39;mean_session_length&#39; but difficult to generalise</span>
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mean_play_time_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+    <span class="s2">&quot;&quot;</span>
+    <span class="c1"># used in Fiedler 2011 and 2013</span>
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">median_bets_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">mean_wagered_per_session</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">median_bets_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">median_loss_per_bet</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">mean_volume_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">max_bet_value</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">min_bet_value</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">mean_sessions_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">mean_rake_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">std_bets_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -381,20 +431,11 @@ nb_path: "01_upcoming.ipynb"
 <span class="k">def</span> <span class="nf">num_bets_weekend_ratio</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">positive_total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># conditional duplicate of &#39;total_amount_won&#39;</span>
-    <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">positive_amount_wagered</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># potentially function-identical variant</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">num_gambling_services_used</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># regarding operators, not game types</span>
-    <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">mean_gambling_hours_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">mean_wager_session_length</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># dragicevic variant, not identical to &#39;mean_session_length&#39;</span>
-    <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">mean_loss_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -413,78 +454,12 @@ nb_path: "01_upcoming.ipynb"
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">create_measures_table</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;frequency&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="General-Improvements">General Improvements<a class="anchor-link" href="#General-Improvements"> </a></h2>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[[1], [3], [66.66666666666666]]
-</pre>
 </div>
-</div>
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>player_id</th>
-      <th>duration</th>
-      <th>frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>3</td>
-      <td>66.666667</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
