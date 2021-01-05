@@ -55,6 +55,8 @@ nb_path: "01_upcoming.ipynb"
 
 <span class="c1"># make porting over a little easier</span>
 <span class="n">check_measures_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">check_measure_data</span>
+<span class="n">get_sessions</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">get_sessions</span>
+<span class="n">aggregate_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">aggregate_bets</span>
 
 <span class="n">player_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">example_bets</span><span class="p">()</span>
 
@@ -190,43 +192,7 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">datetime</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="k">def</span> <span class="nf">aggregate_bets</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">):</span>
-    
-    <span class="n">aggregations</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># a collection of dataframes each corresponding to a level of aggregation</span>
-    
-    <span class="k">if</span> <span class="n">aggregation</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">player_bets</span><span class="p">]</span>
-    
-    <span class="k">if</span> <span class="n">aggregation</span> <span class="o">==</span> <span class="s1">&#39;daily&#39;</span><span class="p">:</span>
-        <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
-        <span class="n">playing_dates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-        
-        <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">playing_dates</span><span class="p">:</span>
-            <span class="n">bets_on_day</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span> <span class="o">==</span> <span class="n">day</span><span class="p">]</span>
-            <span class="n">aggregations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bets_on_day</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="n">aggregations</span>
-    
-    <span class="k">if</span> <span class="n">aggregation</span> <span class="o">==</span> <span class="s1">&#39;weekly&#39;</span><span class="p">:</span>
-        <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
-        <span class="n">current_day</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-        <span class="n">last_day</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-        
-        <span class="n">num_weeks</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">last_day</span> <span class="o">-</span> <span class="n">current_day</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span>
-        
-        <span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_weeks</span><span class="p">):</span>
-            <span class="n">end_of_week</span> <span class="o">=</span> <span class="n">current_day</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-            
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;getting bets between&#39;</span><span class="p">,</span> <span class="n">current_day</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="n">end_of_week</span><span class="p">)</span>
-            <span class="n">bets_this_week</span> <span class="o">=</span> <span class="n">player_bets</span><span class="p">[(</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">current_day</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;bet_date&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">end_of_week</span><span class="p">)]</span>
-            <span class="n">current_day</span> <span class="o">=</span> <span class="n">end_of_week</span>
-            
-            <span class="n">aggregations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bets_this_week</span><span class="p">)</span>
-            
-            <span class="k">return</span> <span class="n">aggregations</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="k">def</span> <span class="nf">aggregate_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;bet_size&#39;</span><span class="p">):</span>
     
@@ -253,43 +219,9 @@ nb_path: "01_upcoming.ipynb"
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">total_wagered_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    
-    <span class="k">return</span> <span class="n">aggregate_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="n">aggregation</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plot</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;bet_size&#39;</span><span class="p">)</span>
-
-<span class="n">total_wagered_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span> <span class="o">=</span> <span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0.0</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -303,33 +235,14 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_sessions</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">get_sessions</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">total_wagered_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">aggregate_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="n">aggregation</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plot</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;bet_size&#39;</span><span class="p">)</span>
+
+<span class="n">total_wagered_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span> <span class="o">=</span> <span class="s1">&#39;monthly&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>6.11999999999999</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -349,7 +262,9 @@ nb_path: "01_upcoming.ipynb"
     <span class="k">pass</span>
 <span class="k">def</span> <span class="nf">mean_simultaneous_tables</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># poker specific</span>
     <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">mean_rake_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">mean_rake_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># poker specific, casino games&#39; house edge doesn&#39;t function in the same way so is not comparable</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">mean_volume_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># (identical to mean rake paid per day) time-specific derivative of rake paid</span>
     <span class="k">pass</span>
 
 
@@ -379,50 +294,23 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mean_play_time_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="s2">&quot;&quot;</span>
-    <span class="c1"># used in Fiedler 2011 and 2013</span>
-    <span class="k">pass</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">median_bets_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">mean_volume_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">std_bets_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">num_bets_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">num_bets_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">active_days_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">mean_game_types_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
+
 
 <span class="k">def</span> <span class="nf">sawtooth_occurances</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># tricky business</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">num_activities_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+
+
+<span class="k">def</span> <span class="nf">mean_gambling_hours_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">mean_loss_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">total_wagered_weekend_ratio</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
@@ -432,17 +320,10 @@ nb_path: "01_upcoming.ipynb"
     <span class="k">pass</span>
 
 
-
-<span class="k">def</span> <span class="nf">mean_gambling_hours_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">num_activities_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">mean_loss_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
 <span class="k">def</span> <span class="nf">num_unique_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
-
 <span class="k">def</span> <span class="nf">num_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># duplicate of &#39;num_activities_played&#39;</span>
     <span class="k">pass</span>
 </pre></div>
