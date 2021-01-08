@@ -322,10 +322,13 @@ nb_path: "01_upcoming.ipynb"
 
 <span class="k">def</span> <span class="nf">num_activities_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
     <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">num_unique_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
 <span class="k">def</span> <span class="nf">num_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># duplicate of &#39;num_activities_played&#39;</span>
     <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">num_unique_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+    
+    
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;game_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 
     </div>

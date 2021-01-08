@@ -69,6 +69,9 @@ entries:
     - output: web,pdf
       title: Scholten 2020
       url: scholten2020.html
+    - output: web,pdf
+      title: Auer 2021
+      url: auer2021.html
     output: web
     title: Research Replications
   - folderitems:
