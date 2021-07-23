@@ -13,7 +13,7 @@ The gamba transaction analysis library is a collection of methods for applying a
 - compute behavioural measures
 - apply descriptive and comparative statistics
 - run machine learning methods
-- replicate entire paper's analyses on your data
+- replicate full academic studies on your data in minutes
 
 ## Getting Started
 

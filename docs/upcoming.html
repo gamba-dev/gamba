@@ -43,26 +43,36 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the measures module currently contains 10 or so unique measures</span>
-<span class="c1"># my WIP paper identifies around 40 measures used in published studies, time to get coding...</span>
-
-<span class="c1"># measures from paper</span>
-<span class="p">[</span><span class="s1">&#39;Total Amount Wagered&#39;</span><span class="p">,</span> <span class="s1">&#39;Net Loss&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Bets Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;Number Of Bets&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Bet Size&#39;</span><span class="p">,</span> <span class="s1">&#39;Percent Loss&#39;</span><span class="p">,</span> <span class="s1">&#39;Frequency Percent&#39;</span><span class="p">,</span> <span class="s1">&#39;Standard Deviation Of Bet Sizes&#39;</span><span class="p">,</span> <span class="s1">&#39;Daily Total Amount Wagered Trajectory&#39;</span><span class="p">,</span> <span class="s1">&#39;Theoretical Loss&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Number Of Sessions&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Playing Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Amount Paid&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Sessions Per Day In Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Playing Time Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Amount Won&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Rake Paid Per Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Simultaneous Tables&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Session Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Max 24H Deposit&#39;</span><span class="p">,</span> <span class="s1">&#39;Max 30D Deposit&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Odds Per Bet&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Stake Per Bet&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Amount Wagered Per Session&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Bets Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Loss Per Bet&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Playing Volume Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Max Bet Value&#39;</span><span class="p">,</span> <span class="s1">&#39;Min Bet Value&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Sessions Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Rake Paid Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Standard Deviation Of Bets Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Weekly Number Of Bets Trajectory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weekly Active Days Trajectory&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Game Types Per Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Sawtooth Occurances&#39;</span><span class="p">,</span> <span class="s1">&#39;Number Of Gambling Activities Played&#39;</span><span class="p">,</span> <span class="s1">&#39;Weekend Total Amount Wagered Ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;Weekend Number Of Bets Ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive Total Amount Won&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive Monies Wagered&#39;</span><span class="p">,</span> <span class="s1">&#39;Number Of Gambling Services Used&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Total Gambling Hours Per Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Wager-Session Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean Loss Per Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Number Of Different Games Played&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Number Of Games Played&#39;</span><span class="p">]</span>
-
-
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getmembers</span><span class="p">,</span> <span class="n">isfunction</span>
-<span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getmembers</span><span class="p">,</span> <span class="n">isfunction</span>
+<span class="kn">import</span> <span class="nn">gamba</span> <span class="k">as</span> <span class="nn">gb</span><span class="o">,</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="c1"># make porting over a little easier</span>
-<span class="n">check_measures_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">check_measure_data</span>
+<span class="n">check_measure_data</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">check_measure_data</span>
 <span class="n">get_sessions</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">get_sessions</span>
 <span class="n">aggregate_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="o">.</span><span class="n">aggregate_bets</span>
 
-<span class="n">player_bets</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">example_bets</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">generate_bets</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bet_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bet_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;payout_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bet</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">if</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">bet</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bet_size&#39;</span><span class="p">]</span> <span class="p">]</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;payout_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bet_time</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">bet_time</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bet_time&#39;</span><span class="p">]]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;decimal_odds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+    
+
+<span class="n">player_bets</span> <span class="o">=</span> <span class="n">generate_bets</span><span class="p">()</span>
 
 <span class="n">functions</span> <span class="o">=</span> <span class="n">getmembers</span><span class="p">(</span><span class="n">gb</span><span class="o">.</span><span class="n">measures</span><span class="p">,</span> <span class="n">isfunction</span><span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">player_bets</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -71,6 +81,18 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="output_wrapper">
 <div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>INFO:tensorflow:Enabling eager execution
+INFO:tensorflow:Enabling v2 tensorshape
+INFO:tensorflow:Enabling resource variables
+INFO:tensorflow:Enabling tensor equality
+INFO:tensorflow:Enabling control flow v2
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -100,77 +122,67 @@ nb_path: "01_upcoming.ipynb"
       <th>payout_size</th>
       <th>payout_time</th>
       <th>decimal_odds</th>
-      <th>house_edge</th>
-      <th>game_type</th>
-      <th>provider</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>2</td>
-      <td>2020-12-15 15:03:00</td>
-      <td>0.00</td>
-      <td>2020-12-15 15:03:49</td>
-      <td>2</td>
-      <td>2</td>
-      <td>coin flip</td>
-      <td>coin provider</td>
+      <td>19</td>
+      <td>2022-07-28 10:16:18.420458</td>
+      <td>38</td>
+      <td>2022-07-28 10:17:02.423591</td>
+      <td>2.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>2</td>
-      <td>2020-12-15 15:07:10</td>
-      <td>0.00</td>
-      <td>2020-12-15 15:07:28</td>
-      <td>2</td>
-      <td>2</td>
-      <td>coin flip</td>
-      <td>coin provider</td>
+      <td>4</td>
+      <td>2022-01-08 06:11:32.591243</td>
+      <td>0</td>
+      <td>2022-01-08 06:12:20.474972</td>
+      <td>2.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
-      <td>3</td>
-      <td>2020-12-15 15:08:31</td>
-      <td>5.88</td>
-      <td>2020-12-15 15:08:48</td>
-      <td>2</td>
-      <td>2</td>
-      <td>coin flip</td>
-      <td>coin provider</td>
+      <td>9</td>
+      <td>2022-05-20 01:48:35.387337</td>
+      <td>18</td>
+      <td>2022-05-20 01:49:15.730706</td>
+      <td>2.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
-      <td>5</td>
-      <td>2020-12-15 15:11:04</td>
-      <td>9.80</td>
-      <td>2020-12-15 15:11:25</td>
-      <td>2</td>
-      <td>2</td>
-      <td>coin flip</td>
-      <td>coin provider</td>
+      <td>17</td>
+      <td>2021-12-11 09:12:44.650649</td>
+      <td>34</td>
+      <td>2021-12-11 09:12:57.668124</td>
+      <td>2.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>1</td>
-      <td>5</td>
-      <td>2020-12-15 15:14:27</td>
-      <td>9.80</td>
-      <td>2020-12-15 15:15:25</td>
-      <td>2</td>
-      <td>2</td>
-      <td>coin flip</td>
-      <td>coin provider</td>
+      <td>8</td>
+      <td>2022-05-11 16:21:21.756946</td>
+      <td>16</td>
+      <td>2022-05-11 16:21:34.148072</td>
+      <td>2.0</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&#39;aggregate_bets&#39;, &lt;function aggregate_bets at 0x7fd3ddee30d0&gt;), (&#39;available_measures&#39;, &lt;function available_measures at 0x7fd3ddee2dc0&gt;), (&#39;calculate_braverman_measures&#39;, &lt;function calculate_braverman_measures at 0x7fd3ddee2d30&gt;), (&#39;calculate_labrie_measures&#39;, &lt;function calculate_labrie_measures at 0x7fd3de5fbca0&gt;), (&#39;check_measure_data&#39;, &lt;function check_measure_data at 0x7fd3ddee2e50&gt;), (&#39;create_measures_table&#39;, &lt;function create_measures_table at 0x7fd3e404b820&gt;), (&#39;duration&#39;, &lt;function duration at 0x7fd3e404b8b0&gt;), (&#39;frequency&#39;, &lt;function frequency at 0x7fd3e404b940&gt;), (&#39;frequency_raw&#39;, &lt;function frequency_raw at 0x7fd3e404baf0&gt;), (&#39;get_sessions&#39;, &lt;function get_sessions at 0x7fd3ddee2ee0&gt;), (&#39;intensity&#39;, &lt;function intensity at 0x7fd3e404ba60&gt;), (&#39;max_bet_size&#39;, &lt;function max_bet_size at 0x7fd3de5fb820&gt;), (&#39;mean_bet_size&#39;, &lt;function mean_bet_size at 0x7fd3e404a0d0&gt;), (&#39;mean_bets_per_day&#39;, &lt;function mean_bets_per_day at 0x7fd3e404be50&gt;), (&#39;mean_game_types_per_day&#39;, &lt;function mean_game_types_per_day at 0x7fd3de5fbc10&gt;), (&#39;mean_play_time_per_day&#39;, &lt;function mean_play_time_per_day at 0x7fd3e404bdc0&gt;), (&#39;mean_session_length&#39;, &lt;function mean_session_length at 0x7fd3e404bd30&gt;), (&#39;mean_sessions_per_day&#39;, &lt;function mean_sessions_per_day at 0x7fd3e404bca0&gt;), (&#39;mean_wagered_per_session&#39;, &lt;function mean_wagered_per_session at 0x7fd3de5fb430&gt;), (&#39;median_bet_size&#39;, &lt;function median_bet_size at 0x7fd3de5fb700&gt;), (&#39;median_bets_per_day&#39;, &lt;function median_bets_per_day at 0x7fd3e404bee0&gt;), (&#39;median_loss_per_bet&#39;, &lt;function median_loss_per_bet at 0x7fd3de5fb9d0&gt;), (&#39;median_odds&#39;, &lt;function median_odds at 0x7fd3de5fbaf0&gt;), (&#39;min_bet_size&#39;, &lt;function min_bet_size at 0x7fd3de5fb790&gt;), (&#39;net_loss&#39;, &lt;function net_loss at 0x7fd3de5fb8b0&gt;), (&#39;num_providers_used&#39;, &lt;function num_providers_used at 0x7fd3de5fbb80&gt;), (&#39;num_sessions&#39;, &lt;function num_sessions at 0x7fd3e404bb80&gt;), (&#39;number_of_bets&#39;, &lt;function number_of_bets at 0x7fd3e404b9d0&gt;), (&#39;percent_loss&#39;, &lt;function percent_loss at 0x7fd3de5fb940&gt;), (&#39;split_measures_table&#39;, &lt;function split_measures_table at 0x7fd3ddee3040&gt;), (&#39;standardise_measures_table&#39;, &lt;function standardise_measures_table at 0x7fd3ddee2f70&gt;), (&#39;std_bet_sizes&#39;, &lt;function std_bet_sizes at 0x7fd3e404a280&gt;), (&#39;std_bets_per_day&#39;, &lt;function std_bets_per_day at 0x7fd3e404bf70&gt;), (&#39;theoretical_loss&#39;, &lt;function theoretical_loss at 0x7fd3de5fba60&gt;), (&#39;total_play_time&#39;, &lt;function total_play_time at 0x7fd3e404bc10&gt;), (&#39;total_wagered&#39;, &lt;function total_wagered at 0x7fd3e404a040&gt;), (&#39;trajectory&#39;, &lt;function trajectory at 0x7fd3e404a1f0&gt;), (&#39;variability&#39;, &lt;function variability at 0x7fd3e404a160&gt;)]
+</pre>
+</div>
 </div>
 
 </div>
@@ -181,7 +193,77 @@ nb_path: "01_upcoming.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="New-Behavioural-Measures">New Behavioural Measures<a class="anchor-link" href="#New-Behavioural-Measures"> </a></h2>
+<h2 id="Systematic-Review-Measures">Systematic Review Measures<a class="anchor-link" href="#Systematic-Review-Measures"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">active_day_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
+    
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sawtooth_occurances</span><span class="p">(</span><span class="n">player_bets</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generic-Utility-Methods">Generic Utility Methods<a class="anchor-link" href="#Generic-Utility-Methods"> </a></h2>
 </div>
 </div>
 </div>
@@ -193,7 +275,7 @@ nb_path: "01_upcoming.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="k">def</span> <span class="nf">aggregate_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="s1">&#39;daily&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;bet_size&#39;</span><span class="p">):</span>
     
     <span class="s2">&quot;Gradient of a linear regression fitted to the sequence of an aggregated behavioural measure. Aggregation level can be daily, weekly, or monthly.&quot;</span>
@@ -219,9 +301,135 @@ nb_path: "01_upcoming.ipynb"
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="n">generic_trajectory</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAAD4CAYAAAD8Zh1EAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjQuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/Z1A+gAAAACXBIWXMAAAsTAAALEwEAmpwYAAAXwklEQVR4nO3de5BU9ZnG8e/rOLWOl9Rkwyhyk0SRXIwRqwVct3ZdRVFDAVqphIgmuiZEy+zGrUh2iYkm5qYhFzFsZKkYldBIFCdIVEIoL1GSaHYAdUTCZre8AMMKJhnQdcJt3v3jdDszTfd090x3nz6/eT5VU9N9+syZ1748Nuc5PcfcHRERSb7D4h5AREQqQ4EuIhIIBbqISCAU6CIigVCgi4gE4vC4fvGwYcN87Nixcf16EZFEWr9+/evu3pLvttgCfezYsbS1tcX160VEEsnMXil0m3a5iIgEQoEuIhIIBbqISCAU6CIigVCgi4gEouSjXMysAWgDtrv7tJzbDFgAXAS8BVzh7hsqOaiISNKt3Lid+Wu20NHZxYjmJuZOHc/MCSMrtv1yDlv8HLAZeEee2y4ExmW+JgF3ZL6LiAhRmM9rbadr/0EAtnd2Ma+1HaBioV7SLhczGwV8GPhRgVVmAEs88jTQbGbHV2RCEZEAzF+z5e0wz+raf5D5a7ZU7HeUug/9NuALQHeB20cCW3td35ZZ1oeZzTGzNjNr27VrVzlziogkWkdnV1nLB6JooJvZNGCnu6/vb7U8yw45c4a7L3b3lLunWlryfnJVRCRII5qbylo+EKW8Qz8LmG5mLwPLgXPMbGnOOtuA0b2ujwI6KjKhiEgA5k4dT1NjQ59lTY0NzJ06vmK/o2igu/s8dx/l7mOBWcBj7n5ZzmqrgE9YZDKw2913VGxKEZGEmzlhJN+65IOMbG7CgJHNTXzrkg/GdpRLH2Z2NYC7LwIeITpk8b+JDlu8siLTiYgEZOaEkRUN8FxlBbq7PwE8kbm8qNdyB66t5GAiIlIefVJURCQQCnQRkUAo0EVEAqFAFxEJhAJdRCQQCnQRkUAo0EVEAqFAFxEJhAJdRCQQCnQRkUAo0EVEAqFAFxEJhAJdRCQQCnQRkUAo0EVEAqFAFxEJhAJdRCQQCnQRkUAo0EVEAqFAFxEJhAJdRCQQCnQRkUAo0EVEAqFAFxEJRNFAN7MjzOx3ZvacmW0ys6/mWedsM9ttZs9mvm6szrgiIlLI4SWssxc4x93fNLNGYJ2ZrXb3p3PWe8rdp1V+RBERKUXRQHd3B97MXG3MfHk1hxIRkfKVtA/dzBrM7FlgJ7DW3Z/Js9qZmd0yq83sAwW2M8fM2sysbdeuXQOfWkREDlFSoLv7QXc/DRgFTDSzU3JW2QCc4O4fAn4ArCywncXunnL3VEtLy8CnFhGRQ5R1lIu7dwJPABfkLN/j7m9mLj8CNJrZsArNKCIiJSjlKJcWM2vOXG4CpgC/z1lnuJlZ5vLEzHb/WPFpRUSkoFKOcjkeuMfMGoiC+j53f8jMrgZw90XAR4BrzOwA0AXMypSpIiJSI6Uc5fI8MCHP8kW9Li8EFlZ2NBERKYc+KSoiEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiATi8GIrmNkRwJPAX2XWX+HuN+WsY8AC4CLgLeAKd99Q+XElaVZu3M78NVvo6OxiRHMTc6eOZ+aEkXGPVVA15k3afSDJfcyKBjqwFzjH3d80s0ZgnZmtdvene61zITAu8zUJuCPzXYawlRu3M6+1na79BwHY3tnFvNZ2gLp8cVRj3qTdB5Lsx6zoLhePvJm52pj58pzVZgBLMus+DTSb2fGVHVWSZv6aLW+/KLK69h9k/potMU3Uv2rMm7T7QJL9mJW0D93MGszsWWAnsNbdn8lZZSSwtdf1bZlluduZY2ZtZta2a9euAY4sSdHR2VXW8rhVY96k3QeS7MespEB394PufhowCphoZqfkrGL5fizPdha7e8rdUy0tLWUPK8kyormprOVxq8a8SbsPpEaP2cGDxdcZgLKOcnH3TuAJ4IKcm7YBo3tdHwV0DGYwSb65U8fT1NjQZ1lTYwNzp46PaaL+VWPepN0HUsXHbOtW+Pa34dRT4fbbB7etAko5yqUF2O/unWbWBEwBbs1ZbRXwWTNbTlSG7nb3HRWfVhIlWyAl5WiBasybtPtAKvyYdXbCihWQTsOvfgXuMHkyjB5d9EcHwtwP2TPSdwWzU4F7gAaid/T3ufvNZnY1gLsvyhy2uJDonftbwJXu3tbfdlOplLe19buKiEjy7N0LDz8chfhDD8G+fXDyyTB7Nlx6KZx00qA2b2br3T2V77ai79Dd/XlgQp7li3pdduDawQwpIpJY3d3w5JNRiK9YEb0zP+44uOaaKMhTKbB8VWNllXIcuoiI5NPeDkuXwr33RvvIjzoKLrkkCvFzz4XDaxuxCnQRkXJs3QrLlkXvxtvboaEBLrgAbr0Vpk+PQj0mCnQRkWKy5ebSpdGulWy5uXAhfPSjUCeHYSvQRUTyKVRufuUrFSk3q0GBLiKSVSfl5kAp0EVE6qzcHKhkTCkiUmlbt0YBvnRp3ZWbA6VAF5Gho7MTHnggCvHen9yss3JzoBToIhK2vXvhkUeiEH/44eh6nZebA6VAF5HwdHfDU09F5eb99/eUm1dfnYhyc6AU6CISjhdeiN6JL1uW6HJzoML+rxOR8G3bFpWb6TQ891xUbk6dmuhyc6AU6CKSPNlyM52GJ57oKTd/8IOo3Dz22LgnjIUCXUSSYe9eWL062qXy0EPR9XHjgiw3B0qBLiL1q7sb1q2LQjxbbh57bPDl5kAp0EWk/rzwQrQ7ZdkyePXVaD/4xRfDZZcNiXJzoHSviEh9KFRu3nLLkCs3B0qBLiLxUblZUQp0EaktlZtVo0AXkerLlpvpNNx3n8rNKlGgi0j1qNysKd2bIlJZhcrNb30LZsxQuVlFCnQRGbzdu3v+LK3Kzdgo0EVkYLLlZjoNP/+5ys06UDTQzWw0sAQYDnQDi919Qc46ZwMPAi9lFrW6+80VnVRE4te73Lz/fvjzn6N335/5TLRfXOVmrEp5h34A+Ly7bzCzY4D1ZrbW3V/MWe8pd59W+RFFJHabNvX8Wdre5ebs2TBlisrNOlH0UXD3HcCOzOU3zGwzMBLIDXQRCcn27T3n3FS5mQhl/W/VzMYCE4Bn8tx8ppk9B3QA17v7pjw/PweYAzBmzJiyhxWRKsuWm+k0PP54VG5OmqRyMyFKDnQzOxp4ALjO3ffk3LwBOMHd3zSzi4CVwLjcbbj7YmAxQCqV8oEOLSIVVKjcvOmmaJeKys3EKCnQzayRKMzT7t6ae3vvgHf3R8zsh2Y2zN1fr9yoIlIx3d3w61/3/Fna3uXm7NlwxhkqNxOolKNcDLgT2Ozu3yuwznDgNXd3M5sIHAb8saKTisjgqdwMWimP3lnA5UC7mT2bWfZFYAyAuy8CPgJcY2YHgC5glrtrl4pIPchXbp5/vsrNAJVylMs6oN9/e7n7QmBhpYYSkUFSuTkk6d9XIqHor9y89NLosgRNgS6SZCo3pRcFukgSbdoUvRNPp1Vuytv0qIskRaFy85vfhJkzVW6KAl2krhUqN2+/HT72MZWb0ocCXaTe7NvXc85NlZtSBgW6SD3IV262tKjclLIo0EXilFtuHnlkzzk3VW5KmfRsEam1bLmZTsOzz/YtN2fMgKOPjntCSSgFukgt7N4Nra3RLhWVm1IlCnSRaslXbp50kspNqRoFukglZcvNdBruu6+n3JwzJyo3J05UuSlVo0AXqYRsublsGbzySk+5mf3kZmNj3BPKEKBAFxmoQuXmN76hclNioUAXKYfKTaljCnSRYrLlZjoNq1ap3JS6pUAXyae/cvOyy/TJTalLCnSR3lRuSoIp0EVUbkogFOgyNOUrNydOVLkpiaZAl6GjULl5443RLhWVm5JwCnQJW3c3/OY3PX+W9k9/UrkpwVKgS5hefDEKcZWbMoQo0CUcHR0959zMlpvnnadyU4aMooFuZqOBJcBwoBtY7O4LctYxYAFwEfAWcIW7b6j8uAKwcuN25q/ZQkdnFyOam5g7dTwzJ4ysu21WU3beN157nY9tbePTW3/Lsf/5655yc8GCqNw87ri4R62aaj1mSXouJGnWWijlHfoB4PPuvsHMjgHWm9lad3+x1zoXAuMyX5OAOzLfpcJWbtzOvNZ2uvYfBGB7ZxfzWtsBBvxErsY2q+nB373E2u/czbznH2PK//yOIw7s45V3juD3n76O915/zZAoN6v1mCXpuZCkWWvlsGIruPuO7Lttd38D2Azk3lszgCUeeRpoNrPjKz6tMH/NlrefwFld+w8yf82WutpmxXV3w7p1cPXVnH32h/j3+29m8tZ2lp96PjMv/y5//+n/4Kp3TxsSYQ7Ve8wS8VzISNKstVLWPnQzGwtMAJ7JuWkksLXX9W2ZZTtyfn4OMAdgzJgxZY4qAB2dXWUtj2ubFfPiiz3n3MyUm4+/+wxWvv8fWDf2NA409DyF62LeGqnWY1bXz4UcSZq1Voq+Q88ys6OBB4Dr3H1P7s15fsQPWeC+2N1T7p5qaWkpb1IBYERzU1nL49rmoHR0wHe/C6efDh/4ANx6K7zvffCTn8BrrzH/8ht54sRUnzCPdd4YVOsxq7vnQj+SNGutlBToZtZIFOZpd2/Ns8o2YHSv66OAjsGPJ7nmTh1PU2NDn2VNjQ3MnTq+rrZZtt274a67okMKR42C66+PDi1csCD6aP7q1dFx40cfXR/zxqxa90GS7tskzVorpRzlYsCdwGZ3/16B1VYBnzWz5URl6G5331FgXRmEbNlTyWa/Gtssyb598Itf9Jxz8y9/KemTm7HNW0eqdR8k6b5N0qy1Yu6H7Bnpu4LZ3wJPAe1Ehy0CfBEYA+DuizKhvxC4gOiwxSvdva2/7aZSKW9r63cVCVH2k5vZP0ub/eTmrFk656ZICcxsvbun8t1W9B26u68j/z7y3us4cO3AxpMhIU+5ycyZ0W4UfXJTpCL0SVGpnuwnN9Np2Lix55ObX/96FOb65KZIRSnQpbL27IEHHohC/LHHhtQnN0XipkCXwctXbp54ov4srUiNKdBlYAqVm5/6VLRfXOWmSM0p0KU8KjdF6pYCXYrLLTcPOyw656bKTZG6okCX/Pbs6TnnZrbcPOMMlZsidUyBLj36KzcvvRROPjnuCUWkHwr0oU7lpkgwFOhDVbbcXLYMXn65p9ycPTv68I/KTZHEUaAPJfnKzfPOg699TeWmSAAU6KFTuSkyZCjQQ5QtN9NpWLWqp9z88pejXSoqN0WCpEAPhcpNkSFPgZ50mzdHu1Oy5WZTE1x8scpNkSFIgZ5EHR2wfHkU5Co3RSRDgZ4UKjdFpAgFej1TuSkiZVCg1xv3qNxcurSn3Bw2LCo3Z8+GSZNUbopIXgr0eqFyU0QGSYEeJ5WbIlJBCvRay5ab6TQ8+mhPuXnbbVG5OXx43BOKSEIp0GtB5aaI1IACvVpUbopIjRUNdDP7MTAN2Onup+S5/WzgQeClzKJWd7+5gjMmy+bNPefczJab2XNuqtwUkSoq5R363cBCYEk/6zzl7tMqMlESZcvNdBo2bOgpN2++OQrzY46Je0IRGQKKBrq7P2lmY2swS7L0Ljcfeyz641gqN0UkRpXah36mmT0HdADXu/umfCuZ2RxgDsCYMWMq9KtraN8+WLMm2i+eLTff8x740peic26OHx/3hCIyhFUi0DcAJ7j7m2Z2EbASGJdvRXdfDCwGSKVSXoHfXX3ZcjOdhp/+tKfcvOqqaL+4yk0RqRODDnR339Pr8iNm9kMzG+burw9227FSuSkiCTPoQDez4cBr7u5mNhE4DPjjoCeLw44dPefcVLkpIglTymGL9wJnA8PMbBtwE9AI4O6LgI8A15jZAaALmOXuydidAlG5+bOf9fxZ2u5uSKVUbopI4pRylMvHi9y+kOiwxuQoVG7ecEP0oR+VmyKSQEPnk6IqN0UkcOEHerbcXLYMXnqpp9ycPRvOP1/lpogEI8xAz1duTpkCX/2qyk0RCVY4gV6o3Pz+92HWLJWbIhK8ZAe6yk0RkbclL9DzlZvveldUbs6eDZMnq9wUkSEpeYF+111ReDc1wYwZ0REqKjdFRBIY6NOnwz33RCdQVrkpIvK25AX6sGHwiU/EPYWISN05LO4BRESkMhToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiASi6N9DN7MfA9OAne5+Sp7bDVgAXAS8BVzh7hsqPSjAyo3bmb9mCx2dXYxobmLu1PHMnDByyG1XJIn0eqi+Uk5wcTewEFhS4PYLgXGZr0nAHZnvFbVy43bmtbbTtf8gANs7u5jX2g4wqCdF0rYrkkR6PdRG0V0u7v4k8Kd+VpkBLPHI00CzmR1fqQGz5q/Z8vaTIatr/0Hmr9kypLYrkkR6PdRGJfahjwS29rq+LbPsEGY2x8zazKxt165dZf2Sjs6uspaHul2RJNLroTYqEeiWZ5nnW9HdF7t7yt1TLS0tZf2SEc1NZS0PdbsiSaTXQ21UItC3AaN7XR8FdFRgu33MnTqepsaGPsuaGhuYO3X8kNquSBLp9VAbpZSixawCPmtmy4nK0N3uvqMC2+0jW5xUuiVP2nZFkkivh9ow97x7R3pWMLsXOBsYBrwG3AQ0Arj7osxhiwuBC4gOW7zS3duK/eJUKuVtbUVXExGRXsxsvbun8t1W9B26u3+8yO0OXDvA2UREpEL0SVERkUAo0EVEAqFAFxEJhAJdRCQQRY9yqdovNtsFvBLLLy9sGPB63EOUIUnzJmlWSNa8SZoVkjVvPc56grvn/WRmbIFej8ysrdDhQPUoSfMmaVZI1rxJmhWSNW+SZgXtchERCYYCXUQkEAr0vhbHPUCZkjRvkmaFZM2bpFkhWfMmaVbtQxcRCYXeoYuIBEKBLiISCAU6YGajzexxM9tsZpvM7HNxz1SMmTWY2UYzeyjuWYoxs2YzW2Fmv8/cx2fGPVMhZvYvmefAC2Z2r5kdEfdMvZnZj81sp5m90GvZX5vZWjP7Q+b7O+OcMavArPMzz4PnzexnZtYc44h95Ju3123Xm5mb2bA4ZiuVAj1yAPi8u78PmAxca2bvj3mmYj4HbI57iBItAH7h7u8FPkSdzm1mI4F/BlLufgrQAMyKd6pD3E30p6p7+zfgUXcfBzyauV4P7ubQWdcCp7j7qcB/AfNqPVQ/7ubQeTGz0cB5wKu1HqhcCnTA3Xe4+4bM5TeIAqdu//K+mY0CPgz8KO5ZijGzdwB/B9wJ4O773L0z1qH6dzjQZGaHA0dShbNvDUaBk7bPAO7JXL4HmFnLmQrJN6u7/9LdD2SuPk10hrO6UOC+Bfg+8AUKnFqznijQc5jZWGAC8EzMo/TnNqInWHfMc5TiPcAu4K7MLqIfmdlRcQ+Vj7tvB75D9E5sB9HZt34Z71QlOS57lrDM92NjnqdU/wisjnuI/pjZdGC7uz8X9yylUKD3YmZHAw8A17n7nrjnycfMpgE73X193LOU6HDgdOAOd58A/B/1s0ugj8y+5xnAu4ERwFFmdlm8U4XJzG4g2tWZjnuWQszsSOAG4Ma4ZymVAj3DzBqJwjzt7q1xz9OPs4DpZvYysBw4x8yWxjtSv7YB29w9+y+eFUQBX4+mAC+5+y533w+0An8T80yleM3MjgfIfN8Z8zz9MrNPAtOA2V7fH4Q5keh/7s9lXm+jgA1mNjzWqfqhQAcy50W9E9js7t+Le57+uPs8dx/l7mOJCrvH3L1u30W6+/8CW80se3r3c4EXYxypP68Ck83syMxz4lzqtMDNsQr4ZObyJ4EHY5ylX2Z2AfCvwHR3fyvuefrj7u3ufqy7j8283rYBp2ee03VJgR45C7ic6N3us5mvi+IeKiD/BKTN7HngNOCb8Y6TX+ZfESuADUA70eujrj76nTlp+2+B8Wa2zcyuAm4BzjOzPxAdjXFLnDNmFZh1IXAMsDbzOlsU65C9FJg3UfTRfxGRQOgduohIIBToIiKBUKCLiARCgS4iEggFuohIIBToIiKBUKCLiATi/wGJDudqYH9kCgAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.11785714285714284</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">parse_version</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">N</span><span class="p">)),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">N</span><span class="p">))))[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="n">true_dens</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+             <span class="o">+</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">true_dens</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;input distribution&#39;</span><span class="p">)</span>
+<span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;kernel = &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;gaussian&#39;</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[ 0.43783922]
+ [-0.51755569]
+ [ 0.97089327]
+ [-0.22500346]
+ [-0.7263175 ]
+ [-0.15770164]
+ [ 6.27062417]
+ [ 5.7033379 ]
+ [ 4.40360843]
+ [ 5.43583463]
+ [ 5.62580374]
+ [ 5.49874224]
+ [ 6.05786905]
+ [ 4.73479873]
+ [ 6.40991222]
+ [ 7.12982237]
+ [ 6.36710014]
+ [ 6.02060833]
+ [ 3.92549412]
+ [ 4.6601087 ]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXoAAAD8CAYAAAB5Pm/hAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjQuMiwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8rg+JYAAAACXBIWXMAAAsTAAALEwEAmpwYAAA+Z0lEQVR4nO3dd3ic5Zno/+89Mxp1WZJtucm9YAy4IWxjmo3pcHAKSUyySSAHWE5Csrv5pbB7Tja7yZ5NzpWcsNlr2cMhpJ6QEEpInEDAlBAwzZaxcS+yLFuyZPU2kqbfvz9GErItWyPNSFN0f65LtmbeMs8rje553vtpoqoYY4xJX45EF8AYY8zoskBvjDFpzgK9McakOQv0xhiT5izQG2NMmrNAb4wxaS6qQC8iN4nIIRGpEJEHz7PfZSISEpE7hnusMcaY0TFkoBcRJ/AwcDOwBLhTRJacY7//Bbw43GONMcaMnmhq9KuAClWtVFU/8ASwcZD9vgg8AzSM4FhjjDGjxBXFPjOA6gGPa4DVA3cQkRnAh4FrgcuGc+yAc9wH3AeQm5t76eLFi6MomjHGGIAdO3Y0qerkwbZFE+hlkOfOnDfh34Cvq2pI5LTdozk28qTqo8CjAGVlZVpeXh5F0YwxxgCIyPFzbYsm0NcAMwc8LgVqz9inDHiiN8hPAm4RkWCUxxpjjBlF0QT67cBCEZkLnAQ2AZ8cuIOqzu37XkR+BvxRVX8nIq6hjjXGGDO6hgz0qhoUkQeI9KZxAj9R1X0icn/v9keGe2x8im6MMSYakozTFA+Wow8EAtTU1OD1ehNUKpMssrKyKC0tJSMjI9FFMSZpiMgOVS0bbFs0qZukUFNTQ35+PnPmzOGMBl8zjqgqzc3N1NTUMHfu3KEPMMakzhQIXq+XiRMnWpAf50SEiRMn2p2dMcOQMoEesCBvAHsfGDNcKRXojTHGDJ8F+ihVVVVx8cUXj+lr5uXlxXyOf/qnf+JnP/tZ7IUZofLycr70pS+N+Pg5c+bErzDGjFMp0xibyoLBIC7X+PxRl5WVUVY2aEcAY8wYsRr9CFRWVrJixQq2b9/O0aNHuemmm7j00ku56qqrOHjwIAB33XUXX/7yl1m/fj1f//rXueuuu/jSl77E2rVrmTdvHk8//XT/+b73ve9x2WWXsXTpUr75zW/Gtax5eXlkZ2cDsH37dpYuXcrll1/OV7/61f47lKqqKq666ipWrlzJypUreeuttwB47bXXuO222/rP9cADD/TfHTz44IMsWbKEpUuX8pWvfAWAp556iosvvphly5Zx9dVXn3WObdu2sXbtWlasWMHatWs5dOgQAD/72c/4yEc+wk033cTChQv52te+1v+akycPOnWHMWYYUrKaee9/tozKeX/0+eIh9zl06BCbNm3ipz/9KcuXL2fDhg088sgjLFy4kHfffZfPf/7zvPrqqwAcPnyYl19+GafTyV133UVdXR1bt27l4MGD3H777dxxxx1s2bKFI0eOsG3bNlSV22+/nddff70/UA7mqquuorOz86znv//973Pddded9lxfEAa4++67efTRR1m7di0PPvjB0gAlJSW89NJLZGVlceTIEe68807ON9dQS0sLzz77LAcPHkREaGtrA+Bb3/oWL774IjNmzOh/bqDFixfz+uuv43K5ePnll/mHf/gHnnnmGQB27drFzp07yczM5IILLuCLX/wiM2fOZPv27ecshzEmOikZ6BOlsbGRjRs38swzz3DRRRfh8Xh46623+NjHPta/j8/n6//+Yx/7GE6ns//xhz70IRwOB0uWLKG+vh6ALVu2sGXLFlasWAGAx+PhyJEj5w30b7zxxrDL3tbWRmdnJ2vXrgXgk5/8JH/84x+ByGC0Bx54gF27duF0Ojl8+PB5z1VQUEBWVhb33HMPt956a3+N/YorruCuu+7i4x//OB/5yEfOOq69vZ3PfvazHDlyBBEhEAj0b9uwYQMTJkwAYMmSJRw/fpyZM2eedQ5jzPClZKCPpuY9GiZMmMDMmTN58803ueiiiwiHwxQWFrJr165B98/NzT3tcWZmZv/3fSOSVZW///u/56//+q+jLsdwavRnvt5gHnroIaZMmcL7779POBwmKysLAJfLRTgc7t+vr++6y+Vi27ZtvPLKKzzxxBP8x3/8B6+++iqPPPII7777Ls899xzLly8/6+fyjW98g/Xr1/Pss89SVVXFunXr+rcN/Nk4nU6CweCQPwdjTHRSMtAnitvt5ne/+x033ngjeXl5fPKTn2Tu3Lk89dRTfOxjH0NV2b17N8uWLYv6nDfeeCPf+MY3+NSnPkVeXh4nT54kIyODkpKScx4zkhp9UVER+fn5vPPOO6xZs4Ynnniif1t7ezulpaU4HA5+/vOfEwqFAJg9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
+"
+>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -240,95 +448,6 @@ nb_path: "01_upcoming.ipynb"
     <span class="k">return</span> <span class="n">aggregate_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span><span class="o">=</span><span class="n">aggregation</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plot</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;bet_size&#39;</span><span class="p">)</span>
 
 <span class="n">total_wagered_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">,</span> <span class="n">aggregation</span> <span class="o">=</span> <span class="s1">&#39;monthly&#39;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">total_paid</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># this is a poker-specific measure that is functionally identical to net_loss</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">mean_rake_per_hour</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># mercantile game specific</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">mean_simultaneous_tables</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># poker specific</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">mean_rake_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># poker specific, casino games&#39; house edge doesn&#39;t function in the same way so is not comparable</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">mean_volume_per_day</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># (identical to mean rake paid per day) time-specific derivative of rake paid</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># this is functionally identical to -net_loss</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">positive_total_amount_won</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># conditional duplicate of &#39;total_amount_won&#39;</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">positive_amount_wagered</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># potentially function-identical variant</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">mean_wager_session_length</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># dragicevic variant, not identical to &#39;mean_session_length&#39; but difficult to generalise</span>
-    <span class="k">pass</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">num_bets_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">active_days_trajectory</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-
-<span class="k">def</span> <span class="nf">sawtooth_occurances</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># tricky business</span>
-    <span class="k">pass</span>
-
-
-
-<span class="k">def</span> <span class="nf">mean_gambling_hours_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">mean_loss_per_month</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">total_wagered_weekend_ratio</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">num_bets_weekend_ratio</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">num_activities_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    <span class="k">pass</span>
-<span class="k">def</span> <span class="nf">num_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span> <span class="c1"># duplicate of &#39;num_activities_played&#39;</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span> <span class="nf">num_unique_games_played</span><span class="p">(</span><span class="n">player_bets</span><span class="p">):</span>
-    
-    
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">player_bets</span><span class="p">[</span><span class="s1">&#39;game_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 </pre></div>
 
     </div>
