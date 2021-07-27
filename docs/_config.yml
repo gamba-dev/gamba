@@ -59,17 +59,8 @@ defaults:
 sidebars:
 - home_sidebar
 
-theme: jekyll-theme-cayman
-
-
 plugins:
-  - jekyll-scholar
-  - relativizer
-
-
-scholar:
-  style: custom_citation_style
-  sort_by: none
-  source: ../
-
+    - jekyll-remote-theme
+    
+remote_theme: fastai/nbdev-jekyll-theme
 baseurl: /gamba/

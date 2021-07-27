@@ -15,21 +15,15 @@ entries:
     - output: web,pdf
       title: Upcoming Features
       url: upcoming.html
-    output: web
-    title: Welcome
-  - folderitems:
     - output: web,pdf
-      title: Beginner
+      title: Beginner Tutorial
       url: beginner.html
     - output: web,pdf
-      title: Intermediate
+      title: Intermediate Tutorial
       url: intermediate.html
     - output: web,pdf
-      title: Advanced
+      title: Advanced Tutorial
       url: advanced.html
-    output: web
-    title: Tutorials
-  - folderitems:
     - output: web,pdf
       title: Data
       url: data.html
@@ -45,46 +39,31 @@ entries:
     - output: web,pdf
       title: Machine Learning
       url: machine_learning.html
-    output: web
-    title: Modules
-  - folderitems:
     - output: web,pdf
-      title: Overview
+      title: Replicating Research
       url: replications.html
     - output: web,pdf
-      title: LaBrie 2007
+      title: LaBrie et al 2007
       url: labrie2007.html
     - output: web,pdf
-      title: LaBrie 2008
+      title: LaBrie et al 2008
       url: labrie2008.html
     - output: web,pdf
-      title: LaPlante 2009
+      title: LaPlante et al 2009
       url: laplante2009.html
     - output: web,pdf
-      title: Braverman 2010
+      title: Braverman and Shaffer 2010
       url: braverman2010.html
     - output: web,pdf
       title: Philander 2014
       url: philander2014.html
     - output: web,pdf
-      title: Scholten 2020
+      title: Inside the Decentralised Casino
       url: scholten2020.html
     - output: web,pdf
       title: Auer 2021
       url: auer2021.html
     output: web
-    title: Research Replications
-  - folderitems:
-    - external_url: http://www.thetransparencyproject.org/index.html
-      output: web,pdf
-      title: The Transparency Project
-    - external_url: https://www.greo.ca/Modules/EvidenceCentre/Search.aspx
-      output: web,pdf
-      title: GREO Evidence Center
-    - external_url: https://osf.io/8bfyj/
-      output: web,pdf
-      title: DGApp Crypto Transactions
-    output: web
-    title: Public Data Repositories
+    title: gamba
   output: web
   title: Sidebar

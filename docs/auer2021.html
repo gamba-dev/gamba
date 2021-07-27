@@ -81,7 +81,7 @@ nb_path: "37_auer2021.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The second parameter in the <a href="/gamba/data.html#read_csv"><code>read_csv</code></a> method is any variables in the data which are datetime values (see Pandas read_csv for details). With the player bets loaded, the next step is to create a measures table, which can be done using the <a href="/gamba/measures.html#create_measures_table"><code>create_measures_table</code></a> method from the measures module. As this paper uses horse race betting data, there are some variables which are context specific (online only and horseraces only). See the table below for the measures described in the paper, and the names of those computed in this notebook in their place.</p>
+<p>The second parameter in the <code>read_csv</code> method is any variables in the data which are datetime values (see Pandas read_csv for details). With the player bets loaded, the next step is to create a measures table, which can be done using the <code>create_measures_table</code> method from the measures module. As this paper uses horse race betting data, there are some variables which are context specific (online only and horseraces only). See the table below for the measures described in the paper, and the names of those computed in this notebook in their place.</p>
 
 </div>
 </div>
@@ -97,31 +97,31 @@ nb_path: "37_auer2021.ipynb"
 <tbody>
 <tr>
 <td>amount of money bet</td>
-<td><a href="/gamba/measures.html#total_wagered"><code>total_wagered</code></a></td>
+<td><code>total_wagered</code></td>
 </tr>
 <tr>
 <td>amount of money bet online</td>
-<td>n/a (context specific derivative of <a href="/gamba/measures.html#total_wagered"><code>total_wagered</code></a>)</td>
+<td>n/a (context specific derivative of <code>total_wagered</code>)</td>
 </tr>
 <tr>
 <td>amount of money bet on Norwegian horseraces</td>
-<td>n/a (context specific derivative of <a href="/gamba/measures.html#total_wagered"><code>total_wagered</code></a>)</td>
+<td>n/a (context specific derivative of <code>total_wagered</code>)</td>
 </tr>
 <tr>
 <td>amount of money won</td>
-<td><a href="/gamba/measures.html#net_loss"><code>net_loss</code></a> (functionally identical)</td>
+<td><code>net_loss</code> (functionally identical)</td>
 </tr>
 <tr>
 <td>number of playing days</td>
-<td><a href="/gamba/measures.html#frequency_raw"><code>frequency_raw</code></a></td>
+<td><code>frequency_raw</code></td>
 </tr>
 <tr>
 <td>number of games played</td>
-<td><a href="/gamba/measures.html#number_of_bets"><code>number_of_bets</code></a> (table in paper uses 'number of tickets')</td>
+<td><code>number_of_bets</code> (table in paper uses 'number of tickets')</td>
 </tr>
 <tr>
 <td>bet conscious play</td>
-<td>n/a (context specific derivative of <a href="/gamba/measures.html#total_wagered"><code>total_wagered</code></a>)</td>
+<td>n/a (context specific derivative of <code>total_wagered</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -131,7 +131,7 @@ nb_path: "37_auer2021.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To create the measures table, the measures used can be defined as a list of names of methods in the measures module. This is then passed to the <a href="/gamba/measures.html#create_measures_table"><code>create_measures_table</code></a> method which computes them across the player bets.</p>
+<p>To create the measures table, the measures used can be defined as a list of names of methods in the measures module. This is then passed to the <code>create_measures_table</code> method which computes them across the player bets.</p>
 
 </div>
 </div>

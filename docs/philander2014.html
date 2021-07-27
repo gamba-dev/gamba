@@ -26,6 +26,24 @@ nb_path: "35_philander2014.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>INFO:tensorflow:Enabling eager execution
+INFO:tensorflow:Enabling v2 tensorshape
+INFO:tensorflow:Enabling resource variables
+INFO:tensorflow:Enabling tensor equality
+INFO:tensorflow:Enabling control flow v2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -94,7 +112,21 @@ nb_path: "35_philander2014.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Logistic-Regressions">Logistic Regressions<a class="anchor-link" href="#Logistic-Regressions"> </a></h2><p>The machine learning module has wrappers for two logistic regression functions which can be used here. As with other machine learning methods in the gamba library, they return predictions of the variables for the test_measures so that performance metrics can be computed.</p>
+<h2 id="Logistic-Regressions">Logistic Regressions<a class="anchor-link" href="#Logistic-Regressions"> </a></h2><p>The machine learning module has wrappers for two logistic regression functions which can be used here. As with other machine learning methods in the gamba library, they return both the actual test labels and the predicted labels so that performance metrics can be computed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='throughout this page the naming convention is an abbreviated version of the name for the test labels used, and the same name with a &#8217;p&#8217; on the end to denote the predicted labels.' %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='you&#8217;ll also notice a train_test_split parameter of 0.696 as a parameter to all of the methods, this is just to make sure that exactly the same train test split happens as in the paper (it defaults to 0.7)' %}</p>
 
 </div>
 </div>
@@ -127,6 +159,7 @@ nb_path: "35_philander2014.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Framing the self_exclude label (0 or 1) as a regression problem means creating a neural network which returns a continuous label. The classification version of the neural network used in the original analysis uses an identical network topology but passes two strings as values instead of a 1 or 0. This should in theory have no substantial difference on the performance of the network (given the sample size and identical architectures).</p>
+<p>By contrast, the gamba library's neural network methods have subtly different topologies for classification and regression as described in <a href="http://faculty.neu.edu.cn/yury/AAI/Textbook/Deep%20Learning%20with%20Python.pdf">Deep Learning with Python</a>, which are used here.</p>
 
 </div>
 </div>
@@ -206,6 +239,13 @@ nb_path: "35_philander2014.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally lets present the performance of each of the machine learning techniques using a number of metrics. Not all of the metrics apply to all of the methods, but it's a good way to see roughly how they compare.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -214,18 +254,18 @@ nb_path: "35_philander2014.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_results</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">,</span> <span class="n">log_rp</span><span class="p">,</span> <span class="n">log_r</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;Lasso Logistic Regression&#39;</span><span class="p">,</span> <span class="n">lasso_lp</span><span class="p">,</span> <span class="n">lasso_l</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;NN Regression&#39;</span><span class="p">,</span> <span class="n">nn_rp</span><span class="p">,</span> <span class="n">nn_r</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;NN Classification&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">nn_c</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM eps-Regression&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">svm_e</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM c-Classification&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">svm_c</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM one-Classification&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">svm_o</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;RF Regression&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">rf_r</span><span class="p">),</span>
-    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;RF Classification&#39;</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">rf_c</span><span class="p">)</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">,</span> <span class="n">log_r</span><span class="p">,</span> <span class="n">log_rp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;Lasso Logistic Regression&#39;</span><span class="p">,</span> <span class="n">lasso_l</span><span class="p">,</span> <span class="n">lasso_lp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;NN Regression&#39;</span><span class="p">,</span> <span class="n">nn_r</span><span class="p">,</span> <span class="n">nn_rp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;NN Classification&#39;</span><span class="p">,</span> <span class="n">nn_c</span><span class="p">,</span> <span class="n">nn_cp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM eps-Regression&#39;</span><span class="p">,</span> <span class="n">svm_e</span><span class="p">,</span> <span class="n">svm_ep</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM c-Classification&#39;</span><span class="p">,</span> <span class="n">svm_c</span><span class="p">,</span> <span class="n">svm_cp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;SVM one-Classification&#39;</span><span class="p">,</span> <span class="n">svm_o</span><span class="p">,</span> <span class="n">svm_op</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;RF Regression&#39;</span><span class="p">,</span> <span class="n">rf_r</span><span class="p">,</span> <span class="n">rf_rp</span><span class="p">),</span>
+    <span class="n">gb</span><span class="o">.</span><span class="n">machine_learning</span><span class="o">.</span><span class="n">compute_performance</span><span class="p">(</span><span class="s1">&#39;RF Classification&#39;</span><span class="p">,</span> <span class="n">rf_c</span><span class="p">,</span> <span class="n">rf_cp</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="n">all_results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span>
+<span class="n">all_results_df</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">all_results_df</span><span class="p">)</span>
 </pre></div>
 
@@ -238,58 +278,123 @@ nb_path: "35_philander2014.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-8-fc86f1fc89ad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>test_labels <span class="ansi-blue-fg">=</span> test_measures<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;self_exclude&#39;</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> all_results = [
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     gb<span class="ansi-blue-fg">.</span>machine_learning<span class="ansi-blue-fg">.</span>compute_performance<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Logistic Regression&#39;</span><span class="ansi-blue-fg">,</span> test_labels<span class="ansi-blue-fg">,</span> log_r<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     gb<span class="ansi-blue-fg">.</span>machine_learning<span class="ansi-blue-fg">.</span>compute_performance<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Lasso Logistic Regression&#39;</span><span class="ansi-blue-fg">,</span> test_labels<span class="ansi-blue-fg">,</span> lasso_l<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>     gb<span class="ansi-blue-fg">.</span>machine_learning<span class="ansi-blue-fg">.</span>compute_performance<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;NN Regression&#39;</span><span class="ansi-blue-fg">,</span> test_labels<span class="ansi-blue-fg">,</span> nn_r<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
 
-<span class="ansi-red-fg">NameError</span>: name &#39;test_measures&#39; is not defined</pre>
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sensitivity</th>
+      <th>specificity</th>
+      <th>accuracy</th>
+      <th>precision</th>
+      <th>auc</th>
+      <th>odds_ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Logistic Regression</th>
+      <td>0.080</td>
+      <td>0.901</td>
+      <td>0.646</td>
+      <td>0.267</td>
+      <td>0.490</td>
+      <td>0.791</td>
+    </tr>
+    <tr>
+      <th>Lasso Logistic Regression</th>
+      <td>0.094</td>
+      <td>0.972</td>
+      <td>0.683</td>
+      <td>0.625</td>
+      <td>0.533</td>
+      <td>3.646</td>
+    </tr>
+    <tr>
+      <th>NN Regression</th>
+      <td>0.431</td>
+      <td>0.545</td>
+      <td>0.509</td>
+      <td>0.306</td>
+      <td>0.488</td>
+      <td>0.910</td>
+    </tr>
+    <tr>
+      <th>NN Classification</th>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.640</td>
+      <td>NaN</td>
+      <td>0.500</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>SVM eps-Regression</th>
+      <td>0.020</td>
+      <td>0.991</td>
+      <td>0.683</td>
+      <td>0.500</td>
+      <td>0.505</td>
+      <td>2.180</td>
+    </tr>
+    <tr>
+      <th>SVM c-Classification</th>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.646</td>
+      <td>NaN</td>
+      <td>0.500</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>SVM one-Classification</th>
+      <td>0.462</td>
+      <td>0.505</td>
+      <td>0.491</td>
+      <td>0.308</td>
+      <td>0.483</td>
+      <td>0.873</td>
+    </tr>
+    <tr>
+      <th>RF Regression</th>
+      <td>0.373</td>
+      <td>0.755</td>
+      <td>0.634</td>
+      <td>0.413</td>
+      <td>0.564</td>
+      <td>1.825</td>
+    </tr>
+    <tr>
+      <th>RF Classification</th>
+      <td>0.241</td>
+      <td>0.869</td>
+      <td>0.658</td>
+      <td>0.481</td>
+      <td>0.555</td>
+      <td>2.106</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
 </div>
-</div>
 
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Visualisations">Visualisations<a class="anchor-link" href="#Visualisations"> </a></h1>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">plot_individual</span><span class="p">(</span><span class="n">measures_table</span><span class="p">,</span> <span class="n">player_id</span><span class="p">):</span>
-    
-    <span class="n">measure_cols</span> <span class="o">=</span> <span class="n">measures_table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="n">player</span> <span class="o">=</span> <span class="n">measures_table</span><span class="p">[</span><span class="n">measures_table</span><span class="p">[</span><span class="s1">&#39;player_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">player_id</span><span class="p">]</span>
-    
-    <span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">measure_cols</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-        <span class="n">hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">measures_table</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">player</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">hist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="n">label</span><span class="o">=</span><span class="n">measure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
-<span class="n">plot_individual</span><span class="p">(</span><span class="n">philander_data</span><span class="p">,</span> <span class="mi">1324368</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 

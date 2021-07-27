@@ -1,34 +1,23 @@
 {
-  "Welcome": {
-  	"Overview": "/",
+  "gamba": {
+    "Overview": "/",
     "About": "about.html",
-    "Upcoming Features": "upcoming.html"
-  },
-  "Tutorials": {
-  	"Beginner": "beginner.html",
-  	"Intermediate": "intermediate.html",
-  	"Advanced": "advanced.html"
-  },
-  "Modules": {
-  	"Data": "data.html",
-  	"Measures": "measures.html",
-  	"Statistics": "statistics.html",
-  	"Labelling": "labelling.html",
-  	"Machine Learning": "machine_learning.html"
-  },
-  "Research Replications": {
-  	"Overview": "replications.html",
-  	"LaBrie 2007": "labrie2007.html",
-  	"LaBrie 2008": "labrie2008.html",
-  	"LaPlante 2009": "laplante2009.html",
-  	"Braverman 2010": "braverman2010.html",
-  	"Philander 2014": "philander2014.html",
-    "Scholten 2020": "scholten2020.html",
+    "Upcoming Features": "upcoming.html",
+    "Beginner Tutorial": "beginner.html",
+    "Intermediate Tutorial": "intermediate.html",
+    "Advanced Tutorial": "advanced.html",
+    "Data": "data.html",
+    "Measures": "measures.html",
+    "Statistics": "statistics.html",
+    "Labelling": "labelling.html",
+    "Machine Learning": "machine_learning.html",
+    "Replicating Research": "replications.html",
+    "LaBrie et al 2007": "labrie2007.html",
+    "LaBrie et al 2008": "labrie2008.html",
+    "LaPlante et al 2009": "laplante2009.html",
+    "Braverman and Shaffer 2010": "braverman2010.html",
+    "Philander 2014": "philander2014.html",
+    "Inside the Decentralised Casino": "scholten2020.html",
     "Auer 2021": "auer2021.html"
-  },
-  "Public Data Repositories": {
-  	"The Transparency Project": "http://www.thetransparencyproject.org/index.html",
-  	"GREO Evidence Center": "https://www.greo.ca/Modules/EvidenceCentre/Search.aspx",
-    "DGApp Crypto Transactions": "https://osf.io/8bfyj/"
   }
 }
