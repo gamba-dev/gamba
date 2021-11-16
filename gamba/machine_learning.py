@@ -433,6 +433,8 @@ def plot_cluster_sizes(model):
     return plt
 
 # Cell
+import matplotlib.pyplot as plt, numpy as np
+from scipy.cluster import hierarchy
 def plot_agglomeration_dendrogram(model, dt_cutoff=None, **kwargs):
     "Create a dendrogram visualising a heirarchical clustering method (agglomerative clustering). A horisontal line can be added using the dt_cutoff parameter to visualise the number of clusters at a given distance threshold."
 
@@ -456,7 +458,7 @@ def plot_agglomeration_dendrogram(model, dt_cutoff=None, **kwargs):
     # Plot the corresponding dendrogram
     plt.figure(figsize=(12, 4))
     plt.title("Hierarchical Clustering dendrogram")
-    sch.dendrogram(linkage_matrix, truncate_mode="level", p=3)
+    hierarchy.dendrogram(linkage_matrix, truncate_mode="level", p=3)
     if dt_cutoff != None:
         plt.plot(list(plt.xlim()), [dt_cutoff, dt_cutoff], linestyle="--", color="grey")
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")

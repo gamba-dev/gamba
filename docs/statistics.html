@@ -31,12 +31,9 @@ nb_path: "22_statistics.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>INFO:tensorflow:Enabling eager execution
-INFO:tensorflow:Enabling v2 tensorshape
-INFO:tensorflow:Enabling resource variables
-INFO:tensorflow:Enabling tensor equality
-INFO:tensorflow:Enabling control flow v2
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2021-11-16 09:13:01.679043: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-16 09:13:01.679059: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre>
 </div>
 </div>
@@ -57,6 +54,13 @@ INFO:tensorflow:Enabling control flow v2
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Methods">Methods<a class="anchor-link" href="#Methods"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The most basic statistics function is the <a href="statistics.html#descriptive_table"><code>descriptive_table</code></a> function, which returns a dataframe holding mean, median, standard deviation, and inter-quartile ranges of each of the measures in the table.</p>
+
 </div>
 </div>
 </div>
@@ -92,6 +96,13 @@ INFO:tensorflow:Enabling control flow v2
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With basic descriptive statistics computed, the next logical step is to compute a number of deeper statistical tests regarding the normality of each of the measure's distributions (<a href="statistics.html#ks_test"><code>ks_test</code></a>), and the correlations between the (potentially non-normally distributed) measures (<a href="statistics.html#spearmans_r"><code>spearmans_r</code></a>).</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -135,9 +146,9 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cohens_d" class="doc_header"><code>cohens_d</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L69" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cohens_d</code>(<strong><code>measures_table</code></strong>, <strong><code>label</code></strong>)</p>
+<h4 id="spearmans_r" class="doc_header"><code>spearmans_r</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>spearmans_r</code>(<strong><code>measures_table</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Calculates Cohen's d value between the behavioural measures of two groups of players. Groups are distinguished using a label column which is either 1 (in group) or 0 (not in group). For example, the column 'in_top5' may represent whether or not a player is in the top 5 % of players by total amount wagered, and would be 1 or 0 for the top 5 and remaining 95 percent respectively.</p>
+<p>Calculates the coefficients (nonparametric Spearman's r) between a collection of behavioural measures. The upper-right diagonal of the resulting matrix is discarded (symmetric).</p>
 
 </div>
 
@@ -156,6 +167,19 @@ INFO:tensorflow:Enabling control flow v2
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Labeled-Measures-Table-Statistics">Labeled Measures Table Statistics<a class="anchor-link" href="#Labeled-Measures-Table-Statistics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The statistics module also contains methods for computing statistics between groups as indicated by a label column in the measures table. {% cite labrie2007assessing %}</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -167,9 +191,9 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="spearmans_r" class="doc_header"><code>spearmans_r</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L117" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>spearmans_r</code>(<strong><code>measures_table</code></strong>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="cohens_d" class="doc_header"><code>cohens_d</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cohens_d</code>(<strong><code>measures_table</code></strong>, <strong><code>label</code></strong>)</p>
 </blockquote>
-<p>Calculates the coefficients (nonparametric Spearman's r) between a collection of behavioural measures. The upper-right diagonal of the resulting matrix is discarded (symmetric).</p>
+<p>Calculates Cohen's d value between the behavioural measures of two groups of players. Groups are distinguished using a label column which is either 1 (in group) or 0 (not in group). For example, the column 'in_top5' may represent whether or not a player is in the top 5 % of players by total amount wagered, and would be 1 or 0 for the top 5 and remaining 95 percent respectively.</p>
 
 </div>
 
@@ -220,19 +244,6 @@ INFO:tensorflow:Enabling control flow v2
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Labeled-Measures-Table-Statistics">Labeled Measures Table Statistics<a class="anchor-link" href="#Labeled-Measures-Table-Statistics"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The statistics module also contains methods for computing statistics between groups as indicated by a label column in the measures table. {% cite labrie2007assessing %}</p>
-
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -273,7 +284,7 @@ INFO:tensorflow:Enabling control flow v2
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/gamba/statistics.html"><code>statistics</code></a> module has some utility methods which may not be directly useful for an analysis but can be used to do simple tasks like join measures tables.</p>
+<p>The <a href="statistics.html"><code>statistics</code></a> module has some utility methods which may not be directly useful for an analysis but can be used to do simple tasks like join measures tables.</p>
 
 </div>
 </div>
@@ -324,6 +335,153 @@ INFO:tensorflow:Enabling control flow v2
 <h4 id="color_matrix" class="doc_header"><code>color_matrix</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L381" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>color_matrix</code>(<strong><code>matrix</code></strong>, <strong><code>cmap</code></strong>)</p>
 </blockquote>
 <p>Creates a shaded matrix based on a color map.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="k">def</span> <span class="nf">standardise_measures_table</span><span class="p">(</span><span class="n">measures_table</span><span class="p">):</span>
+    <span class="s2">&quot;Standardises all measures columns in a measures table by applying the scipy.stats.zscore function to each column. This is useful for column-wise comparisons and some clustering methods.&quot;</span>
+    <span class="n">colnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">measures_table</span><span class="o">.</span><span class="n">columns</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">standardised_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">standardised_table</span><span class="p">[</span><span class="s2">&quot;player_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">measures_table</span><span class="p">[</span><span class="s2">&quot;player_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">colnames</span><span class="p">:</span>
+        <span class="n">standardised_table</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">measures_table</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">standardised_table</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Plotting">Plotting<a class="anchor-link" href="#Plotting"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="plot_measure_hist" class="doc_header"><code>plot_measure_hist</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L415" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_measure_hist</code>(<strong><code>measures</code></strong>, <strong><code>name</code></strong>)</p>
+</blockquote>
+<p>Plots a histogram for a named measure from a dataframe of measures.
+Args:
+    measures (Dataframe): Collection of behavioural measures for a cohort of players.
+    name (String): The name of the measure to plot, e.g. 'duration'.
+Returns:
+    Matplotlib.pyplot plot object.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="plot_measure_centile" class="doc_header"><code>plot_measure_centile</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L445" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_measure_centile</code>(<strong><code>measures</code></strong>, <strong><code>name</code></strong>, <strong><code>top_heavy</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Plots centiles of a single named measure from a dataframe of measures.
+Args:
+    measures (Dataframe): Collection of behavioural measures for a cohort of players.
+    name (String): The name of the measure to plot, e.g. 'duration'.
+    top_heavy (Boolean): Whether to plot each centile (100), or to plot every 5 up to 95 followed by 96-100 as individual percentiles (discontinuous x axis). Default is False (plot 100 bars).
+Returns:
+    Matplotlib.pyplot plot object.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="plot_measure_pair_plot" class="doc_header"><code>plot_measure_pair_plot</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/statistics.py#L532" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_measure_pair_plot</code>(<strong><code>measures</code></strong>, <strong><code>label_override</code></strong>=<em><code>None</code></em>, <strong><code>thermal</code></strong>=<em><code>False</code></em>, <strong><code>figsize</code></strong>=<em><code>(14, 14)</code></em>)</p>
+</blockquote>
+<p>Plots centiles of a single named measure from a dataframe of measures.
+Args:
+    measures (Dataframe): Collection of behavioural measures for a cohort of players.
+    label_override (List of Strings): List of axis labels, if None, the column names directly from the measures dataframe will be used.
+    thermal (Boolean): Show 2D histograms instead of scatter plots (better for perceiving density).
+    figsize (Tuple of Integers (2)): Size of the resulting plot, (14,14) is good for large numbers of measures (5+).
+Returns:
+    Matplotlib.pyplot plot object.</p>
 
 </div>
 

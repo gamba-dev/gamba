@@ -97,13 +97,13 @@ def frequency_percent(player_bets):
     player_bets.reset_index(drop=True, inplace=True)
     age_in_days = duration(player_bets)
 
-    player_bets["bet_date"] = player_bets["bet_time"].dt.date
+    betting_dates = player_bets["bet_time"].dt.date
     first_day = player_bets.iloc[0]["bet_time"]
 
     betting_days = 0
     for day in range(age_in_days):
         current_date = (first_day + datetime.timedelta(days=day)).date()
-        bets_today = player_bets.iloc[player_bets["bet_date"].values == current_date]
+        bets_today = player_bets.iloc[betting_dates.values == current_date]
         if len(bets_today) != 0:
             betting_days += 1
 
@@ -243,15 +243,15 @@ def num_bets_deviation_per_day(player_bets):
 # Cell
 from datetime import timedelta
 import numpy as np
-from pysan.core.spells import get_spells
+from pysan.spells import get_spells
 
 def inactive_day_streak_variance(player_bets):
 
-    player_bets["bet_date"] = player_bets["bet_time"].dt.date
+    betting_days = betting_days.dt.date
 
-    active_dates = player_bets['bet_date'].unique()
+    active_dates = betting_days.unique()
 
-    all_days = pd.date_range(player_bets['bet_date'].min(), player_bets['bet_date'].max(), freq='d')
+    all_days = pd.date_range(betting_days.min(), betting_days.max(), freq='d')
 
     all_days_as_sequence_with_active_as_true = [True if (date in active_dates) else False for date in all_days]
 
@@ -265,7 +265,7 @@ def inactive_day_streak_variance(player_bets):
 # Cell
 from datetime import timedelta
 import numpy as np
-from pysan.core.spells import get_spells
+from pysan.spells import get_spells
 
 def persistence(player_bets):
 
@@ -777,13 +777,13 @@ def get_daily_bets(player_bets):
     player_bets.reset_index(drop=True, inplace=True)
     age_in_days = duration(player_bets)
 
-    player_bets["bet_date"] = player_bets["bet_time"].dt.date
+    betting_days = player_bets["bet_time"].dt.date
     first_day = player_bets.iloc[0]["bet_time"]
 
     daily_bets = []
     for day in range(age_in_days):
         current_date = (first_day + datetime.timedelta(days=day)).date()
-        bets_today = player_bets[player_bets["bet_date"] == current_date]
+        bets_today = player_bets[betting_days == current_date]
         if len(bets_today) != 0:
             daily_bets.append(bets_today)
 

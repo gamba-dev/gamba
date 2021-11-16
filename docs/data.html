@@ -31,12 +31,9 @@ nb_path: "20_data.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>INFO:tensorflow:Enabling eager execution
-INFO:tensorflow:Enabling v2 tensorshape
-INFO:tensorflow:Enabling resource variables
-INFO:tensorflow:Enabling tensor equality
-INFO:tensorflow:Enabling control flow v2
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2021-11-16 09:12:54.773944: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-16 09:12:54.774004: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre>
 </div>
 </div>
@@ -75,7 +72,7 @@ INFO:tensorflow:Enabling control flow v2
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This can be done using the <code>read_csv</code> method, which is a wrapper around the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">pandas library's method</a> of the same name.</p>
+<p>This can be done using the <a href="data.html#read_csv"><code>read_csv</code></a> method, which is a wrapper around the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">pandas library's method</a> of the same name.</p>
 
 </div>
 </div>
@@ -387,7 +384,7 @@ INFO:tensorflow:Enabling control flow v2
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There's also an <code>generate_bets</code> method which returns a set of example transactions (entirely synthetic) to use as an example throughout the docs or to compare against your own data.</p>
+<p>There's also an <a href="data.html#generate_bets"><code>generate_bets</code></a> method which returns a set of example transactions (entirely synthetic) to use as an example throughout the docs or to compare against your own data.</p>
 
 </div>
 </div>
@@ -431,7 +428,7 @@ INFO:tensorflow:Enabling control flow v2
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It's good practice to check that your column names match those used by the gamba library, and make sure that no extra columns exist. The <code>check_data</code> method below can be given the dataframe, and it will raise an error if anything isn't as it should be;</p>
+<p>It's good practice to check that your column names match those used by the gamba library, and make sure that no extra columns exist. The <a href="data.html#check_data"><code>check_data</code></a> method below can be given the dataframe, and it will raise an error if anything isn't as it should be;</p>
 
 </div>
 </div>

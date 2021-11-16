@@ -57,10 +57,10 @@ def spending_portions(measures_table):
 
     for percentage in percentages:
 
-        labelled_measures_table = gb.top_split(
+        labelled_measures_table = top_split(
             mt, "total_wagered", percentile=100 - percentage
         )
-        groups = gb.get_labelled_groups(labelled_measures_table, "top_total_wagered")
+        groups = get_labelled_groups(labelled_measures_table, "top_total_wagered")
         label_members = groups[1]
         non_members = groups[0]
 

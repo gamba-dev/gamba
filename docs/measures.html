@@ -31,12 +31,9 @@ nb_path: "21_measures.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>INFO:tensorflow:Enabling eager execution
-INFO:tensorflow:Enabling v2 tensorshape
-INFO:tensorflow:Enabling resource variables
-INFO:tensorflow:Enabling tensor equality
-INFO:tensorflow:Enabling control flow v2
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2021-11-16 09:13:00.633252: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-16 09:13:00.633269: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre>
 </div>
 </div>
@@ -55,14 +52,14 @@ INFO:tensorflow:Enabling control flow v2
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A behavioural measure is a number derived from a player's transaction data. This data needs to have specific columns depending on the measure you want to calculate. For example, measures in the bet domain require the <strong>bet_size</strong> column. For each of the measures you plan to use, make sure that the data you have in the gamba standard format (see <code>check_data</code>) has the correct values.</p>
+<p>A behavioural measure is a number derived from a player's transaction data. This data needs to have specific columns depending on the measure you want to calculate. For example, measures in the bet domain require the <strong>bet_size</strong> column. For each of the measures you plan to use, make sure that the data you have in the gamba standard format (see <a href="data.html#check_data"><code>check_data</code></a>) has the correct values.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Once your data has all of the right columns, the simplest way to get started is to call the <code>create_measures_table</code> method below, giving it one or more players bets in the gamba standard format.</p>
+<p>Once your data has all of the right columns, the simplest way to get started is to call the <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method below, giving it one or more players bets in the gamba standard format.</p>
 
 </div>
 </div>
@@ -80,7 +77,7 @@ INFO:tensorflow:Enabling control flow v2
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="create_measures_table" class="doc_header"><code>create_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L25" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_measures_table</code>(<strong><code>all_player_bets</code></strong>, <strong><code>measures</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
-<p>Creates a measures table from a collection of bets in the gamba standard format. The second parameter 'measures' should be a list of names from the measures module. See <code>available_measures</code> or the table below for currently available options.</p>
+<p>Creates a measures table from a collection of bets in the gamba standard format. The second parameter 'measures' should be a list of names from the measures module. See <a href="measures.html#available_measures"><code>available_measures</code></a> or the table below for currently available options.</p>
 
 </div>
 
@@ -101,7 +98,7 @@ INFO:tensorflow:Enabling control flow v2
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>{% include note.html content='The <code>create_measures_table</code> method is perhaps the most useful thing in the entire library.' %}</p>
+<p>{% include note.html content='The <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method is perhaps the most useful thing in the entire library.' %}</p>
 
 </div>
 </div>
@@ -131,151 +128,151 @@ INFO:tensorflow:Enabling control flow v2
 </thead>
 <tbody>
 <tr>
-<td><code>duration</code></td>
-<td><code>total_wagered</code></td>
-<td><code>net_loss</code></td>
-<td><code>theoretical_loss</code></td>
+<td><a href="measures.html#duration"><code>duration</code></a></td>
+<td><a href="measures.html#total_wagered"><code>total_wagered</code></a></td>
+<td><a href="measures.html#net_loss"><code>net_loss</code></a></td>
+<td><a href="measures.html#theoretical_loss"><code>theoretical_loss</code></a></td>
 </tr>
 <tr>
-<td><code>frequency</code></td>
-<td><code>mean_bet_size</code></td>
-<td><code>percent_loss</code></td>
-<td><code>mean_odds_per_bet</code></td>
+<td><a href="measures.html#frequency"><code>frequency</code></a></td>
+<td><a href="measures.html#mean_bet_size"><code>mean_bet_size</code></a></td>
+<td><a href="measures.html#percent_loss"><code>percent_loss</code></a></td>
+<td><a href="measures.html#mean_odds_per_bet"><code>mean_odds_per_bet</code></a></td>
 </tr>
 <tr>
-<td><code>frequency_percent</code></td>
-<td><code>median_bet_size</code></td>
-<td><code>payout_bet_count_ratio</code></td>
-<td><code>median_odds_per_bet</code></td>
+<td><a href="measures.html#frequency_percent"><code>frequency_percent</code></a></td>
+<td><a href="measures.html#median_bet_size"><code>median_bet_size</code></a></td>
+<td><a href="measures.html#payout_bet_count_ratio"><code>payout_bet_count_ratio</code></a></td>
+<td><a href="measures.html#median_odds_per_bet"><code>median_odds_per_bet</code></a></td>
 </tr>
 <tr>
-<td><code>number_of_bets</code></td>
-<td><code>max_bet</code></td>
-<td><code>payout_bet_size_ratio</code></td>
-<td><code>num_providers_used</code></td>
+<td><a href="measures.html#number_of_bets"><code>number_of_bets</code></a></td>
+<td><a href="measures.html#max_bet"><code>max_bet</code></a></td>
+<td><a href="measures.html#payout_bet_size_ratio"><code>payout_bet_size_ratio</code></a></td>
+<td><a href="measures.html#num_providers_used"><code>num_providers_used</code></a></td>
 </tr>
 <tr>
-<td><code>mean_bets_per_day</code></td>
-<td><code>min_bet</code></td>
-<td><code>mean_net_loss_per_session</code></td>
-<td><code>mean_game_types_per_day</code></td>
+<td><a href="measures.html#mean_bets_per_day"><code>mean_bets_per_day</code></a></td>
+<td><a href="measures.html#min_bet"><code>min_bet</code></a></td>
+<td><a href="measures.html#mean_net_loss_per_session"><code>mean_net_loss_per_session</code></a></td>
+<td><a href="measures.html#mean_game_types_per_day"><code>mean_game_types_per_day</code></a></td>
 </tr>
 <tr>
-<td><code>median_bets_per_day</code></td>
-<td><code>bet_size_range</code></td>
-<td><code>median_net_loss_per_session</code></td>
+<td><a href="measures.html#median_bets_per_day"><code>median_bets_per_day</code></a></td>
+<td><a href="measures.html#bet_size_range"><code>bet_size_range</code></a></td>
+<td><a href="measures.html#median_net_loss_per_session"><code>median_net_loss_per_session</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>num_sessions</code></td>
-<td><code>bet_size_deviation</code></td>
-<td><code>sum_of_payouts</code></td>
+<td><a href="measures.html#num_sessions"><code>num_sessions</code></a></td>
+<td><a href="measures.html#bet_size_deviation"><code>bet_size_deviation</code></a></td>
+<td><a href="measures.html#sum_of_payouts"><code>sum_of_payouts</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>total_play_time</code></td>
-<td><code>trajectory</code></td>
-<td><code>relative_big_win</code></td>
+<td><a href="measures.html#total_play_time"><code>total_play_time</code></a></td>
+<td><a href="measures.html#trajectory"><code>trajectory</code></a></td>
+<td><a href="measures.html#relative_big_win"><code>relative_big_win</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>mean_sessions_per_day</code></td>
-<td><code>mean_amount_wagered_per_day</code></td>
-<td><code>big_win</code></td>
+<td><a href="measures.html#mean_sessions_per_day"><code>mean_sessions_per_day</code></a></td>
+<td><a href="measures.html#mean_amount_wagered_per_day"><code>mean_amount_wagered_per_day</code></a></td>
+<td><a href="measures.html#big_win"><code>big_win</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>median_sessions_per_day</code></td>
-<td><code>median_amount_wagered_per_day</code></td>
-<td><code>mean_payout_size</code></td>
+<td><a href="measures.html#median_sessions_per_day"><code>median_sessions_per_day</code></a></td>
+<td><a href="measures.html#median_amount_wagered_per_day"><code>median_amount_wagered_per_day</code></a></td>
+<td><a href="measures.html#mean_payout_size"><code>mean_payout_size</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>mean_play_time</code></td>
-<td><code>amount_wagered_per_day_variance</code></td>
-<td><code>median_payout_size</code></td>
+<td><a href="measures.html#mean_play_time"><code>mean_play_time</code></a></td>
+<td><a href="measures.html#amount_wagered_per_day_variance"><code>amount_wagered_per_day_variance</code></a></td>
+<td><a href="measures.html#median_payout_size"><code>median_payout_size</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>median_play_time</code></td>
-<td><code>mean_amount_wagered_per_session</code></td>
-<td><code>overall_binary_loser</code></td>
+<td><a href="measures.html#median_play_time"><code>median_play_time</code></a></td>
+<td><a href="measures.html#mean_amount_wagered_per_session"><code>mean_amount_wagered_per_session</code></a></td>
+<td><a href="measures.html#overall_binary_loser"><code>overall_binary_loser</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>mean_bets_per_day</code></td>
-<td><code>median_amount_wagered_per_session</code></td>
-<td><code>clamped_net_win</code></td>
+<td><a href="measures.html#mean_bets_per_day_aggregated"><code>mean_bets_per_day_aggregated</code></a></td>
+<td><a href="measures.html#median_amount_wagered_per_session"><code>median_amount_wagered_per_session</code></a></td>
+<td><a href="measures.html#clamped_net_win"><code>clamped_net_win</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>median_bets_per_day</code></td>
-<td><code>total_amount_wagered_across_duration</code></td>
-<td><code>net_loss_on_last_day</code></td>
+<td><a href="measures.html#median_bets_per_day"><code>median_bets_per_day</code></a></td>
+<td><a href="measures.html#total_amount_wagered_across_duration"><code>total_amount_wagered_across_duration</code></a></td>
+<td><a href="measures.html#net_loss_on_last_day"><code>net_loss_on_last_day</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>num_bets_deviation_per_day</code></td>
-<td><code>amount_wagered_per_session_variance</code></td>
-<td><code>mean_loss_per_bet</code></td>
+<td><a href="measures.html#num_bets_deviation_per_day"><code>num_bets_deviation_per_day</code></a></td>
+<td><a href="measures.html#amount_wagered_per_session_variance"><code>amount_wagered_per_session_variance</code></a></td>
+<td><a href="measures.html#mean_loss_per_bet"><code>mean_loss_per_bet</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>inactive_day_streak_variance</code></td>
-<td><code>bet_size_trajectory</code></td>
-<td><code>median_loss_per_bet</code></td>
+<td><a href="measures.html#inactive_day_streak_variance"><code>inactive_day_streak_variance</code></a></td>
+<td><a href="measures.html#bet_size_trajectory"><code>bet_size_trajectory</code></a></td>
+<td><a href="measures.html#median_loss_per_bet"><code>median_loss_per_bet</code></a></td>
 <td></td>
 </tr>
 <tr>
-<td><code>persistence</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>bet_count_trajectory</code></td>
+<td><a href="measures.html#persistence"><code>persistence</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>mean_bets_per_session</code></td>
+<td><a href="measures.html#bet_count_trajectory"><code>bet_count_trajectory</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>median_bets_per_session</code></td>
+<td><a href="measures.html#mean_bets_per_session"><code>mean_bets_per_session</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>bets_per_session_variance</code></td>
+<td><a href="measures.html#median_bets_per_session"><code>median_bets_per_session</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>session_duration_variance</code></td>
+<td><a href="measures.html#bets_per_session_variance"><code>bets_per_session_variance</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>session_duration_trajectory</code></td>
+<td><a href="measures.html#session_duration_variance"><code>session_duration_variance</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>sawtooth_occurances</code></td>
+<td><a href="measures.html#session_duration_trajectory"><code>session_duration_trajectory</code></a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>active_day_trajectory</code></td>
+<td><a href="measures.html#sawtooth_occurances"><code>sawtooth_occurances</code></a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="measures.html#active_day_trajectory"><code>active_day_trajectory</code></a></td>
 <td></td>
 <td></td>
 <td></td>
@@ -401,7 +398,7 @@ INFO:tensorflow:Enabling control flow v2
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="frequency_percent" class="doc_header"><code>frequency_percent</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>frequency_percent</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
-<p>The percentage of days within the <code>duration</code> that included at least one bet. Note that this method returns the actual percentage value e.g. 75, <strong>not</strong> the raw number of days or values in the interval [0,1].</p>
+<p>The percentage of days within the <a href="measures.html#duration"><code>duration</code></a> that included at least one bet. Note that this method returns the actual percentage value e.g. 75, <strong>not</strong> the raw number of days or values in the interval [0,1].</p>
 
 </div>
 
@@ -488,9 +485,8 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_bets_per_day" class="doc_header"><code>mean_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L221" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_day</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="mean_bets_per_day" class="doc_header"><code>mean_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
-<p>The average (mean) number of bets made on active betting days.</p>
 
 </div>
 
@@ -513,7 +509,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_bets_per_day" class="doc_header"><code>median_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L247" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_bets_per_day" class="doc_header"><code>median_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Aggregates daily bets and returns the median number of bets placed across all active betting days.</p>
 
@@ -774,7 +770,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_bets_per_day" class="doc_header"><code>median_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L247" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_bets_per_day" class="doc_header"><code>median_bets_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Aggregates daily bets and returns the median number of bets placed across all active betting days.</p>
 
@@ -806,7 +802,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="num_bets_deviation_per_day" class="doc_header"><code>num_bets_deviation_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>num_bets_deviation_per_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="num_bets_deviation_per_day" class="doc_header"><code>num_bets_deviation_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L233" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>num_bets_deviation_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Standard deviation of the number of bets placed per active betting day.</p>
 
@@ -838,7 +834,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="inactive_day_streak_variance" class="doc_header"><code>inactive_day_streak_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L273" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>inactive_day_streak_variance</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="inactive_day_streak_variance" class="doc_header"><code>inactive_day_streak_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L248" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>inactive_day_streak_variance</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -869,7 +865,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="persistence" class="doc_header"><code>persistence</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L295" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>persistence</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="persistence" class="doc_header"><code>persistence</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L270" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>persistence</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -900,7 +896,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="bet_count_trajectory" class="doc_header"><code>bet_count_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L311" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_count_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="bet_count_trajectory" class="doc_header"><code>bet_count_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L286" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_count_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -931,7 +927,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_bets_per_session" class="doc_header"><code>mean_bets_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L317" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_session</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_bets_per_session" class="doc_header"><code>mean_bets_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L292" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bets_per_session</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -955,7 +951,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_bets_per_session" class="doc_header"><code>median_bets_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L322" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_session</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_bets_per_session" class="doc_header"><code>median_bets_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L297" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bets_per_session</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -979,62 +975,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="bets_per_session_variance" class="doc_header"><code>bets_per_session_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L327" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bets_per_session_variance</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="session_duration_variance" class="doc_header"><code>session_duration_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L333" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>session_duration_variance</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="session_duration_trajectory" class="doc_header"><code>session_duration_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L338" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>session_duration_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="bets_per_session_variance" class="doc_header"><code>bets_per_session_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L302" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bets_per_session_variance</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1065,7 +1006,31 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sawtooth_occurances" class="doc_header"><code>sawtooth_occurances</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L344" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sawtooth_occurances</code>(<strong><code>player_bets</code></strong>, <strong><code>threshold</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="session_duration_variance" class="doc_header"><code>session_duration_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L308" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>session_duration_variance</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="session_duration_trajectory" class="doc_header"><code>session_duration_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L313" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>session_duration_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1096,7 +1061,38 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="active_day_trajectory" class="doc_header"><code>active_day_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L364" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>active_day_trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>time_period_length</code></strong>=<em><code>datetime.timedelta(days=30)</code></em>)</p>
+<h4 id="sawtooth_occurances" class="doc_header"><code>sawtooth_occurances</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L319" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sawtooth_occurances</code>(<strong><code>player_bets</code></strong>, <strong><code>threshold</code></strong>=<em><code>1</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="active_day_trajectory" class="doc_header"><code>active_day_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L339" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>active_day_trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>time_period_length</code></strong>=<em><code>datetime.timedelta(days=30)</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1140,7 +1136,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="total_wagered" class="doc_header"><code>total_wagered</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L378" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_wagered</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="total_wagered" class="doc_header"><code>total_wagered</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L353" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_wagered</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The total amount wagered (sum of bet sizes).</p>
 
@@ -1172,7 +1168,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_bet_size" class="doc_header"><code>mean_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L384" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bet_size</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="mean_bet_size" class="doc_header"><code>mean_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L359" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_bet_size</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>The average (mean) size of bets.</p>
 
@@ -1204,7 +1200,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_bet_size" class="doc_header"><code>median_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L395" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bet_size</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_bet_size" class="doc_header"><code>median_bet_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L370" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_bet_size</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>Median bet size, as used in Xuan 2009</p>
 
@@ -1236,7 +1232,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="max_bet" class="doc_header"><code>max_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L403" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="max_bet" class="doc_header"><code>max_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L378" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1260,7 +1256,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="min_bet" class="doc_header"><code>min_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L406" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>min_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="min_bet" class="doc_header"><code>min_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L381" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>min_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1284,7 +1280,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="bet_size_range" class="doc_header"><code>bet_size_range</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L409" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_range</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="bet_size_range" class="doc_header"><code>bet_size_range</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L384" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_range</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1315,7 +1311,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="bet_size_deviation" class="doc_header"><code>bet_size_deviation</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L413" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_deviation</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="bet_size_deviation" class="doc_header"><code>bet_size_deviation</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L388" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_deviation</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Standard deviation of stake size in first month, if data set contains daily aggregate data.</p>
 
@@ -1347,7 +1343,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="trajectory" class="doc_header"><code>trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L428" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="trajectory" class="doc_header"><code>trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L403" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>trajectory</code>(<strong><code>player_bets</code></strong>, <strong><code>daily</code></strong>=<em><code>False</code></em>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Gradient of a linear regression fitted to the sequence of daily aggredated bet sizes.</p>
 
@@ -1379,7 +1375,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_amount_wagered_per_day" class="doc_header"><code>mean_amount_wagered_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L457" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_amount_wagered_per_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_amount_wagered_per_day" class="doc_header"><code>mean_amount_wagered_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L432" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_amount_wagered_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1403,38 +1399,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_amount_wagered_per_day" class="doc_header"><code>median_amount_wagered_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L460" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_amount_wagered_per_day</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="amount_wagered_per_day_variance" class="doc_header"><code>amount_wagered_per_day_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L469" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>amount_wagered_per_day_variance</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_amount_wagered_per_day" class="doc_header"><code>median_amount_wagered_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L435" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_amount_wagered_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1465,31 +1430,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_amount_wagered_per_session" class="doc_header"><code>mean_amount_wagered_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L479" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_amount_wagered_per_session</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_amount_wagered_per_session" class="doc_header"><code>median_amount_wagered_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L485" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_amount_wagered_per_session</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="amount_wagered_per_day_variance" class="doc_header"><code>amount_wagered_per_day_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L444" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>amount_wagered_per_day_variance</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1520,7 +1461,31 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="total_amount_wagered_across_duration" class="doc_header"><code>total_amount_wagered_across_duration</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L492" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_amount_wagered_across_duration</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_amount_wagered_per_session" class="doc_header"><code>mean_amount_wagered_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L454" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_amount_wagered_per_session</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="median_amount_wagered_per_session" class="doc_header"><code>median_amount_wagered_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L460" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_amount_wagered_per_session</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1551,7 +1516,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="amount_wagered_per_session_variance" class="doc_header"><code>amount_wagered_per_session_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L498" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>amount_wagered_per_session_variance</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="total_amount_wagered_across_duration" class="doc_header"><code>total_amount_wagered_across_duration</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L467" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>total_amount_wagered_across_duration</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1582,7 +1547,38 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="bet_size_trajectory" class="doc_header"><code>bet_size_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L504" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="amount_wagered_per_session_variance" class="doc_header"><code>amount_wagered_per_session_variance</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L473" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>amount_wagered_per_session_variance</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="bet_size_trajectory" class="doc_header"><code>bet_size_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L479" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>bet_size_trajectory</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1626,7 +1622,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="net_loss" class="doc_header"><code>net_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L510" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="net_loss" class="doc_header"><code>net_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L485" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The net amount lost (sum of bet sizes minus sum of payout sizes). This is functionally identical to the negative of total amount won</p>
 
@@ -1658,9 +1654,9 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="percent_loss" class="doc_header"><code>percent_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L518" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>percent_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="percent_loss" class="doc_header"><code>percent_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L493" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>percent_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
-<p>The <code>net_loss</code> as a percentage of <code>total_wagered</code>.</p>
+<p>The <a href="measures.html#net_loss"><code>net_loss</code></a> as a percentage of <a href="measures.html#total_wagered"><code>total_wagered</code></a>.</p>
 
 </div>
 
@@ -1690,7 +1686,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="payout_bet_count_ratio" class="doc_header"><code>payout_bet_count_ratio</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L527" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>payout_bet_count_ratio</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="payout_bet_count_ratio" class="doc_header"><code>payout_bet_count_ratio</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L502" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>payout_bet_count_ratio</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1714,62 +1710,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="payout_bet_size_ratio" class="doc_header"><code>payout_bet_size_ratio</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L532" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>payout_bet_size_ratio</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_net_loss_per_session" class="doc_header"><code>mean_net_loss_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L538" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_net_loss_per_session</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_net_loss_per_session" class="doc_header"><code>median_net_loss_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L544" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_net_loss_per_session</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="payout_bet_size_ratio" class="doc_header"><code>payout_bet_size_ratio</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L507" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>payout_bet_size_ratio</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1800,7 +1741,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sum_of_payouts" class="doc_header"><code>sum_of_payouts</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L551" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sum_of_payouts</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_net_loss_per_session" class="doc_header"><code>mean_net_loss_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L513" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_net_loss_per_session</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1824,31 +1765,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="relative_big_win" class="doc_header"><code>relative_big_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L554" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>relative_big_win</code>(<strong><code>player_bets</code></strong>, <strong><code>top</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="big_win" class="doc_header"><code>big_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L557" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>big_win</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_net_loss_per_session" class="doc_header"><code>median_net_loss_per_session</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L519" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_net_loss_per_session</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1879,7 +1796,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_payout_size" class="doc_header"><code>mean_payout_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L562" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_payout_size</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="sum_of_payouts" class="doc_header"><code>sum_of_payouts</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L526" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sum_of_payouts</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1903,38 +1820,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_payout_size" class="doc_header"><code>median_payout_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L566" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_payout_size</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="overall_binary_loser" class="doc_header"><code>overall_binary_loser</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L571" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>overall_binary_loser</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="relative_big_win" class="doc_header"><code>relative_big_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L529" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>relative_big_win</code>(<strong><code>player_bets</code></strong>, <strong><code>top</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1958,31 +1844,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="clamped_net_win" class="doc_header"><code>clamped_net_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L574" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clamped_net_win</code>(<strong><code>player_bets</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="net_loss_on_last_day" class="doc_header"><code>net_loss_on_last_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L577" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss_on_last_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="big_win" class="doc_header"><code>big_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L532" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>big_win</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2013,7 +1875,141 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_loss_per_bet" class="doc_header"><code>mean_loss_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L583" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_loss_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_payout_size" class="doc_header"><code>mean_payout_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L537" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_payout_size</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="median_payout_size" class="doc_header"><code>median_payout_size</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L541" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_payout_size</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="overall_binary_loser" class="doc_header"><code>overall_binary_loser</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L546" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>overall_binary_loser</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="clamped_net_win" class="doc_header"><code>clamped_net_win</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L549" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clamped_net_win</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="net_loss_on_last_day" class="doc_header"><code>net_loss_on_last_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L552" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>net_loss_on_last_day</code>(<strong><code>player_bets</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="mean_loss_per_bet" class="doc_header"><code>mean_loss_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L558" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_loss_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The median amount lost per bet (bet size minus payout).</p>
 
@@ -2038,7 +2034,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_loss_per_bet" class="doc_header"><code>median_loss_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L592" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_loss_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_loss_per_bet" class="doc_header"><code>median_loss_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L567" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_loss_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The median amount lost per bet (bet size minus payout).</p>
 
@@ -2083,7 +2079,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="theoretical_loss" class="doc_header"><code>theoretical_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L601" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>theoretical_loss</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="theoretical_loss" class="doc_header"><code>theoretical_loss</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L576" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>theoretical_loss</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The product of bet size and house advantage, also referred to as the gross gaming revenue.</p>
 
@@ -2115,7 +2111,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_odds_per_bet" class="doc_header"><code>mean_odds_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L617" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_odds_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_odds_per_bet" class="doc_header"><code>mean_odds_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L592" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_odds_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2139,7 +2135,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="median_odds_per_bet" class="doc_header"><code>median_odds_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L620" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_odds_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="median_odds_per_bet" class="doc_header"><code>median_odds_per_bet</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L595" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>median_odds_per_bet</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2170,7 +2166,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="num_providers_used" class="doc_header"><code>num_providers_used</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L624" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>num_providers_used</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="num_providers_used" class="doc_header"><code>num_providers_used</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L599" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>num_providers_used</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The number of different gambling game providers used by the player.</p>
 
@@ -2202,7 +2198,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_game_types_per_day" class="doc_header"><code>mean_game_types_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L634" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_game_types_per_day</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="mean_game_types_per_day" class="doc_header"><code>mean_game_types_per_day</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L609" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_game_types_per_day</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 <p>The mean number of unique game types played per active betting day. Note this does not account for the number of each game type played, only that they have been played at least once.</p>
 
@@ -2247,7 +2243,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="calculate_labrie_measures" class="doc_header"><code>calculate_labrie_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L647" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_labrie_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>filename</code></strong>=<em><code>'gamba_labrie_measures.csv'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>daily</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="calculate_labrie_measures" class="doc_header"><code>calculate_labrie_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L622" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_labrie_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>filename</code></strong>=<em><code>'gamba_labrie_measures.csv'</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>, <strong><code>daily</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Calculates the set of measures described in LaBrie et al's work in 2008 on casino gamblers. These measures include the durations, frequencies, number of bets, bets per day, value per bet (eth), total amount wagered, net loss, and percent loss for each player. As this method sits in the studies module, it accepts a list of dataframes representing each player's bets as input. By default, this method saves the resulting dataframe of each player's measures to 'gamba_labrie_measures.csv'. Be advised: this method can take some time for large numbers of players, the 'loud' parameter can be set to True to print out updates every 200 players.</p>
 
@@ -2279,7 +2275,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="calculate_braverman_measures" class="doc_header"><code>calculate_braverman_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L702" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_braverman_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="calculate_braverman_measures" class="doc_header"><code>calculate_braverman_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L677" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>calculate_braverman_measures</code>(<strong><code>all_player_bets</code></strong>, <strong><code>savedir</code></strong>=<em><code>''</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Calculates the set of measures described in Braverman and Shaffer's work in 2010 on high risk internet gamblers. These measures include the frequency, intensity, variability, and trajectories of each player. As this method sits in the studies module, it accepts a list of dataframes representing each player's bets as input. By default, this method saves the resulting dataframe of each player's measures to 'gamba_braverman_measures.csv'.</p>
 
@@ -2324,9 +2320,9 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="available_measures" class="doc_header"><code>available_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L758" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>available_measures</code>()</p>
+<h4 id="available_measures" class="doc_header"><code>available_measures</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L733" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>available_measures</code>()</p>
 </blockquote>
-<p>Returns a list of valid measures that the gamba library can compute. This list can be used in whole or in part by the <code>create_measures_table</code> method to compute these measures across one or more players bets.</p>
+<p>Returns a list of valid measures that the gamba library can compute. This list can be used in whole or in part by the <a href="measures.html#create_measures_table"><code>create_measures_table</code></a> method to compute these measures across one or more players bets.</p>
 
 </div>
 
@@ -2356,7 +2352,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_measure_data" class="doc_header"><code>check_measure_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L763" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_measure_data</code>(<strong><code>player_bets</code></strong>, <strong><code>required_columns</code></strong>)</p>
+<h4 id="check_measure_data" class="doc_header"><code>check_measure_data</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L738" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_measure_data</code>(<strong><code>player_bets</code></strong>, <strong><code>required_columns</code></strong>)</p>
 </blockquote>
 <p>Compares the columns found in a dataframe of player bets to a supplied list of column names. If any of the required_column names are not found, an exception is raised reporting the error.</p>
 
@@ -2388,7 +2384,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_sessions" class="doc_header"><code>get_sessions</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L775" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_sessions</code>(<strong><code>player_bets</code></strong>, <strong><code>session_window</code></strong>=<em><code>30</code></em>)</p>
+<h4 id="get_sessions" class="doc_header"><code>get_sessions</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L750" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_sessions</code>(<strong><code>player_bets</code></strong>, <strong><code>session_window</code></strong>=<em><code>30</code></em>)</p>
 </blockquote>
 <p>Splits a single players bet dataframe into a collection of dataframes, each representing a single session. The session_window parameter determines the maximum number of minutes between bets for them to be considered part of the same session.</p>
 
@@ -2420,7 +2416,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_daily_bets" class="doc_header"><code>get_daily_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L797" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_daily_bets</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="get_daily_bets" class="doc_header"><code>get_daily_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L772" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_daily_bets</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2451,7 +2447,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="standardise_measures_table" class="doc_header"><code>standardise_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L819" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>standardise_measures_table</code>(<strong><code>measures_table</code></strong>)</p>
+<h4 id="standardise_measures_table" class="doc_header"><code>standardise_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L794" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>standardise_measures_table</code>(<strong><code>measures_table</code></strong>)</p>
 </blockquote>
 <p>Standardises all measures columns in a measures table by applying the scipy.stats.zscore function to each column. This is useful for column-wise comparisons and some clustering methods, but use with caution!</p>
 
@@ -2483,7 +2479,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="split_measures_table" class="doc_header"><code>split_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L832" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_measures_table</code>(<strong><code>measures_table</code></strong>, <strong><code>frac</code></strong>=<em><code>0.7</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="split_measures_table" class="doc_header"><code>split_measures_table</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L807" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_measures_table</code>(<strong><code>measures_table</code></strong>, <strong><code>frac</code></strong>=<em><code>0.7</code></em>, <strong><code>loud</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Splits a measures table into two randomly selected groups. This is useful for machine learning methods where a train-test split is needed, and uses the Pandas library's sample method.</p>
 
@@ -2515,7 +2511,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="generic_trajectory" class="doc_header"><code>generic_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L847" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generic_trajectory</code>(<strong><code>sequence</code></strong>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="generic_trajectory" class="doc_header"><code>generic_trajectory</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L822" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generic_trajectory</code>(<strong><code>sequence</code></strong>, <strong><code>plot</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Gradient of a linear regression fitted to a one dimensional sequence. Generic utility method to be used in more specific cases.</p>
 
@@ -2560,7 +2556,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_individual" class="doc_header"><code>plot_individual</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L870" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_individual</code>(<strong><code>measures_table</code></strong>, <strong><code>player_id</code></strong>)</p>
+<h4 id="plot_individual" class="doc_header"><code>plot_individual</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L845" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_individual</code>(<strong><code>measures_table</code></strong>, <strong><code>player_id</code></strong>)</p>
 </blockquote>
 <p>Plots an individual's position in the population across each of the behavioural measures in the measures table. Note that this will output one bar chart for each behavioural measure.</p>
 
@@ -2592,7 +2588,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_continuous_time_domain" class="doc_header"><code>plot_continuous_time_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L891" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_continuous_time_domain</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="plot_continuous_time_domain" class="doc_header"><code>plot_continuous_time_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L866" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_continuous_time_domain</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2616,7 +2612,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="discretise_player_bets" class="doc_header"><code>discretise_player_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L898" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>discretise_player_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>days</code></strong>=<em><code>7</code></em>)</p>
+<h4 id="discretise_player_bets" class="doc_header"><code>discretise_player_bets</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L873" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>discretise_player_bets</code>(<strong><code>player_bets</code></strong>, <strong><code>days</code></strong>=<em><code>7</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2640,7 +2636,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_discrete_time_domain" class="doc_header"><code>plot_discrete_time_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L908" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_discrete_time_domain</code>(<strong><code>player_bets</code></strong>, <strong><code>days</code></strong>=<em><code>7</code></em>)</p>
+<h4 id="plot_discrete_time_domain" class="doc_header"><code>plot_discrete_time_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L883" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_discrete_time_domain</code>(<strong><code>player_bets</code></strong>, <strong><code>days</code></strong>=<em><code>7</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2664,7 +2660,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_session_domain" class="doc_header"><code>plot_session_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L921" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_session_domain</code>(<strong><code>player_bets</code></strong>, <strong><code>session_window</code></strong>=<em><code>30</code></em>)</p>
+<h4 id="plot_session_domain" class="doc_header"><code>plot_session_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L896" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_session_domain</code>(<strong><code>player_bets</code></strong>, <strong><code>session_window</code></strong>=<em><code>30</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2688,7 +2684,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_cost_domain" class="doc_header"><code>plot_cost_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L931" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_cost_domain</code>(<strong><code>player_bets</code></strong>)</p>
+<h4 id="plot_cost_domain" class="doc_header"><code>plot_cost_domain</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L906" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_cost_domain</code>(<strong><code>player_bets</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2712,7 +2708,7 @@ INFO:tensorflow:Enabling control flow v2
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="show_domain_differences" class="doc_header"><code>show_domain_differences</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L945" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_domain_differences</code>()</p>
+<h4 id="show_domain_differences" class="doc_header"><code>show_domain_differences</code><a href="https://github.com/gamba-dev/gamba/tree/main/gamba/measures.py#L920" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_domain_differences</code>()</p>
 </blockquote>
 
 </div>

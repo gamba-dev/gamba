@@ -2,6 +2,38 @@
 > A Python library for player behaviour tracking research
 
 
+
+    ---------------------------------------------------------------------------
+
+    ModuleNotFoundError                       Traceback (most recent call last)
+
+    /tmp/ipykernel_5080/442603745.py in <module>
+          1 #export
+    ----> 2 from gamba.data import *
+          3 from gamba.measures import *
+          4 from gamba.statistics import *
+          5 from gamba.labelling import *
+
+
+    ~/Desktop/gamba/gamba/__init__.py in <module>
+          5 # Cell
+          6 from .data import *
+    ----> 7 from .measures import *
+          8 from .statistics import *
+          9 from .labelling import *
+
+
+    ~/Desktop/gamba/gamba/measures.py in <module>
+        618 
+        619 # Cell
+    --> 620 from tqdm import tqdm
+        621 import datetime, pandas as pd
+        622 def calculate_labrie_measures(all_player_bets, savedir="", filename="gamba_labrie_measures.csv", loud=False, daily=True,):
+
+
+    ModuleNotFoundError: No module named 'tqdm'
+
+
 [![PyPI](https://img.shields.io/pypi/v/gamba?style=for-the-badge&color=blue)](https://pypi.org/project/gamba/)
 [![Commit](https://img.shields.io/github/last-commit/gamba-dev/gamba?label=Last%20update&style=for-the-badge&)](https://github.com/gamba-dev/gamba/commit/main)
 
